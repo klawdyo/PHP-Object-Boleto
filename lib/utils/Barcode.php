@@ -4,7 +4,7 @@ class Barcode{
     //Imagem
     public $image;
     //dimensões do código de barras
-    public $width = 500;
+    public $width = 450;
     public $height= 50;
     //Cores
     public $white;

@@ -1,4 +1,4 @@
-<div id="ficha_compensacao" class="span-20 last showgrid">
+<div id="ficha_compensacao">
     <!--  cabecalho  -->
     <div id="cabecalho">
         <div class="cabecalho banco_logo span-4"><img src="<?php echo OB::url('/public/images/logobradesco.jpg')?>"></div>
@@ -70,12 +70,12 @@
             <!--quantidade-->
             <div class="item qtd span-2">
                 <label>Quantidade</label>
-                
+                <?php echo $OB->Boleto->Quantidade; ?>
             </div>
             <!--valor-->
             <div class="item valor span-2 last">
                 <label>(x) Valor</label>
-                
+                <?php echo number_format($OB->Boleto->Valor/100,2,',','.'); ?>
             </div>
         </div>
         
@@ -93,24 +93,39 @@
         </div>
         <div class="span-7">
              <label>Agência / Código cedente </label>
+             <?php
+                echo $OB->Vendedor->Agencia . '-' . Math::Mod11($OB->Vendedor->Agencia)
+                     . ' / ' .
+                     $OB->Vendedor->Conta . '-' . Math::Mod11($OB->Vendedor->Conta)
+                ;
+                ?>
         </div>
         <div class="span-7">
              <label>Nosso número</label>
+             <?php
+                echo $OB->Boleto->NossoNumero . '-' . Math::Mod11($OB->Boleto->NossoNumero)
+                ;
+                ?>
         </div>
         <div class="span-7">
              <label>(=) Valor do documento</label>
+             <?php echo !empty($OB->Boleto->Valor) ? number_format($OB->Boleto->Valor/100, 2, ',', '.') : ''; ?>
         </div>
         <div class="span-7">
              <label>(-) Desconto/Abatimento</label>
+             <?php echo $OB->Boleto->Desconto ? number_format($OB->Boleto->Desconto, 2, ',', '.') : ''; ?>
         </div>
         <div class="span-7">
              <label>(-) Outras deduções</label>
+             <?php echo $OB->Boleto->OutrosAbatimentos ? number_format($OB->Boleto->OutrosAbatimentos, 2, ',', '.') : ''; ?>
         </div>
         <div class="span-7">
              <label>(-) Mora/Multa</label>
+             <?php echo $OB->Boleto->Multa ? number_format($OB->Boleto->Multa, 2, ',', '.') : ''; ?>
         </div>
         <div class="span-7">
              <label>(-) Outros Acréscimos</label>
+             <?php echo $OB->Boleto->OutrosAcrescimos ? number_format($OB->Boleto->OutrosAcrescimos, 2, ',', '.') : ''; ?>
         </div>
         <div class="span-7">
              <label>(=) Valor cobrado</label>

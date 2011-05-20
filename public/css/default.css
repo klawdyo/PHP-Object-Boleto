@@ -8,76 +8,88 @@ div#container{
         float:left;
     }
     
-    #ficha_compensacao #colunaprincipal div,
-    #ficha_compensacao #colunadireita div{
-        height:27px;
-        margin:0;
-        margin-bottom:2px;
-        float:left;
-        border-bottom: 1px solid #C0C0C0;
-    }
-    #ficha_compensacao #colunaprincipal div .item{
-        border-bottom:0;
-    }
-    #ficha_compensacao #colunaprincipal .item,
-    #ficha_compensacao #colunaprincipal .mensagens,
-    #ficha_compensacao #colunadireita div
-    {
-        border-left:5px solid #CC0000;
-        padding-left:5px;
-        padding-right:0px;
-    }
-        /*
-            Cabeçalho
-        */
-        #ficha_compensacao #cabecalho{
-            border-bottom: 3px solid #000000;
-            width:690px;
-            margin-bottom:5px;
+        #ficha_compensacao #colunaprincipal div,
+        #ficha_compensacao #colunadireita div{
+            height:27px;
+            margin:0;
+            margin-bottom:2px;
+            float:left;
+            border-bottom: 1px solid #C0C0C0;
         }
-        #ficha_compensacao #cabecalho div{float:left}
-        #ficha_compensacao #cabecalho .banco_logo{width:160px}
-        #ficha_compensacao #cabecalho .banco_codigo{width:70px;font-size:17px;font-weight:bold;text-align:center;margin-top:20px;border:0;border-left:3px solid #000000;border-right:3px solid #000000;}
-        #ficha_compensacao #cabecalho .linha_digitavel{width:450px;font-size:15px;font-weight:bold;text-align:right;margin-top:20px}
-        
-        #ficha_compensacao #colunaprincipal{
-            border:0;
-            width:480px;
+        #ficha_compensacao #colunaprincipal div .item{
+            border-bottom:0;
         }
-        #ficha_compensacao label{
-            font-size:9px;
-            display:block;
+        #ficha_compensacao #colunaprincipal .item,
+        #ficha_compensacao #colunaprincipal .mensagens,
+        #ficha_compensacao #colunadireita div
+        {
+            border-left:5px solid #CC0000;
+            padding-left:5px;
+            padding-right:0px;
         }
-            #ficha_compensacao .local_pagamento,#ficha_compensacao .mensagens,
-            #ficha_compensacao .cedente,        #ficha_compensacao .linha{
+            /*
+                Cabeçalho
+            */
+            #ficha_compensacao #cabecalho{
+                border-bottom: 3px solid #000000;
+                width:690px;
+                margin-bottom:5px;
+            }
+            #ficha_compensacao #cabecalho div{float:left}
+            #ficha_compensacao #cabecalho .banco_logo{width:160px}
+            #ficha_compensacao #cabecalho .banco_codigo{width:70px;font-size:17px;font-weight:bold;text-align:center;margin-top:20px;border:0;border-left:3px solid #000000;border-right:3px solid #000000;}
+            #ficha_compensacao #cabecalho .linha_digitavel{width:450px;font-size:15px;font-weight:bold;text-align:right;margin-top:20px}
+            
+            #ficha_compensacao #colunaprincipal{
+                border:0;
                 width:480px;
-                clear:left;
+            }
+            #ficha_compensacao label{
+                font-size:9px;
+                display:block;
+            }
+                #ficha_compensacao .local_pagamento,#ficha_compensacao .mensagens,
+                #ficha_compensacao .cedente,        #ficha_compensacao .linha{
+                    width:480px;
+                    clear:left;
+                }
+                
+                /*  Mensagens   */
+                #ficha_compensacao #colunaprincipal .mensagens{height:147px;}
+                
+                /*  Linha 3   */
+                #ficha_compensacao #colunaprincipal .data_doc{width:100px;}
+                #ficha_compensacao #colunaprincipal .num_doc{width:120px;}
+                #ficha_compensacao #colunaprincipal .espec_doc{width:70px;}
+                #ficha_compensacao #colunaprincipal .aceite{width:40px;}
+                #ficha_compensacao #colunaprincipal .dt_proc{width:90px;}
+    
+                /*  Linha 4   */
+                #ficha_compensacao #colunaprincipal .uso_banco{width:100px;}
+                #ficha_compensacao #colunaprincipal .carteira{width:50px;}
+                #ficha_compensacao #colunaprincipal .moeda{width:80px;}
+                #ficha_compensacao #colunaprincipal .qtd{width:55px;}
+                #ficha_compensacao #colunaprincipal .valor{width:130px;}
+                
+                /*  Coluna lado direito   */
+                #ficha_compensacao #colunadireita{width:200px;}
+                #ficha_compensacao #colunadireita div{display:block;width:200px}
+                
+                
+            /*Sacado*/
+            #ficha_compensacao #sacado, #ficha_compensacao #codigo_barras{
+                clear:both;
+                width:680px;
+                height:70px;
+                border-left:5px solid #fff;
+                padding-left:5px;
             }
             
-            /*  Mensagens   */
-            #ficha_compensacao #colunaprincipal .mensagens{height:147px;}
-            
-            /*  Linha 3   */
-            #ficha_compensacao #colunaprincipal .data_doc{width:100px;}
-            #ficha_compensacao #colunaprincipal .num_doc{width:120px;}
-            #ficha_compensacao #colunaprincipal .espec_doc{width:70px;}
-            #ficha_compensacao #colunaprincipal .aceite{width:40px;}
-            #ficha_compensacao #colunaprincipal .dt_proc{width:90px;}
-
-            /*  Linha 4   */
-            #ficha_compensacao #colunaprincipal .uso_banco{width:100px;}
-            #ficha_compensacao #colunaprincipal .carteira{width:50px;}
-            #ficha_compensacao #colunaprincipal .moeda{width:80px;}
-            #ficha_compensacao #colunaprincipal .qtd{width:55px;}
-            #ficha_compensacao #colunaprincipal .valor{width:130px;}
-            
-            /*  Coluna lado direito   */
-            #ficha_compensacao #colunadireita{width:200px;}
-            #ficha_compensacao #colunadireita div{display:block;width:200px}
+            #ficha_compensacao #sacado{
+                border-bottom:1px solid #c0c0c0;
+            }
+            #ficha_compensacao #codigo_barras{
+                border-bottom:1px dotted #000;
+            }
             
             
-        /*Sacado*/
-        #ficha_compensacao #sacado{
-            clear:both;
-            width:680px;
-        }

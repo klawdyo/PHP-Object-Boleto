@@ -16,7 +16,7 @@ class Boleto{
     /**
       *
       * @version 0.1 18/05/2011 Initial
-      *
+      * @todo Trabalho pra OB
       */
     public function render(){
         //$data2 = array('OB', $this->parent);
@@ -47,7 +47,12 @@ class Boleto{
     public $NossoNumero;
     public $NumDocumento;
     public $DataEmissao;
-    
+    //Opcionais
+    public $Quantidade;
+    public $Desconto;
+    public $OutrosAbatimentos;
+    public $Multa;
+    public $OutrosAcrescimos;
     //
     public $CodigoBarras;
     public $LinhaDigitavel;
@@ -83,7 +88,6 @@ class Boleto{
       * Define o valor, retirando a vírgula
       * 
       * @version 0.1 18/05/2011 Initial
-      *          0.2 20/05/2011 Valor precisa ter 10 caracteres
       *
       */
     public function setValor($valor){
@@ -98,8 +102,14 @@ class Boleto{
       *
       */
     public function setNossoNumero($valor){
-        $this->NossoNumero = $valor;
-        return $this;
+        if(!preg_match('/[^0-9]/', $valor)){
+            $this->NossoNumero = $valor;
+            return $this;
+        }
+        else{
+            throw new Exception('Boleto::setNossoNumero só permite números');
+        }
+        
     }
     
     /**
@@ -116,6 +126,7 @@ class Boleto{
     
     /**
       * Adiciona dias à data de hoje para definir o vencimento
+      * 
       * @version 0.1 18/05/2011 Initial
       *
       */
@@ -124,6 +135,56 @@ class Boleto{
         $this->setVencimento(date('d', $time), date('m', $time), date('Y', $time));
         return $this;
     }
-     
+    
+    /**
+      * 
+      * 
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setMulta($valor){
+        $this->Multa = $valor;
+        return $this;
+    }
+    
+    /**
+      * 
+      * 
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setDesconto($valor){
+        $this->Desconto = $valor;
+        return $this;
+    }
+    
+    /**
+      * 
+      * 
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setOutrosAcrescimos($valor){
+        $this->OutrosAcrescimos = $valor;
+        return $this;
+    }
+    
+    /**
+      * 
+      * 
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setOutrosAbatimentos($valor){
+        $this->OutrosAbatimentos = $valor;
+        return $this;
+    }
+    
+    /**
+      * 
+      * 
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setQuantidade($num){
+        $this->Quantidade = $num;
+        return $this;
+    }
+    
     
 }

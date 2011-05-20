@@ -39,8 +39,9 @@
     $ob->Boleto
             ->setValor(129.45)
             ->setDiasVencimento(5)
-            ->setNossoNumero('123456789')
+            ->setNossoNumero('123456')
             ->setNumDocumento('873245')
+            ->setDesconto(25.99)
         ;
     
     $ob->plugin('Pdf')->save('/public/files/filename.pdf');
