@@ -83,6 +83,7 @@ class Boleto{
       * Define o valor, retirando a vírgula
       * 
       * @version 0.1 18/05/2011 Initial
+      *          0.2 20/05/2011 Valor precisa ter 10 caracteres
       *
       */
     public function setValor($valor){

@@ -8,7 +8,7 @@
     $ob->Vendedor
             ->setBanco('001')
             ->setAgencia('214')
-            ->setConta('12375543')
+            ->setConta('10571')
             ->setNome('Jose Claudio Medeiros de Lima')
             ->setCpf('012.345.678-90')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')

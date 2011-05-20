@@ -17,6 +17,11 @@ class OB{
     //Dados de configuração do Layout para o banco escolhido
     public $Layout;
     
+    
+    //
+    public $data = array();
+    
+    
     /**
       *
       * @version 0.1 18/05/2011 Initial
@@ -77,54 +82,68 @@ class OB{
     /**
       *
       * @version 0.1 18/05/2011 Initial
+      *              20/05/2011 Modificações gerais, uso das variáveis de layout
+      *                 externas, separação dos tratamentos de dados em outro
+      *                 método, verificação se a propriedade já existe para
+      *                 evitar mais processamento, e criação da propriedade
       *
       */
     public function geraCodigo(){
+        //Se nenhum código foi gerado.
         if(empty($this->Boleto->CodigoBarras)){
-            //Carrega o banco usado
+            #Carrega o banco usado
             $this->loadBanco();
-            $data = array(
-                        'banco'=> $this->Vendedor->Banco,
-                        'moeda' => $this->Vendedor->Moeda,
-                        'valor' => $this->Boleto->Valor,
-                        'agencia' => $this->Vendedor->Agencia,
-                        'carteira' => $this->Vendedor->Carteira,
-                        'conta' => $this->Vendedor->Conta,
-                        'nosso_numero' => $this->Boleto->NossoNumero,
-                        'vencimento' => $this->Boleto->Vencimento,
-                        'fator_vencimento' => $this->Boleto->FatorVencimento,
-                        'zero_fixo' => 0
-                       );
-            $layoutCodigoBarras = ':banco:moeda:fator_vencimento:valor:agencia:carteira:nosso_numero:conta:zero_fixo';
-            $cod = String::insert($layoutCodigoBarras, $data);
             
-            //Calculo o dígito verificador geral
+            #Padroniza os dados necessários de acordo com Layout do banco
+            $this->normalizeData();
+            
+            #Insere os valores de $this->data no layout do codigo de barras
+            $cod = String::insert($this->Layout->layoutCodigoBarras, $this->data);
+
+            #Cálculo do dígito verificador geral do código de barras
             $dv = Math::Mod11($cod, 1, 1);
-    
-            //Insiro o dígito verificador exatamente na posição 4, iniciando em 0.
-            return $this->Boleto->CodigoBarras = String::putAt($cod, $dv, 4);
+
+            #Inserindo o dígito verificador exatamente na posição 4, iniciando em 0.
+            $this->Boleto->CodigoBarras = String::putAt($cod, $dv, 4);
         }
-        else{
-            return $this->Boleto->CodigoBarras;
-        }
+
+        return $this->Boleto->CodigoBarras;
     }
     
     /**
-      *
+      * Normaliza os dados da propriedade, unificando a esse trabalho
+      * 
       * @version 0.1 18/05/2011 Initial
+      *              20/05/2011 Agora verifica se a propriedade já está
+      *                 preenchida, salva os dados em uma propriedade de
+      *                 classe
       *
-      */
-   public static function zeros($text, $length){
-        return str_pad($text, $length, '0', STR_PAD_LEFT);
-    }
-    
-    /**
-      *
-      * @version 0.1 18/05/2011 Initial
-      *
+      * @todo Esse método é responsabilidade do layout
       */
     public function normalizeData(){
-        
+        if(empty($this->data)){
+            $data = array(
+                'Banco'=> $this->Vendedor->Banco,
+                'Moeda' => $this->Vendedor->Moeda,
+                'Valor' => $this->Boleto->Valor,
+                'Agencia' => $this->Vendedor->Agencia,
+                'Carteira' => $this->Vendedor->Carteira,
+                'Conta' => $this->Vendedor->Conta,
+                'NossoNumero' => $this->Boleto->NossoNumero,
+                'FatorVencimento' => $this->Boleto->FatorVencimento,
+               );
+
+            foreach($data as $var => $value){
+                $this->data[$var] = self::zeros($value, $this->Layout->posicoes[$var][1]);
+            }
+            
+            $this->data['Vencimento'] = $this->Boleto->Vencimento;
+
+            return $this->data;
+        }
+        else{
+            return $this->data;
+        }
     }
     
     /**
@@ -153,13 +172,7 @@ class OB{
             $data[$var] = substr($codigo, $substr[0], $substr[1]);
         }
         
-        //Layout para montar a linha digitável, que virá de $this->Layout->layoutLinhaDigitavel
-        $layout = ':banco:moeda:agencia:carteira:nosso_numero:conta_corrente'.
-                  ':vencimento:valor';
-                  
-        $mask   = '00000.00000 00000.000000 00000.000000 0 00000000000000';
-        
-        //Aplico no layout da linha digitável os dados da variável $data
+        #Aplico no layout da linha digitável os dados da variável $data
         $linhaDigitavel = String::insert($this->Layout->layoutLinhaDigitavel, $data);
 
         #Calculando o dv vindo do código de barras, que 
@@ -172,9 +185,9 @@ class OB{
         $dv3 = Math::Mod10(substr($linhaDigitavel, 20, 10));
         
         #Inserindo os DVs em seus lugares
-        $linhaDigitavel = String::putAt($linhaDigitavel, $dv1, 9);//
-        $linhaDigitavel = String::putAt($linhaDigitavel, $dv2, 20);//
-        $linhaDigitavel = String::putAt($linhaDigitavel, $dv3, 31);//
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv1, 9);
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv2, 20);
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv3, 31);
         $linhaDigitavel = String::putAt($linhaDigitavel, $dv, 32);
        
         #Aplicando A linha digitável gerada à sua máscara
@@ -199,8 +212,28 @@ class OB{
     # #
     # # # # # # # # # # # # # # # # # # # # # #
 
+
+
+
+
+
+
+    # # # # # # # # # # # # # # # # # # # # # #
+    # # 
+    # #     FUNÇÕES AUXILIARES
+    # #
+    # # # # # # # # # # # # # # # # # # # # # #
+
     
     
+    /**
+      * Completa com zeros adicionais à esquerda até o valor informado
+      * 
+      * @version 0.1 18/05/2011 Initial
+      */
+   public static function zeros($text, $length){
+        return str_pad($text, $length, '0', STR_PAD_LEFT);
+    }
     
     
 }
