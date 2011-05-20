@@ -1,8 +1,12 @@
 <div id="ficha_compensacao" class="span-20 last showgrid">
     <!--  cabecalho  -->
-    <div class="cabecalho banco_logo span-4"></div>
-    <div class="cabecalho banco_codigo span-2"></div>
-    <div class="cabecalho linha_digitavel span-12 last">linha digitavel</div>
+    <div id="cabecalho">
+        <div class="cabecalho banco_logo span-4"><img src="<?php echo OB::url('/public/images/logobradesco.jpg')?>"></div>
+        <div class="cabecalho banco_codigo span-2">237-2</div>
+        <div class="cabecalho linha_digitavel span-12 last">23791.17209 60007.589645 52040.300502 1 49780000295295
+
+</div>
+    </div>
     
     <div id="colunaprincipal" class="span-12">
         <!--  linha1  -->
@@ -72,7 +76,7 @@
             </div>
             <!--valor-->
             <div class="item valor span-2 last">
-                <label>Valor</label>
+                <label>(x) Valor</label>
                 
             </div>
         </div>
@@ -116,10 +120,21 @@
     </div>
     
     <!--  sacado  -->
-    
+    <div id="sacado" class="">
+        <div class="span-7">
+             <label>Sacado</label>
+             José Cláudio Medeiros de Lima<br>
+             CPF: 012.905.824-67<br>
+             Rua 24 de Junho, 1323, Centro - Assu-RN
+        </div>
+    </div>
     
     <!--  codigo_barras  -->
-    
+    <div id="codigo_barras" class="">
+        <?php
+           echo Barcode::getHtml('8734623874352463526453265473254735227543265473527');
+        ?>
+    </div>
     
 
 <!--Encerra ficha de compensação-->    

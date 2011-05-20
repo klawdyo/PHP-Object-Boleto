@@ -136,20 +136,9 @@ class OB{
       */
     public function linhaDigitavel(){
         $codigo = $this->geraCodigo();
-        $posicoes = array(
-                              //(Inicio, Tamanho). Inicia em 0
-            'banco'             => array(0,3),    //identificação do banco
-            'moeda'             => array(3,1),    //Código da moeda: real=9
-            'dv'                => array(4,1),    //Dígito verificador geral da linha digitável
-            'vencimento'        => array(5,4),    //Fator de vencimento (Dias passados desde 7/out/1997)
-            'valor'             => array(9,10),  //Valor nominal do título
-            'agencia'           => array(19,4),  //Código da agencia, sem dígito
-            'carteira'          => array(23,2),  //Código da Carteira
-            'nosso_numero'      => array(25,11),  //Nosso número
-            'conta_corrente'    => array(36,7),  //Conta corrente do cedente, sem o dígito
-        );
         $data = array();
-        foreach($posicoes as $var => $substr){
+        
+        foreach($this->Layout->posicoes as $var => $substr){
             $data[$var] = substr($codigo, $substr[0], $substr[1]);
         }
         pr($data, 'data');
@@ -195,7 +184,6 @@ class OB{
       *
       */
     public static function url($url = null){
-        
         return dirname($_SERVER['REQUEST_URI']) . $url;
     }
     
