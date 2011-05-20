@@ -65,6 +65,24 @@ class Template{
         
         return $this;
     }
+    /**
+      * Retorna os styles css formatados como html
+      * 
+      * @version 0.1 19/05/2011 Initial
+      *
+      */
+    public function getStyles(){
+        if(!empty($this->Styles)){
+            $html = '';
+            foreach($this->Styles as $file => $media){
+                $html .= '<link rel="stylesheet" type="text/css" media="'
+                      . $media . '" href="' .  OB::url('/public/css/' . $file)
+                      . '" />' . PHP_EOL;
+            }
+        }
+        return $html;
+    }
+    
     
     /**
       * Envia para o template um bloco de código para um lugar previamente
@@ -108,24 +126,6 @@ class Template{
     }
     
     /**
-      * Retorna os styles css formatados como html
-      * 
-      * @version 0.1 19/05/2011 Initial
-      *
-      */
-    public function getStyles(){
-        if(!empty($this->Styles)){
-            $html = '';
-            foreach($this->Styles as $file => $media){
-                $html .= '<link rel="stylesheet" type="text/css" media="'
-                      . $media . '" href="' .  OB::url('/public/css/' . $file)
-                      . '" />' . PHP_EOL;
-            }
-        }
-        return $html;
-    }
-    
-    /**
       * Pega o html de um template qualquer informado em $templateFilename,
       * adiciona os dados e o carrega dentro de outro template
       * 
@@ -134,8 +134,9 @@ class Template{
       */
     public function getTemplate($templateFilename, $data = array()){
         $blockName = 'template_' . time();
-        $data = array_merge($data, array('OB' => $this->parent));
-        $this->addBlock($blockName, $templateFilename, array('OB' => $this->parent));
+        //$data = array_merge($data, array('OB' => $this->parent));
+        $this->addBlock($blockName, $templateFilename, $data);
+        //$this->addBlock($blockName, $templateFilename, array('OB' => $this->parent));
         
         return $this->getBlock($blockName);
     }

@@ -49,3 +49,4 @@
     
             
     $ob->Boleto->render();
+    //$ob->render();

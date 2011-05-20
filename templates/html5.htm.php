@@ -1,5 +1,6 @@
 <?php
-//pr($OB);
+//$OB->Template->addBlock('ficha_compensacao','ficha_compensacao', array('OB'=>$OB));
+//pr($OB->Template,'html5');
 ?>
 <html>
     <head>
@@ -33,7 +34,7 @@
             
             <!--DIV FICHA DE COMPENSACAO-->
             <?php
-                echo $OB->Template->getTemplate('ficha_compensacao');
+                echo $OB->Template->getTemplate('ficha_compensacao', array('OB'=>$OB));
             ?>
         </div>
     </body>
