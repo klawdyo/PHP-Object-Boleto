@@ -10,9 +10,9 @@ div#container{
     
     #ficha_compensacao #colunaprincipal div,
     #ficha_compensacao #colunadireita div{
-        height:30px;
+        height:27px;
         margin:0;
-        margin-bottom:5px;
+        margin-bottom:2px;
         float:left;
         border-bottom: 1px solid #C0C0C0;
     }
@@ -55,7 +55,7 @@ div#container{
             }
             
             /*  Mensagens   */
-            #ficha_compensacao #colunaprincipal .mensagens{height:174px;}
+            #ficha_compensacao #colunaprincipal .mensagens{height:147px;}
             
             /*  Linha 3   */
             #ficha_compensacao #colunaprincipal .data_doc{width:100px;}

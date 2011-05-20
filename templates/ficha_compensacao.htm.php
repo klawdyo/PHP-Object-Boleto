@@ -131,8 +131,7 @@
     <div id="codigo_barras" class="">
         <label>Sacador/Avalista</label>
         <?php
-           pr($OB->geraCodigo());
-           echo Barcode::getHtml('8734623874352463526453265473254735227543265473527');
+           echo Barcode::getHtml($OB->geraCodigo());
         ?>
     </div>
     

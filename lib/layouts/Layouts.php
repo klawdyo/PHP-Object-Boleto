@@ -63,10 +63,8 @@ class Layouts{
     }
     
     public function Banco($codigo){
-        pr($codigo);
         if(array_key_exists($codigo, $this->relacoes)){
             $banco = $this->relacoes[$codigo];
-            pr($banco . 'iiiiiiiiiii');
             require OB_DIR . '/lib/layouts/' . $banco . '.php';
             return new $banco;
         }

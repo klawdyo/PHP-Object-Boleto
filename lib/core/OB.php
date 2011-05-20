@@ -178,7 +178,7 @@ class OB{
         $linhaDigitavel = String::putAt($linhaDigitavel, $dv, 32);
        
         #Aplicando A linha digitável gerada à sua máscara
-        $linhaDigitavel = String::applyMask($linhaDigitavel, $mask);
+        $linhaDigitavel = String::applyMask($linhaDigitavel, $this->Layout->mascaraLinhaDigitavel);
         
         return $linhaDigitavel;
     }
