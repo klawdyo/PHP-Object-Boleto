@@ -1,5 +1,6 @@
 <?php
-//$OB->Template->addBlock('ficha_compensacao','ficha_compensacao', array('OB'=>$OB));
+#Esse template usará os seguintes blocks: ficha_compensaca.htm.php
+$OB->Template->addBlock('ficha_compensacao');
 //pr($OB->Template,'html5');
 ?>
 <html>
@@ -15,13 +16,6 @@
         <!--    DIV CENTRAL    -->
         <div id="container" class="container">
             
-            <!--DIV PERSONALIZADA-->
-            <?php if($OB->Template->blockExists('custom')): ?>
-            <div id="personalizada">
-                <?php echo $OB->Template->getBlock('custom'); ?>
-            </div>
-            <?php endif; ?>
-            
             <!--DIV DADOS DO VENDEDOR-->
             <div id="dados_vendedor">
                 
@@ -34,7 +28,12 @@
             
             <!--DIV FICHA DE COMPENSACAO-->
             <?php
-                echo $OB->Template->getTemplate('ficha_compensacao', array('OB'=>$OB));
+                if($OB->Template->blockLoaded('ficha_compensacao')){
+                    echo $OB->Template->getBlock('ficha_compensacao', array('OB'=>$OB));
+                }
+                else{
+                    echo 'ficha de compensacao nao foi carregada';
+                }
             ?>
         </div>
     </body>

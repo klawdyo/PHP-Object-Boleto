@@ -99,17 +99,21 @@ class Template{
       * @version 0.1 18/05/2011 Initial
       *
       */
-    public function addBlock($blockName, $templateName, $data = array()){
-        $this->Blocks[$blockName] = $this->render($templateName, $data);
+    public function addBlock($blockName, $data = array()){
+        $data = array_merge($data, array('OB' => (object) $this->parent));
+        $this->Blocks[$blockName] = $this->render('blocks/' . $blockName, $data);
+        
+        return $this;
     }
     
     /**
       * O bloco existe?
       * 
       * @version 0.1 18/05/2011 Initial
+      *              20/05/2011 Renomeado para blockLoaded()
       *
       */
-    public function blockExists($blockName){
+    public function blockLoaded($blockName){
         return array_key_exists($blockName, $this->Blocks);
     }
     
@@ -120,27 +124,10 @@ class Template{
       *
       */
     public function getBlock($blockName, $data = array()){
-        if($this->blockExists($blockName)){
+        if($this->blockLoaded($blockName)){
             return $this->Blocks[$blockName];
         }
     }
-    
-    /**
-      * Pega o html de um template qualquer informado em $templateFilename,
-      * adiciona os dados e o carrega dentro de outro template
-      * 
-      * @version 0.1 19/05/2011 Initial
-      *
-      */
-    public function getTemplate($templateFilename, $data = array()){
-        $blockName = 'template_' . time();
-        //$data = array_merge($data, array('OB' => $this->parent));
-        $this->addBlock($blockName, $templateFilename, $data);
-        //$this->addBlock($blockName, $templateFilename, array('OB' => $this->parent));
-        
-        return $this->getBlock($blockName);
-    }
-    
     
     /**
       * Renderiza templates
