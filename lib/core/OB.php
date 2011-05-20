@@ -27,15 +27,12 @@ class OB{
         foreach($classes as $class){
             $this->$class = new $class($this);
         }
-        //$this->Vendedor = new Vendedor($this);
-        //$this->Cliente = new Cliente($this);
-        //$this->Boleto = new Boleto($this);
-        //$this->Configuracao = new Configuracao($this);
-        //$this->Template = new Template($this);
-        //$this->Layout = new Layouts;
-        
+        //Carrego 
+        require OB_DIR . '/lib/layouts/Layouts.php';
+        //$this->Layout = new Layouts($this);
     }
     
+    //public function __get()
     
     /**
       *
@@ -51,9 +48,24 @@ class OB{
     }
     
     /**
-      *
+      * Carrego os dados do banco desejado
+      * 
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function loadBanco(){
+        //Instância do Layouts pai
+        $layout = new Layouts;
+        //Todos os layouts dos bancos extendem o layout pai. Carrego o layout
+        //específico para o banco em questão
+        $this->Layout = $layout->Banco($this->Vendedor->Banco);
+        //
+        return $this->Layout;
+    }
+    
+    /**
+      * Calcula o fator de vencimento
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public static function fatorVencimento($dia, $mes, $ano){
         $timestampVencimento = (int) (mktime(0,0,0,$mes, $dia, $ano) / (24*60*60));
@@ -68,38 +80,33 @@ class OB{
       *
       */
     public function geraCodigo(){
-        //repassados
-        $banco = self::zeros('237', 3);
-        $moeda = self::zeros('9', 1);
-        $valor = self::zeros((2952.95 * 100), 10); //10 algarismos
-        $agencia = self::zeros('1172', 4); //tam.4
-        $carteira = self::zeros('6', 2);//tam.2
-        $conta = self::zeros('0403005', 7); //0403005-2 - tam.7
-        $nosso_numero = self::zeros('00075896452', 11); ///00075896452-5 - tam.
-        
-        //calculado
-        $vencimento = self::fatorVencimento('23', '5', '2011');
-
-
-        $data = array(
-                    'banco'=> $banco,
-                    'moeda' => $moeda,
-                    'valor' => $valor,
-                    'agencia' => $agencia,
-                    'carteira' => $carteira,
-                    'conta' => $conta,
-                    'nosso_numero' => $nosso_numero,
-                    'vencimento' => $vencimento,
-                    'zero_fixo' => 0
-                   );
-        $layoutCodigoBarras = ':banco:moeda:vencimento:valor:agencia:carteira:nosso_numero:conta:zero_fixo';
-        $cod = String::insert($layoutCodigoBarras, $data);
-        
-        //Calculo o dígito verificador geral
-        $dv = Math::Mod11($cod, 1, 1);
-        
-        //Insiro o dígito verificador exatamente na posição 4, iniciando em 0.
-        return $this->codigo = String::putAt($cod, $dv, 4);
+        if(empty($this->Boleto->CodigoBarras)){
+            //Carrega o banco usado
+            $this->loadBanco();
+            $data = array(
+                        'banco'=> $this->Vendedor->Banco,
+                        'moeda' => $this->Vendedor->Moeda,
+                        'valor' => $this->Boleto->Valor,
+                        'agencia' => $this->Vendedor->Agencia,
+                        'carteira' => $this->Vendedor->Carteira,
+                        'conta' => $this->Vendedor->Conta,
+                        'nosso_numero' => $this->Boleto->NossoNumero,
+                        'vencimento' => $this->Boleto->Vencimento,
+                        'fator_vencimento' => $this->Boleto->FatorVencimento,
+                        'zero_fixo' => 0
+                       );
+            $layoutCodigoBarras = ':banco:moeda:fator_vencimento:valor:agencia:carteira:nosso_numero:conta:zero_fixo';
+            $cod = String::insert($layoutCodigoBarras, $data);
+            
+            //Calculo o dígito verificador geral
+            $dv = Math::Mod11($cod, 1, 1);
+    
+            //Insiro o dígito verificador exatamente na posição 4, iniciando em 0.
+            return $this->Boleto->CodigoBarras = String::putAt($cod, $dv, 4);
+        }
+        else{
+            return $this->Boleto->CodigoBarras;
+        }
     }
     
     /**
@@ -136,45 +143,44 @@ class OB{
       */
     public function linhaDigitavel(){
         $codigo = $this->geraCodigo();
+        
+        #Inicio $data vazia
         $data = array();
         
+        #A partir das posições indicadaas pelo layout, separo os dados dentro
+        #do código em variáveis normais
         foreach($this->Layout->posicoes as $var => $substr){
             $data[$var] = substr($codigo, $substr[0], $substr[1]);
         }
-        pr($data, 'data');
         
+        //Layout para montar a linha digitável, que virá de $this->Layout->layoutLinhaDigitavel
         $layout = ':banco:moeda:agencia:carteira:nosso_numero:conta_corrente'.
                   ':vencimento:valor';
                   
         $mask   = '00000.00000 00000.000000 00000.000000 0 00000000000000';
         
-        $cod = String::insert($layout, $data);
+        //Aplico no layout da linha digitável os dados da variável $data
+        $linhaDigitavel = String::insert($this->Layout->layoutLinhaDigitavel, $data);
 
-        pr($this->codigo, 'codigo de barras');
+        #Calculando o dv vindo do código de barras, que 
+        #fica exatamente na posição 4, iniciando em 0
+        $dv = $codigo[4];
         
         #Calculando os dígitos verificadores dos subgrupos
-        $dv1 = Math::Mod10(substr($cod, 0, 9));
-        $dv2 = Math::Mod10(substr($cod, 9, 10));
-        $dv3 = Math::Mod10(substr($cod, 20, 10));
-        
-        pr($dv1);        pr($dv2);        pr($dv3);
+        $dv1 = Math::Mod10(substr($linhaDigitavel, 0, 9));
+        $dv2 = Math::Mod10(substr($linhaDigitavel, 9, 10));
+        $dv3 = Math::Mod10(substr($linhaDigitavel, 20, 10));
         
         #Inserindo os DVs em seus lugares
-        $cod = String::putAt($cod, $dv1, 9);//
-        $cod = String::putAt($cod, $dv2, 20);//
-        $cod = String::putAt($cod, $dv3, 31);//
-        $cod = String::putAt($cod, $data['dv'], 32);
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv1, 9);//
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv2, 20);//
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv3, 31);//
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv, 32);
        
-        pr($cod);
+        #Aplicando A linha digitável gerada à sua máscara
+        $linhaDigitavel = String::applyMask($linhaDigitavel, $mask);
         
-        $cod = String::applyMask($cod, $mask);
-        
-        //23791.17209 60007.589645 52040.300547 1 9760000295295 //gerado por mim
-        //23791.17209 60007.589645 52040.300502 1 49760000295295
-
-
-        
-        pr($cod);
+        return $linhaDigitavel;
     }
     
     /**

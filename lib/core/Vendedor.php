@@ -8,6 +8,7 @@ class Vendedor{
     public $Agencia;
     public $Conta;
     public $Carteira;
+    public $Moeda = 9;
     
     //Identificação
     public $Nome;
@@ -32,7 +33,7 @@ class Vendedor{
       * @version 0.1 18/05/2011 Initial
       *
       */
-    public function __call($name, $arg=null){
+    public function __call($name, $arg = null){
         //pr();
         preg_match('/^(set|get)([a-zA-Z]+)$/', $name, $output);
         if($output[1] == 'set'){

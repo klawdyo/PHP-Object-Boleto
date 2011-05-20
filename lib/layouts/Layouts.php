@@ -1,11 +1,11 @@
 <?php
 //18/05/11
 class Layouts{
-    protected $nomeBanco;
-    protected $logoBanco;
+    public $nomeBanco;
+    public $logoBanco;
     
-    protected $css = 'default';//css utilizado no boleto desse banco
-    protected $template = 'default';
+    public $css = 'default';//css utilizado no boleto desse banco
+    public $template = 'default';
     
     public $relacoes = array(
         '001' => 'BB',
@@ -17,7 +17,7 @@ class Layouts{
     /*
     Pegando os dados do boleto constantes no código de barras
     */
-    protected $posicoes = array(
+    public $posicoes = array(
                      //(Inicio, Tamanho). Inicia em 0
         'Banco'         => array(0,3),    //identificação do banco
         'Moeda'         => array(3,1),    //Código da moeda: real=9
@@ -33,17 +33,17 @@ class Layouts{
     /* @var $layoutCodigoBarras
         armazena o layout que será usado para gerar o código de barras desse banco
      */
-    protected $layoutCodigoBarras = ':Banco:Moeda:Vencimento:Valor:Agencia:Carteira:NossoNumero:Conta0';
+    public $layoutCodigoBarras = ':Banco:Moeda:Vencimento:Valor:Agencia:Carteira:NossoNumero:Conta0';
     
     /* @var $layoutCodigoBarras
         Armazena o layout que será usado para gerar a linha digitável nesse banco
      */
-    protected $layoutLinhaDigitavel = ':Banco:Moeda:Agencia:Carteira:NossoNumero:Conta:Vencimento:Valor';
+    public $layoutLinhaDigitavel = ':Banco:Moeda:Agencia:Carteira:NossoNumero:Conta:Vencimento:Valor';
 
     /* @var $formataLinhaDigitavel
        Máscara para a linha digitável
      */
-    protected $mascaraLinhaDigitavel = '00000.00000 00000.000000 00000.000000 0 00000000000000';
+    public $mascaraLinhaDigitavel = '00000.00000 00000.000000 00000.000000 0 00000000000000';
     
     
     /**
@@ -51,8 +51,28 @@ class Layouts{
       * @version 0.1 18/05/2011 Initial
       *
       */
-    public function __construct(&$obj){
-        $this->parent = $obj;
+    //public function __construct(&$obj){
+    public function __construct(){
+        //$this->parent = $obj;
+        //return $this->Banco($banco);
+        
+        //$Banco = $this->parent->Vendedor->Banco;
+        //pr($this->parent);
+        //require OB_DIR . '/lib/templates/' . $Banco . '.php';
+        //return new $Banco($obj);
+    }
+    
+    public function Banco($codigo){
+        pr($codigo);
+        if(array_key_exists($codigo, $this->relacoes)){
+            $banco = $this->relacoes[$codigo];
+            pr($banco . 'iiiiiiiiiii');
+            require OB_DIR . '/lib/layouts/' . $banco . '.php';
+            return new $banco;
+        }
+        else{
+            throw new Exception('O banco informado não existem em Layouts::relacoes');
+        }
     }
     
     /**

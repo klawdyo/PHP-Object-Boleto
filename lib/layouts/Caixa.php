@@ -1,6 +1,6 @@
 <?php
 
-class Caixa extends Layout{
+class Caixa extends Layouts{
     
     protected $logoBanco = 'logocaixa.png';
     protected $nomeBanco = 'Caixa';

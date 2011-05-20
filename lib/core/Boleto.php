@@ -42,10 +42,15 @@ class Boleto{
 
     //Setters Valores
     public $Valor;
+    public $FatorVencimento;
     public $Vencimento;
     public $NossoNumero;
     public $NumDocumento;
     public $DataEmissao;
+    
+    //
+    public $CodigoBarras;
+    public $LinhaDigitavel;
     
     /**
       * Define a data da emissão do boleto. Qualquer um dos parâmetros
@@ -103,7 +108,8 @@ class Boleto{
       *
       */
     public function setVencimento($dia, $mes, $ano){
-        $this->Vencimento = OB::fatorVencimento($dia, $mes, $ano);
+        $this->FatorVencimento = OB::fatorVencimento($dia, $mes, $ano);
+        $this->Vencimento = $dia . '/' . $mes . '/' . $ano;
         return $this;
     }
     
@@ -114,7 +120,7 @@ class Boleto{
       */
     public function setDiasVencimento($num){
         $time = strtotime('+' . $num . ' days');
-        $this->Vencimento = OB::fatorVencimento(date('d', $time), date('m', $time), date('Y', $time));
+        $this->setVencimento(date('d', $time), date('m', $time), date('Y', $time));
         return $this;
     }
      

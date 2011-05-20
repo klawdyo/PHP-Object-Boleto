@@ -40,6 +40,7 @@
             ->setValor(129.45)
             ->setDiasVencimento(5)
             ->setNossoNumero('123456789')
+            ->setNumDocumento('873245')
         ;
     
     $ob->plugin('Pdf')->save('/public/files/filename.pdf');

@@ -3,9 +3,7 @@
     <div id="cabecalho">
         <div class="cabecalho banco_logo span-4"><img src="<?php echo OB::url('/public/images/logobradesco.jpg')?>"></div>
         <div class="cabecalho banco_codigo span-2">237-2</div>
-        <div class="cabecalho linha_digitavel span-12 last">23791.17209 60007.589645 52040.300502 1 49780000295295
-
-</div>
+        <div class="cabecalho linha_digitavel span-12 last"><?php echo $OB->linhaDigitavel();?></div>
     </div>
     
     <div id="colunaprincipal" class="span-12">
@@ -83,7 +81,7 @@
         
         <!--  instrucoes/mensagens  -->
         <div class="mensagens span-11">
-                 <label>Mensagens</label>
+                 <label>Instruções (Texto de responsabilidade do cedente)</label>
         </div>
     
     </div>
@@ -91,7 +89,7 @@
     <div id="colunadireita" class="span-7">
         <div class="span-7">
              <label>Vencimento</label>
-             19/05/2011
+             <?php echo $OB->Boleto->Vencimento; ?>
         </div>
         <div class="span-7">
              <label>Agência / Código cedente </label>
@@ -131,7 +129,9 @@
     
     <!--  codigo_barras  -->
     <div id="codigo_barras" class="">
+        <label>Sacador/Avalista</label>
         <?php
+           pr($OB->geraCodigo());
            echo Barcode::getHtml('8734623874352463526453265473254735227543265473527');
         ?>
     </div>
