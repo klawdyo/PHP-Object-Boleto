@@ -1,0 +1,8 @@
+-----------------
+Configuration
+-----------------
+
+1) Download DomPdf (http://code.google.com/p/dompdf/) and copy dompdf folder to /lib/utils/Pdf/dompdf in your application.
+
+2) Copy Pdf.php to /lib/utils/Pdf.php and DomPdf_Library.php to /lib/utils/Pdf/
+3) Require lib/utils/Pdf.php in your controllers and start using it. 

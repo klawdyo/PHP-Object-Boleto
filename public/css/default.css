@@ -1,0 +1,60 @@
+
+div#container{
+    width:700px;
+}
+    div#container div, div#container{
+        float:left;
+    }
+    
+    #ficha_compensacao #colunaprincipal div,
+    #ficha_compensacao #colunadireita div{
+        border-left:0px solid #C0C0C0;
+        border-bottom: 1px solid #C0C0C0;
+        height:30px;
+        padding-left:0px;
+        padding-right:0px;
+        margin:0;
+        margin-bottom:5px;
+        float:left
+    }
+        /*
+            Cabeçalho
+        */
+        #ficha_compensacao .cabecalho{
+            border-bottom: 5px solid #9999ff
+        }
+        
+        #ficha_compensacao #colunaprincipal, #ficha_compensacao #colunaprincipal{
+            border:0;
+        }
+        #ficha_compensacao label{
+            font-size:9px;
+            display:block;
+        }
+            #ficha_compensacao .local_pagamento,#ficha_compensacao .mensagens,
+            #ficha_compensacao .cedente,        #ficha_compensacao .linha{
+                width:470px;
+                clear:left;
+            }
+            
+            /*  Mensagens   */
+            #ficha_compensacao #colunaprincipal .mensagens{height:170px;}
+            
+            /*  Linha 3   */
+            #ficha_compensacao #colunaprincipal .data_doc{width:100px;}
+            #ficha_compensacao #colunaprincipal .num_doc{width:130px;}
+            #ficha_compensacao #colunaprincipal .espec_doc{width:80px;}
+            #ficha_compensacao #colunaprincipal .aceite{width:50px;}
+            #ficha_compensacao #colunaprincipal .dt_proc{width:100px;}
+
+            /*  Linha 4   */
+            #ficha_compensacao #colunaprincipal .uso_banco{width:100px;}
+            #ficha_compensacao #colunaprincipal .carteira{width:100px;}
+            #ficha_compensacao #colunaprincipal .moeda{width:100px;}
+            #ficha_compensacao #colunaprincipal .qtd{width:100px;}
+            #ficha_compensacao #colunaprincipal .valor{width:100px;}
+            
+            /*  Coluna lado direito   */
+            #ficha_compensacao #colunadireita{width:270px;}
+            #ficha_compensacao #colunadireita div{display:block}
+            

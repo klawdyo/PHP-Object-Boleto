@@ -1,0 +1,8 @@
+-----------------
+Configuration
+-----------------
+
+1) Download DomPdf (http://mpdf.bpm1.com/download) and copy mpdf folder to /lib/utils/Pdf/mpdf in your application.
+
+2) Copy Pdf.php to /lib/utils/Pdf.php and mPdf_Library.php to /lib/utils/Pdf/
+3) Require lib/utils/Pdf.php in your controllers and start using it. 
