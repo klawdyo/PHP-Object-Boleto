@@ -76,6 +76,8 @@ class Layout{
       *
       */
     public function Banco($codigo){
+        $codigo = OB::zeros($codigo, 3);
+        
         if(array_key_exists($codigo, $this->relacoes)){
             $banco = $this->relacoes[$codigo];
             $filename = OB_DIR . '/lib/layouts/' . $banco . '.php';
