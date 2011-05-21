@@ -2,43 +2,94 @@
 h1. Descrição
 
 
-Software gerador de boletos bancários de vários bancos para PHP, com
-interface orientada a objetos
+Software gerador de boletos bancários de vários bancos para PHP, com interface orientada a objetos
 
 h2. Conceitos
 
+
+* Facilidade de configuração
+
+ObjectBoleto tem sua própria camada de Visualização, dividida em Templates e Blocks.
+Templates são como layouts para uma página, onde você adiciona suas logomarcas, e demais informações, do jeito que preferir, podendo criar quantos templates desejar.
+Já os Blocks, são pedaços padronizados de html que podem ser importados para os templates.
+
+* Novas tecnologias
+
+Chega de sistemas de boletos cheios de tabelas e estilos inline, com funções ultrapassadas e/ou depreciadas.
+ObjectBoleto é todo desenvolvido com Html5 e CSS3, tudo para fazer a melhor apresentação do seu boleto.
+
+* Reaproveitamento de código
+
+ObjectBoleto usa uma biblioteca de classes que disponibiliza todos métodos que o sistema precisa. Não precisa mais criar milhares de arquivos com os mesmos códigos para bancos diferentes, só por causa de uma mudança de logo no lado esquerdo.
+
+* Código de barras otimizado
+
+ObjectBoleto utiliza um gerador de código de barras em imagem única, evitando
+aquele html repetitivo e infindável, cheio de imagens pequenas.
+Economiza banda e melhora a legibilidade do html gerado.
+
+
+* Suporte a plugins
+
+O projeto ObjectBoleto prevê suporte a plugins dos mais diversos tipos, como:
+- Geração de boletos bancários em PDF,
+- Envio de boletos bancários por e-mail,
+- Processamento de dados de arquivos de retorno, etc.
   
 * Diferentemente dos softwares existentes, que estão ultrapassados e/ou
 desatualizados, ObjBoleto objetiva um completo controle de boletos,
 com processamento de dados do arquivo de retorno, envio de boleto por
 e-mail, criação de boletos em pdf, etc.
 
-* Através de um arquivo único de layout, com diversas opções de configu-
-ração, é possível modificar os boletos de qualquer banco facilmente
-  
-*Os boletos são gerados no final da página, dando a possibilidade de
-acrescentar texto html no início, logo da sua empresa e informações adi-
-cionais.
 
-*Os códigos de barra são gerados em um arquivo único, sem aquele monte
-imagens minúsculas, diminuindo o html gerado, conservando processamento,
-economizando banda e evitando que o não aparecimento de alguma imagem
-atrapalhe a geração do código de barras
+h2. Exemplo de uso
 
-*Todos os métodos das classes são constantemente adaptados para melhorar
-a leitura, estudo do código e evitar repetições de código comuns aos
-sistemas de boleto atuais.
-
-*O sistema será compatível com plugins, que poderão ser usados para tratar
-retorno dos dados,  salvar em pdf, enviar por e-mail, etc
-
-*Preferência pelo HTML5 e CSS3 ao invés de tabelas e estilos inline,
-facilitando a leitura e compreensão do código gerado, diminuição da
-banda, facilidade de manutenção e alteração pelo desenvolvedor
-
-
-
-
+pre. //Incluindo o arquivo padrão de inicialização do ObjectBoleto
+    include 'OB_init.php';    
+    //Instanciando a class
+    $ob = new OB();
+    //Definindo os dados do vendedor
+    $ob->Vendedor
+            ->setBanco('001')
+            ->setAgencia('214')
+            ->setConta('10571')
+            ->setNome('Jose Claudio Medeiros de Lima')
+            ->setCpf('012.345.678-90')
+            ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
+            ->setEmail('joseclaudiomedeirosdelima@uol.com.br')
+        ;
+    //Definindo configurações gerais
+    $ob->Configuracao
+            ->setLocalPagamento('Pagável em qualquer banco até o vencimento')
+        ;
+    //Definindo configurações do template
+    $ob->Template
+            ->setTitle('ObjBoleto')
+            ->setTemplate('html5')
+            ->set('variavel', 'valor')
+        ;
+    //Identificando o cliente
+    $ob->Cliente
+            //->setNome('Maria Joelma Bezerra de Medeiros')
+            //->setCpf('111.999.888-77')
+            //->setEmail('mariajoelma85@hotmail.com')
+            ->set(array(
+                        'Nome' => 'Sheverllannyo',
+                        'Cpf' => '123.456.789-09',
+                        'Email'=> 'shev_moto@mail.com'
+                        ))
+        ;
+    //Passando dados pro boleto   
+    $ob->Boleto
+            ->setValor(129.45)
+            ->setDiasVencimento(5)
+            ->setNossoNumero('123456')
+            ->setNumDocumento('873245')
+            ->setQuantidade(2)
+        ;
+    //Renderizando o boleto       
+    $ob->render();
+    
 
 
 
