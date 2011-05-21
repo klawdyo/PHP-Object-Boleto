@@ -94,9 +94,6 @@
             Detalhes da compra<br>
             Detalhes da compra<br>
             Detalhes da compra<br>
-            Detalhes da compra<br>
-            Detalhes da compra<br>
-            Detalhes da compra<br>
         </div>
         <!-- Autenticação Mecânica -->
         <div class="autenticacao_mecanica">

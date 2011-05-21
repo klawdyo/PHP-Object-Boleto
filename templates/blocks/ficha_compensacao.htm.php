@@ -158,10 +158,16 @@
                 
                 <!--  codigo_barras  -->
                 <div id="codigo_barras" class="">
-                    <label>Sacador/Avalista</label>
-                    <?php
-                       echo Barcode::getHtml($OB->geraCodigo());
-                    ?>
+                    <div>
+                        <label>Sacador/Avalista</label>
+                        <?php
+                           echo Barcode::getHtml($OB->geraCodigo());
+                        ?>
+                    </div>
+                    <div class="">
+                        <span>Ficha de Compensação</span>
+                        <label>Autenticação Mecânica</label>
+                    </div>
                 </div>
                 
                 <!--Linha pontilhada para corte-->
