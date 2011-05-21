@@ -20,17 +20,6 @@ class Cliente{
     }
     
     /**
-      *
-      * @version 0.1 18/05/2011 Initial
-      *
-      */
-    public function __call($name, $arg){
-        preg_match('/^set([a-zA-Z]+)$/', $name, $output);
-        $this->$output[1] = $arg[0];
-        return $this;
-    }
-    
-    /**
       * Configura os dados dos clientes a partir de um array
       *
       * @version 0.1 20/05/2011 Initial
