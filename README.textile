@@ -45,8 +45,8 @@ pre. //Incluindo o arquivo padrão de inicialização do ObjectBoleto
     //Definindo os dados do vendedor
     $ob->Vendedor
             ->setBanco('001')
-            ->setAgencia('214')
-            ->setConta('10571')
+            ->setAgencia('2345')
+            ->setConta('67890')
             ->setNome('Jose Claudio Medeiros de Lima')
             ->setCpf('012.345.678-90')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
