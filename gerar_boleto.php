@@ -42,6 +42,7 @@
             ->setDiasVencimento(5)
             ->setNossoNumero('123456')
             ->setNumDocumento('873245')
+            ->setQuantidade(2)
         ;
             
     $ob->render();

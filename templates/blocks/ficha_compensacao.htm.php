@@ -81,7 +81,7 @@
                         <!--valor-->
                         <div class="valor item">
                             <label>(x) Valor</label>
-                            <?php echo number_format($OB->Boleto->Valor/100,2,',','.'); ?>
+                            <?php echo number_format($OB->Boleto->ValorUnitario/100,2,',','.'); ?>
                         </div>
                     </div>
                     

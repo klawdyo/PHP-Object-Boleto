@@ -24,6 +24,7 @@ class Boleto{
 
     //Setters Valores
     public $Valor;
+    public $ValorUnitario;
     public $FatorVencimento;
     public $Vencimento;
     public $NossoNumero;
@@ -80,13 +81,20 @@ class Boleto{
     }
     
     /**
-      * Define o valor, retirando a vírgula
+      * Define a propriedade Valor e ValorUnitario, retirando a vírgula.
+      * setValor() verifica o valor da propriedade Quantidade e ajusta
+      * o valor da propriedade Valor
       * 
       * @version 0.1 18/05/2011 Initial
       *
       */
     public function setValor($valor){
-        $this->Valor = (int) ($valor * 100);
+        $this->ValorUnitario = (int) ($valor * 100);
+        if(empty($this->Quantidade)){
+            $this->Quantidade = 1;
+        }
+        $this->Valor = $this->ValorUnitario * $this->Quantidade;
+        
         return $this;
     }
     
@@ -172,12 +180,24 @@ class Boleto{
     }
     
     /**
-      * 
+      * Define o índice quantidade desse boleto
       * 
       * @version 0.1 20/05/2011 Initial
+      *          0.2 21/05/2011 Ajusta o valor nominal do boleto de acordo
+      *             com a quantidade
+      *          0.3 21/05/2011 Obriga $num a ser maior ou igual a 1
       */
-    public function setQuantidade($num){
+    public function setQuantidade($num = 1){
+        if($num < 1) {
+            $num = (int) 1;
+        }
+        
         $this->Quantidade = $num;
+        
+        if(!empty($this->ValorUnitario)){
+            $this->Valor = $this->ValorUnitario * $this->Quantidade;
+        }
+        
         return $this;
     }
     
