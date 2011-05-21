@@ -1,6 +1,6 @@
----------------------------------------
-    DESCRIÇÃO
-- - - - - - - - - - - - - - - - - - - -
+
+    h1.Descrição
+
     -
     - Software gerador de boletos bancários de vários bancos para PHP, com
     interface orientada a objetos
