@@ -2,7 +2,7 @@
 h1. Descrição
 
 
-Software gerador de boletos bancários de vários bancos para PHP, com interface orientada a objetos
+Software gerador de boletos bancários de vários bancos para PHP, com interface orientada a objetos, suporte a plugins, uso de HTML5 e CSS3 e geração de código de barras em uma imagem única.
 
 h2. Conceitos
 
@@ -20,27 +20,21 @@ ObjectBoleto é todo desenvolvido com Html5 e CSS3, tudo para fazer a melhor apr
 
 h3. Reaproveitamento de código
 
-ObjectBoleto usa uma biblioteca de classes que disponibiliza todos métodos que o sistema precisa. Não precisa mais criar milhares de arquivos com os mesmos códigos para bancos diferentes, só por causa de uma mudança de logo no lado esquerdo.
+ObjectBoleto usa uma biblioteca de classes que disponibiliza todos os métodos que o sistema precisa. Não precisa mais criar milhares de arquivos com os mesmos códigos para bancos diferentes, só por causa de uma mudança de logo no lado esquerdo.
 
 h3. Código de barras otimizado
 
-ObjectBoleto utiliza um gerador de código de barras em imagem única, evitando
-aquele html repetitivo e infindável, cheio de imagens pequenas.
+ObjectBoleto utiliza um gerador de código de barras em imagem única, evitando aquele html repetitivo e infindável, cheio de imagens pequenas.
 Economiza banda e melhora a legibilidade do html gerado.
 
 
 h3. Suporte a plugins
 
 O projeto ObjectBoleto prevê suporte a plugins dos mais diversos tipos, como:
-- Geração de boletos bancários em PDF,
-- Envio de boletos bancários por e-mail,
-- Processamento de dados de arquivos de retorno, etc.
+* Geração de boletos bancários em PDF,
+* Envio de boletos bancários por e-mail,
+* Processamento de dados de arquivos de retorno, etc.
   
-h3. Diferentemente dos softwares existentes, que estão ultrapassados e/ou
-desatualizados, ObjBoleto objetiva um completo controle de boletos,
-com processamento de dados do arquivo de retorno, envio de boleto por
-e-mail, criação de boletos em pdf, etc.
-
 
 h2. Exemplo de uso
 
