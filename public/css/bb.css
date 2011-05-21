@@ -1,26 +1,27 @@
 /******   SEPARADORES DOS CAMPOS ****/
+#recibo .linha div,
 #ficha_compensacao #colunadireita div,
 #ficha_compensacao #colunaprincipal .item,
 #ficha_compensacao #colunaprincipal .mensagens{
-    border-left-color:#ff0;
+    border-left-color:#FF0;
 }
 
 /******   LOGOMARCA DO BANCO   ******/
-#ficha_compensacao .cabecalho.banco_logo{
+.cabecalho .banco_logo{
     background:url(../images/logobb.gif) no-repeat left bottom;
 }
 
 /******   LINHAS NO CABEÇALHO   ******/
-#ficha_compensacao #cabecalho, #ficha_compensacao #cabecalho .banco_codigo{
+.cabecalho, .cabecalho .banco_codigo{
     border-color:#009;
 }
 
 /******   LINHAS INFERIORES DOS CAMPOS    ******/
+#recibo div,
 #ficha_compensacao #colunaprincipal div,
 #ficha_compensacao #colunadireita div,
 #ficha_compensacao #sacado{
     border-bottom-color:#009;
-    
 }
 
 /***** CORES DOS TEXTOS **********/
@@ -29,11 +30,11 @@
 }
 
 /***** CORES DOS LABELS **********/
-#ficha_compensacao label{
+#ficha_compensacao label, #recibo label{
     color:#009;
 }
 
 /***** CORES DOS TEXTOS DO CABEÇALHO**********/
-#ficha_compensacao #cabecalho{
+.cabecalho{
     color:#009;
 }

@@ -22,7 +22,6 @@ $OB->Template->addBlock('recibo');
             </div>
             
             <!--DIV RECIBO DO SACADO-->
-            <div id="recibo">
             <?php
                 if($OB->Template->blockLoaded('recibo')):
                     echo $OB->Template->getBlock('recibo');
@@ -30,7 +29,6 @@ $OB->Template->addBlock('recibo');
                     echo 'recibo nao foi carregada';
                 endif;
             ?>
-            </div>
             
             <!--DIV FICHA DE COMPENSACAO-->
             <?php

@@ -6,10 +6,10 @@
 
             <div id="ficha_compensacao">
                 <!--  cabecalho  -->
-                <div id="cabecalho">
-                    <div class="cabecalho banco_logo "></div>
-                    <div class="cabecalho banco_codigo "><?php echo $OB->Vendedor->Banco . '-' . Math::Mod11($OB->Vendedor->Banco)?></div>
-                    <div class="cabecalho linha_digitavel  last"><?php echo $OB->linhaDigitavel();?></div>
+                <div class="cabecalho">
+                    <div class="banco_logo "></div>
+                    <div class="banco_codigo "><?php echo $OB->Vendedor->Banco . '-' . Math::Mod11($OB->Vendedor->Banco)?></div>
+                    <div class="linha_digitavel  last"><?php echo $OB->linhaDigitavel();?></div>
                 </div>
                 
                 <div id="colunaprincipal" class="">
@@ -70,7 +70,7 @@
                         </div>
                         <!--especie moeda-->
                         <div class="moeda item">
-                            <label>Espécie Moeda</label>
+                            <label>Moeda</label>
                             R$
                         </div>
                         <!--quantidade-->
@@ -164,6 +164,8 @@
                     ?>
                 </div>
                 
-            
+                <!--Linha pontilhada para corte-->
+                <div class="linha_corte"><label>Corte na linha pontilhada</label></div>
+                
             <!--Encerra ficha de compensação-->    
             </div>
