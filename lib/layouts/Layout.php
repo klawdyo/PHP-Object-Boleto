@@ -30,14 +30,14 @@ class Layout{
     */
     public $posicoes = array(
                      //(Inicio, Tamanho). Inicia em 0
-        'Banco'         => array(0,3),    //identificação do banco
-        'Moeda'         => array(3,1),    //Código da moeda: real=9
-        'DV'            => array(4,1),    //Dígito verificador geral da linha digitável
-        'FatorVencimento'=>array(5,4),    //Fator de vencimento (Dias passados desde 7/out/1997)
+        'Banco'         => array(0,3),   //identificação do banco
+        'Moeda'         => array(3,1),   //Código da moeda: real=9
+        'DV'            => array(4,1),   //Dígito verificador geral da linha digitável
+        'FatorVencimento'=>array(5,4),   //Fator de vencimento (Dias passados desde 7/out/1997)
         'Valor'         => array(9,10),  //Valor nominal do título
         'Agencia'       => array(19,4),  //Código da agencia, sem dígito
         'Carteira'      => array(23,2),  //Código da Carteira
-        'NossoNumero'   => array(25,12),  //Nosso número
+        'NossoNumero'   => array(25,12), //Nosso número
         'Conta'         => array(36,7),  //Conta corrente do cedente, sem o dígito
     );
     
@@ -61,23 +61,20 @@ class Layout{
     
     
     /**
-      *
+      * Construtor da classe
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
-    //public function __construct(&$obj){
     public function __construct(){
 
     }
     
     /**
       * Carrega o arquivo e as configurações de layout do banco informado
+      * 
       * @version 0.1 20/05/2011 Initial
-      *
       */
     public function Banco($codigo){
-        $codigo = OB::zeros($codigo, 3);
-        
         if(array_key_exists($codigo, $this->relacoes)){
             $banco = $this->relacoes[$codigo];
             $filename = OB_DIR . '/lib/layouts/' . $banco . '.php';
@@ -96,9 +93,9 @@ class Layout{
     }
     
     /**
-      *
+      * Normaliza as variáveis de acordo com os seus tamanhos exatos
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function normalize($valor, $variavel){
         if(array_key_exists($variavel, $this->posicoes)){

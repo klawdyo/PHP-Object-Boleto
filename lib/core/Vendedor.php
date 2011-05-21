@@ -55,7 +55,7 @@ class Vendedor{
       *
       */
     public function setBanco($codigo){
-        $this->Banco = $codigo;
+        $this->Banco = OB::zeros($codigo, 3);
         
         return $this;
     }
