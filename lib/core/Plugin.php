@@ -1,5 +1,6 @@
 <?php
-
+    //$ob->plugin('Pdf')->save('/public/files/filename.pdf');
+            
 class Plugin{
     
     public $plugins = array();

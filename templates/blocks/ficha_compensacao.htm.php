@@ -3,9 +3,6 @@
     if(!empty($OB->Layout->css))
         $OB->Template->addStyle($OB->Layout->css);
     
-    //$OB->Template->addStyle('bb');
-    
-//pr($OB, 'addstyle');
 ?>
 <div id="ficha_compensacao">
     <!--  cabecalho  -->
@@ -20,12 +17,12 @@
             <!--local de pagamento-->
             <div class="local_pagamento item">
                  <label>Local de Pagamento</label>
-                 Pagável em qualquer banco até o vencimento
+                 <?php echo $OB->Configuracao->LocalPagamento; ?>
             </div>
         
         <!--  linha2  -->
             <!--Cedente-->
-            <div class="cedente item ">
+            <div class="cedente item">
                  <label>Cedente </label>
                  <?php echo $OB->Vendedor->Nome; ?>
             </div>
@@ -48,12 +45,12 @@
 
             </div>
             <!--aceite-->
-            <div class="item aceite">
+            <div class="aceite item">
                 <label>Aceite</label>
 
             </div>
             <!--data processamento-->
-            <div class="item dt_proc">
+            <div class="dt_proc item">
                 <label>Data proc</label>
                  <?php echo $OB->Boleto->DataEmissao; ?>
             </div>
@@ -62,27 +59,27 @@
         <!--  linha4  -->
         <div class="linha">
             <!--uso do banco-->
-            <div class="item uso_banco ">
+            <div class="uso_banco item">
                 <label>Uso do Banco</label>
                 
             </div>
             <!--carteira-->
-            <div class="item carteira ">
+            <div class="carteira item">
                 <label>Carteira</label>
                  <?php echo $OB->Vendedor->Carteira; ?>
             </div>
             <!--especie moeda-->
-            <div class="item moeda ">
+            <div class="moeda item">
                 <label>Espécie Moeda</label>
                 R$
             </div>
             <!--quantidade-->
-            <div class="item qtd ">
+            <div class="qtd item">
                 <label>Quantidade</label>
                 <?php echo $OB->Boleto->Quantidade; ?>
             </div>
             <!--valor-->
-            <div class="item valor  last">
+            <div class="valor item">
                 <label>(x) Valor</label>
                 <?php echo number_format($OB->Boleto->Valor/100,2,',','.'); ?>
             </div>
@@ -91,6 +88,9 @@
         <!--  instrucoes/mensagens  -->
         <div class="mensagens ">
                  <label>Instruções (Texto de responsabilidade do cedente)</label>
+                 <?php
+                    
+                 ?>
         </div>
     
     </div>

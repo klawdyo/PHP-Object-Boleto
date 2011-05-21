@@ -40,6 +40,19 @@ class Boleto{
     public $LinhaDigitavel;
     
     /**
+      * Configura os dados dos clientes a partir de um array
+      *
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function set($array){
+        foreach($array as $var => $value){
+            $method = 'set' . $var;
+            $this->$method($value);
+        }
+        return $this;
+    }
+
+    /**
       * Define a data da emissão do boleto. Qualquer um dos parâmetros
       * deixados em branco seraá preenchido com o valor referente ao dia
       * atual

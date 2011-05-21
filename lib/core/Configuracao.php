@@ -1,8 +1,8 @@
 <?php //18/05/2010
 
 class Configuracao{
-    private $instrucoes = array();
-    public $localPagamento;
+    private $Instrucoes = array();
+    public $LocalPagamento;
     
     /**
       *
@@ -20,7 +20,7 @@ class Configuracao{
       */
     public function addInstrucao($frase){
         if(!empty($frase)){
-            $this->instrucoes[] = $frase;
+            $this->Instrucoes[] = $frase;
         }        
         return $this;
     }
@@ -32,7 +32,7 @@ class Configuracao{
       */
     public function setLocalPagamento($frase){
         if(!empty($frase)){
-            $this->localPagamento[] = $frase;
+            $this->LocalPagamento = $frase;
         }        
         return $this;
     }

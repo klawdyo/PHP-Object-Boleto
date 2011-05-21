@@ -130,6 +130,16 @@ class Template{
     }
     
     /**
+      * Manda variáveis para os templates/blocks
+      * 
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function set($var, $value){
+        $this->$var = $value;
+        return $this;
+    }
+    
+    /**
       * Renderiza templates
       * 
       * @version 0.1 18/05/2011 Initial

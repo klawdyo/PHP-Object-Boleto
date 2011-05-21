@@ -33,8 +33,8 @@ class OB{
             $this->$class = new $class($this);
         }
         //Carrego 
-        require OB_DIR . '/lib/layouts/Layouts.php';
-        //$this->Layout = new Layouts($this);
+        require OB_DIR . '/lib/layouts/Layout.php';
+        //$this->Layout = new Layout($this);
     }
     
     //public function __get()
@@ -64,7 +64,7 @@ class OB{
         }
         
         //Instância do Layouts pai
-        $layout = new Layouts;
+        $layout = new Layout;
         //Todos os layouts dos bancos extendem o layout pai. Carrego o layout
         //específico para o banco em questão
         $this->Layout = $layout->Banco($this->Vendedor->Banco);
@@ -220,19 +220,8 @@ class OB{
         ));
 
         $this->Template->render($this->Template->Template, $data);
-
-        $this->clean();
     }
     
-    /**
-      * Limpa as variáveis Boleto e Cliente e deixa no ponto de gerar um novo boleto
-      * 
-      * @version 0.1 19/05/2011 Initial
-      *
-      */
-    public function clean(){
-        
-    }
     
     /**
       * Pega uma url relativa
@@ -272,6 +261,4 @@ class OB{
    public static function zeros($text, $length){
         return str_pad($text, $length, '0', STR_PAD_LEFT);
     }
-    
-    
 }

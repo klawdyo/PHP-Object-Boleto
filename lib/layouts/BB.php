@@ -1,7 +1,6 @@
 <?php
-class BB extends Layouts{
+class BB extends Layout{
     public $nomebanco = 'Banco do Brasil';
-    public $logobanco = 'logobb.jpg';
     public $css = 'bb.css';
     
 }

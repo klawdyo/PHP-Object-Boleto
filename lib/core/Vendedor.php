@@ -60,4 +60,17 @@ class Vendedor{
         return $this;
     }
     
+    /**
+      * Configura os dados do vendedor a partir de um array
+      *
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function set($array){
+        foreach($array as $var => $value){
+            $method = 'set' . $var;
+            $this->$method($value);
+        }
+        return $this;
+    }
+    
 }

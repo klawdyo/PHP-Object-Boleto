@@ -6,7 +6,7 @@
     $ob = new OB();
     
     $ob->Vendedor
-            ->setBanco('001')
+            ->setBanco('104')
             ->setAgencia('214')
             ->setConta('10571')
             ->setNome('Jose Claudio Medeiros de Lima')
@@ -16,21 +16,24 @@
         ;
             
     $ob->Configuracao
-            ->addInstrucao('Sr. Caixa, cobrar multa de 2% após o vencimento')
-            ->addInstrucao('Receber até 10 dias após o vencimento')
-            ->addInstrucao('Em caso de dúvidas entre em contato conosco: xxxx@xxxx.com.br')
-            ->addInstrucao('Emitido pelo sistema Projeto BoletoPhp - www.boletophp.com.br')
+            ->setLocalPagamento('Pagável em qualquer banco até o vencimento')
         ;
         
     $ob->Template
             ->setTitle('ObjBoleto')
             ->setTemplate('html5')
+            ->set('variavel', 'valor')
         ;
         
     $ob->Cliente
-            ->setNome('Maria Joelma Bezerra de Medeiros')
-            ->setCpf('111.999.888-77')
-            ->setEmail('mariajoelma85@hotmail.com')
+            //->setNome('Maria Joelma Bezerra de Medeiros')
+            //->setCpf('111.999.888-77')
+            //->setEmail('mariajoelma85@hotmail.com')
+            ->set(array(
+                        'Nome' => 'Sheverllannyo',
+                        'Cpf' => '123.456.789-09',
+                        'Email'=> 'shev_moto@mail.com'
+                        ))
         ;
         
             
@@ -39,28 +42,8 @@
             ->setDiasVencimento(5)
             ->setNossoNumero('123456')
             ->setNumDocumento('873245')
-            ->setDesconto(25.99)
         ;
-    
-    //$ob->plugin('Pdf')->save('/public/files/filename.pdf');
             
-    
-            
-    $ob->render();
-    $ob->Cliente
-            ->setNome('Maria Joelma Bezerra de Medeiros')
-            ->setCpf('111.999.888-77')
-            ->setEmail('mariajoelma85@hotmail.com')
-        ;
-        
-            
-    $ob->Boleto
-            ->setValor(1294.5)
-            ->setDiasVencimento(30)
-            ->setNossoNumero('123457')
-            ->setNumDocumento('873246')
-            ->setDesconto(25.99)
-        ;
     $ob->render();
     
     
