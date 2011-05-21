@@ -56,8 +56,13 @@ class OB{
       * Carrego os dados do banco desejado
       * 
       * @version 0.1 20/05/2011 Initial
+      *          0.2 20/05/2011 Verifico se algo já foi carregado
       */
     public function loadBanco(){
+        if(!empty($this->Layout)){
+            return $this->Layout;
+        }
+        
         //Instância do Layouts pai
         $layout = new Layouts;
         //Todos os layouts dos bancos extendem o layout pai. Carrego o layout
@@ -194,6 +199,39 @@ class OB{
         $linhaDigitavel = String::applyMask($linhaDigitavel, $this->Layout->mascaraLinhaDigitavel);
         
         return $linhaDigitavel;
+    }
+    /**
+      *
+      * @version 0.1 18/05/2011 Initial
+      *          0.2 20/05/2011 Retirado o echo
+      *          1.0 20/05/2011 Movido da classe Boleto para a classe OB
+      * @todo Trabalho pra OB
+      */
+    public function render(){
+        $this->loadBanco();
+        //$data2 = array('OB', $this->parent);
+        $data = array(
+            'OB' => (object) array(
+                'Template' => $this->Template,
+                'Vendedor' => $this->Vendedor,
+                'Cliente' => $this->Cliente,
+                'Boleto' => $this->Boleto,
+                'Configuracao' => $this->Configuracao,
+        ));
+
+        $this->Template->render($this->Template->Template, $data);
+
+        $this->clean();
+    }
+    
+    /**
+      * Limpa as variáveis Boleto e Cliente e deixa no ponto de gerar um novo boleto
+      * 
+      * @version 0.1 19/05/2011 Initial
+      *
+      */
+    public function clean(){
+        
     }
     
     /**

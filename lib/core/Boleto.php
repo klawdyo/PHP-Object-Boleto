@@ -13,24 +13,6 @@ class Boleto{
         $this->setDataEmissao();
     }
     
-    /**
-      *
-      * @version 0.1 18/05/2011 Initial
-      * @todo Trabalho pra OB
-      */
-    public function render(){
-        //$data2 = array('OB', $this->parent);
-        $data = array(
-            'OB' => (object) array(
-                'Template' => $this->parent->Template,
-                'Vendedor' => $this->parent->Vendedor,
-                'Cliente' => $this->parent->Cliente,
-                'Boleto' => $this->parent->Boleto,
-                'Configuracao' => $this->parent->Configuracao,
-        ));
-        echo
-            $this->parent->Template->render($this->parent->Template->Template, $data);
-    }
     
     
     # # # # # # # # # # # # # # # # # # # # # #

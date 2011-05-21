@@ -35,10 +35,10 @@ div#container{
                 width:690px;
                 margin-bottom:5px;
             }
-            #ficha_compensacao #cabecalho div{float:left}
+            #ficha_compensacao #cabecalho div{float:left;height:20px;padding-top:20px;border:0}
             #ficha_compensacao #cabecalho .banco_logo{width:160px}
-            #ficha_compensacao #cabecalho .banco_codigo{width:70px;font-size:17px;font-weight:bold;text-align:center;margin-top:20px;border:0;border-left:3px solid #000000;border-right:3px solid #000000;}
-            #ficha_compensacao #cabecalho .linha_digitavel{width:450px;font-size:15px;font-weight:bold;text-align:right;margin-top:20px}
+            #ficha_compensacao #cabecalho .banco_codigo{width:70px;font-size:17px;font-weight:bold;text-align:center;border:0;border-left:3px solid #000000;border-right:3px solid #000000;}
+            #ficha_compensacao #cabecalho .linha_digitavel{width:450px;font-size:15px;font-weight:bold;text-align:right}
             
             #ficha_compensacao #colunaprincipal{
                 border:0;

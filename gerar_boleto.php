@@ -14,12 +14,6 @@
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
             ->setEmail('joseclaudiomedeirosdelima@uol.com.br')
         ;
-        
-    $ob->Cliente
-            ->setNome('Maria Joelma Bezerra de Medeiros')
-            ->setCpf('111.999.888-77')
-            ->setEmail('mariajoelma85@hotmail.com')
-        ;
             
     $ob->Configuracao
             ->addInstrucao('Sr. Caixa, cobrar multa de 2% após o vencimento')
@@ -31,10 +25,14 @@
     $ob->Template
             ->setTitle('ObjBoleto')
             ->setTemplate('html5')
-            ->addStyle('default')
-            //->addStyle('blueprint')
-            //->addBlock('personalizado', 'demonstrativo', array('nome'=>'carai'))
         ;
+        
+    $ob->Cliente
+            ->setNome('Maria Joelma Bezerra de Medeiros')
+            ->setCpf('111.999.888-77')
+            ->setEmail('mariajoelma85@hotmail.com')
+        ;
+        
             
     $ob->Boleto
             ->setValor(129.45)
@@ -44,9 +42,25 @@
             ->setDesconto(25.99)
         ;
     
-    $ob->plugin('Pdf')->save('/public/files/filename.pdf');
+    //$ob->plugin('Pdf')->save('/public/files/filename.pdf');
             
     
             
-    $ob->Boleto->render();
-    //$ob->render();
+    $ob->render();
+    $ob->Cliente
+            ->setNome('Maria Joelma Bezerra de Medeiros')
+            ->setCpf('111.999.888-77')
+            ->setEmail('mariajoelma85@hotmail.com')
+        ;
+        
+            
+    $ob->Boleto
+            ->setValor(1294.5)
+            ->setDiasVencimento(30)
+            ->setNossoNumero('123457')
+            ->setNumDocumento('873246')
+            ->setDesconto(25.99)
+        ;
+    $ob->render();
+    
+    

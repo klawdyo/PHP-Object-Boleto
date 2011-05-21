@@ -1,20 +1,19 @@
 <?php
-#Esse template usará os seguintes blocks: ficha_compensaca.htm.php
+#Adicionando um style para ser carregado
+$OB->Template->addStyle('default');
+#Esse template usará os seguintes blocks: ficha_compensacao.htm.php
 $OB->Template->addBlock('ficha_compensacao');
 //pr($OB->Template,'html5');
 ?>
 <html>
     <head>
         <title><?php echo $OB->Template->Title;?></title>
-        <?php
-            $OB->Template->addStyle('default');
-            echo $OB->Template->getStyles();
-            ?>
+        <?php echo $OB->Template->getStyles();?>
     </head>
     
     <body>
         <!--    DIV CENTRAL    -->
-        <div id="container" class="container">
+        <div id="container">
             
             <!--DIV DADOS DO VENDEDOR-->
             <div id="dados_vendedor">

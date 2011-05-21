@@ -141,7 +141,7 @@ class Template{
             extract($data);
             ob_start();
             require $template;
-            //ob_end_flush();
+            ob_get_flush();
             return ob_get_clean();
         }
         else{
