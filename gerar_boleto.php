@@ -25,17 +25,15 @@
         ;
         
     $ob->Cliente
-            //->setNome('Maria Joelma Bezerra de Medeiros')
-            //->setCpf('111.999.888-77')
-            //->setEmail('mariajoelma85@hotmail.com')
-            ->set(array(
-                        'Nome' => 'Sheverllannyo',
-                        'Cpf' => '123.456.789-09',
-                        'Email'=> 'shev_moto@mail.com'
-                        ))
+            ->setNome('Maria Joelma Bezerra de Medeiros')
+            ->setCpf('111.999.888-77')
+            ->setEmail('mariajoelma85@hotmail.com')
+            ->setEndereco('')
+            ->setCidade('')
+            ->setUf('')
+            ->setCep('')
         ;
-        
-            
+    
     $ob->Boleto
             ->setValor(2952.95)
             ->setDiasVencimento(5)

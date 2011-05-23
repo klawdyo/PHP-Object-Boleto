@@ -15,8 +15,6 @@
     require OB_DIR . '/lib/core/Boleto.php';
     require OB_DIR . '/lib/core/Configuracao.php';
     require OB_DIR . '/lib/core/Template.php';
-    //require OB_DIR . '/lib/core/Plugin.php';
-    //require OB_DIR . '/lib/layouts/Layouts.php';
     
     /*
         UTILS

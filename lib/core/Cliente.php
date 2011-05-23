@@ -6,14 +6,17 @@ class Cliente{
     public $Nome;
     public $Cnpj;
     public $Cpf;
-    public $Endereco;
     public $Email;
+    public $Endereco;
+    public $Cidade;
+    public $Uf;
+    public $Cep;
     
     
     /**
-      *
+      * Construtor da classe
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function __construct(&$obj){
         $this->parent = $obj;
@@ -81,5 +84,31 @@ class Cliente{
         $this->Endereco = $value;
         return $this;
     }
-    
+    /**
+      * Configura a cidade do cliente
+      *
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setCidade($value){
+        $this->Cidade = $value;
+        return $this;
+    }
+    /**
+      * Configura a uf do cliente
+      *
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setUf($value){
+        $this->Uf = $value;
+        return $this;
+    }
+    /**
+      * Configura o cep do cliente
+      *
+      * @version 0.1 20/05/2011 Initial
+      */
+    public function setCep($value){
+        $this->Cep = $value;
+        return $this;
+    }
 }

@@ -1,5 +1,7 @@
 logo_empresa.png
-esquema*
+esquema.png
 *.komodoproject
 TODO.txt
 arquivos/*
+teste.php
+.gitignore

@@ -127,11 +127,11 @@
                          <?php echo $OB->Boleto->OutrosAbatimentos ? number_format($OB->Boleto->OutrosAbatimentos, 2, ',', '.') : ''; ?>
                     </div>
                     <div class="">
-                         <label>(-) Mora/Multa</label>
+                         <label>(+) Mora/Multa</label>
                          <?php echo $OB->Boleto->Multa ? number_format($OB->Boleto->Multa, 2, ',', '.') : ''; ?>
                     </div>
                     <div class="">
-                         <label>(-) Outros Acréscimos</label>
+                         <label>(+) Outros Acréscimos</label>
                          <?php echo $OB->Boleto->OutrosAcrescimos ? number_format($OB->Boleto->OutrosAcrescimos, 2, ',', '.') : ''; ?>
                     </div>
                     <div class="">
