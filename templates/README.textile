@@ -1,0 +1,52 @@
+h1. Introdução
+
+ObjectBoleto trabalha com uma camada de visualização que se divide em 2 partes:
+Templates e Blocks
+
+h2. Templates
+
+Os Templates são o que podemos chamar de layouts. Você, usuário, poderá criar quantos templates quiser, pois cada cliente pode exigir um modelo diferente.
+Por padrão, ObjectBoleto vem com os templates default, html5 e carne.
+
+* "default" é um modelo em tabelas, com estilos inline, importado e adaptado do boletophp.
+* "html5" é totalmente tabless. Ele acompanha um recibo de cliente, e uma ficha de compensação. É o padrão geralmente utilizado. "html5" é personalisado por arquivos .css externos para cada banco.
+* "carne" também não usa tabelas, e seus estilos são oriundos de um arquivo css externo. A diferença para o "html" é que ele é no formato de um carnê pagamento, onde, além da ficha de compensação, à sua esquerda tem um recibo para o cliente.
+
+Os templates padrão do ObjectBoleto tem por objetivo facilitar a personalização dos boletos, com imagens, textos e etc.
+
+h2. Blocks
+
+Os blocks são códigos html que geralmente são usados em vários locais, como a ficha de compensação. Nesse sentido, o ObjectBoleto dispõe de 3 blocks padrão:
+
+* "ficha_compensacao" concentra o boleto bancário propriamente dito, inclusive com o código de barras;
+* "recibo" contém a parte superior de uma folha A4, acima da ficha de compensação;
+* "canhoto" é o comprovante que fica à esquerda das fichas de compensação em um carnê.
+
+O objetivo dos blocks é minimizar a repetição de código, concentrando tudo em um só lugar.
+
+h3. Exemplo
+
+A ficha de compensação é utilizada tanto no template "html", como no "carne". Você, usuário, também poderia criar seu próprio template, utilizando os blocks prontos do ObjectBoleto.
+Supondo que eu quero um template com uma imagem grande na parte de cima, com propaganda do produto do seu cliente, e um boleto bancário na parte de baixo.
+Crio o arquivo "novotemplate.htm.php". Todos os templates e blocks devem ter a extensão ".htm.php". Os templates ficam no diretório "/templates", e os blocks no diretório "/templates/blocks".
+
+pre. <html>
+<head>
+    <title>Meu template</title>
+</head>
+<body>
+    <img src="imagem_cliente.png" />
+    <?php
+        //Incluindo o boleto bancário
+        echo $OB->Template->getBlock('novotemplate');
+    ?>
+</body>
+</html>
+
+Pronto. Está criado o seu template personalizado.
+
+Agora, para usá-lo, é só indicar no momento da configuração do ObjectBoleto.
+
+pre. $ob = new OB();
+$ob->Template->setTemplate('novotemplate');
+
