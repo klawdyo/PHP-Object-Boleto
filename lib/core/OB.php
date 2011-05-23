@@ -15,7 +15,7 @@ class OB{
     public $Template;
     
     //Dados de configuração do Layout para o banco escolhido
-    public $Layout;
+    public $Banco;
     
     
     //
@@ -33,7 +33,7 @@ class OB{
             $this->$class = new $class($this);
         }
         #Carrego o layout
-        require OB_DIR . '/lib/layouts/Layout.php';
+        require OB_DIR . '/lib/core/Banco.php';
     }
     
     /**
@@ -56,18 +56,18 @@ class OB{
       *          0.2 20/05/2011 Verifico se algo já foi carregado
       */
     public function loadBanco(){
-        if(!empty($this->Layout)){
-            return $this->Layout;
+        if(!empty($this->Banco)){
+            return $this->Banco;
         }
         
         #Instância do Layouts pai
-        $layout = new Layout;
+        $banco = new Banco;
         
         #Todos os layouts dos bancos extendem o layout pai. Carrego o layout
         #específico para o banco em questão
-        $this->Layout = $layout->Banco($this->Vendedor->Banco);
+        $this->Banco = $banco->load($this->Vendedor->Banco);
         
-        return $this->Layout;
+        return $this->Banco;
     }
     
     /**
@@ -101,7 +101,7 @@ class OB{
             $this->normalizeData();
             
             #Insere os valores de $this->data no layout do codigo de barras
-            $cod = String::insert($this->Layout->layoutCodigoBarras, $this->Data);
+            $cod = String::insert($this->Banco->layoutCodigoBarras, $this->Data);
 
             #Cálculo do dígito verificador geral do código de barras
             $dv = Math::Mod11($cod, 1, 1);
@@ -137,7 +137,7 @@ class OB{
                );
 
             foreach($data as $var => $value){
-                $this->Data[$var] = self::zeros($value, $this->Layout->posicoes[$var][1]);
+                $this->Data[$var] = self::zeros($value, $this->Banco->posicoes[$var][1]);
             }
             
             $this->Data['Vencimento'] = $this->Boleto->Vencimento;
@@ -171,12 +171,12 @@ class OB{
         
         #A partir das posições indicadaas pelo layout, separo os dados dentro
         #do código em variáveis normais
-        foreach($this->Layout->posicoes as $var => $substr){
+        foreach($this->Banco->posicoes as $var => $substr){
             $data[$var] = substr($codigo, $substr[0], $substr[1]);
         }
         
         #Aplico no layout da linha digitável os dados da variável $data
-        $linhaDigitavel = String::insert($this->Layout->layoutLinhaDigitavel, $data);
+        $linhaDigitavel = String::insert($this->Banco->layoutLinhaDigitavel, $data);
 
         #Calculando o dv vindo do código de barras, que 
         #fica exatamente na posição 4, iniciando em 0
@@ -194,7 +194,7 @@ class OB{
         $linhaDigitavel = String::putAt($linhaDigitavel, $dv, 32);
        
         #Aplicando A linha digitável gerada à sua máscara
-        $linhaDigitavel = String::applyMask($linhaDigitavel, $this->Layout->mascaraLinhaDigitavel);
+        $linhaDigitavel = String::applyMask($linhaDigitavel, $this->Banco->mascaraLinhaDigitavel);
         
         return $linhaDigitavel;
     }

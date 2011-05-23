@@ -1,14 +1,14 @@
 <?php
- header('Content-type: text/html; charset=utf-8');
- include 'OB_init.php';    
-
+    header('Content-type: text/html; charset=utf-8');
+    include 'OB_init.php';    
 
     $ob = new OB();
     
     $ob->Vendedor
             ->setBanco('001')
-            ->setAgencia('214')
-            ->setConta('10571')
+            ->setAgencia('9999')
+            ->setConta('99999')
+            ->setCarteira('18')
             ->setNome('Jose Claudio Medeiros de Lima')
             ->setCpf('012.345.678-90')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
@@ -37,12 +37,15 @@
         
             
     $ob->Boleto
-            ->setValor(1329.45)
+            ->setValor(2952.95)
             ->setDiasVencimento(5)
-            ->setNossoNumero('123456')
-            ->setNumDocumento('873245')
+            ->setNossoNumero('77777770000087654')
+            ->setNumDocumento('27.030195.10')
             ->setQuantidade(1)
         ;
             
     $ob->render();
     
+    
+    //00199.99903 07777.777009 00008.765402 2 49810000295295
+    //00190.00009 07777.777009 00087.654182 8 49810000295295

@@ -1,6 +1,6 @@
 <?php
 //18/05/11
-class Layout{
+class Banco{
     /*
         @var array $nomeBanco
         Armazena o nome do banco
@@ -95,21 +95,21 @@ class Layout{
       * 
       * @version 0.1 20/05/2011 Initial
       */
-    public function Banco($codigo){
+    public function load($codigo){
         if(array_key_exists($codigo, $this->relacoes)){
             $banco = $this->relacoes[$codigo];
-            $filename = OB_DIR . '/lib/layouts/' . $banco . '.php';
+            $filename = OB_DIR . '/lib/bancos/' . $banco . '.php';
 
             if(file_exists($filename)){
                 require $filename;
                 return new $banco;
             }
             else{
-                throw new Exception('O arquivo /lib/layouts/' . $banco. '.php não existe.');
+                throw new Exception('O arquivo /lib/bancos/' . $banco. '.php não existe.');
             }
         }
         else{
-            throw new Exception('O banco ' . $banco. ' não existe em Layouts::$relacoes');
+            throw new Exception('O banco ' . $banco. ' não existe em Banco::$relacoes');
         }
     }
     
