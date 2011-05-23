@@ -1,0 +1,35 @@
+/******   SEPARADORES DOS CAMPOS ****/
+#recibo .linha div,
+#ficha_compensacao #colunadireita div,
+#ficha_compensacao #colunaprincipal .item,
+#ficha_compensacao #colunaprincipal .mensagens{
+    border-left-color:rgb(231,130,39);
+}
+
+/******   LINHAS NO CABEÇALHO   ******/
+.cabecalho, .cabecalho .banco_codigo{
+    border-color:rgb(0,94,151);
+}
+
+/******   LINHAS INFERIORES DOS CAMPOS    ******/
+#recibo div,
+#ficha_compensacao #colunaprincipal div,
+#ficha_compensacao #colunadireita div,
+#ficha_compensacao #sacado{
+    border-bottom-color:rgb(0,94,151);
+}
+
+/***** CORES DOS TEXTOS **********/
+#ficha_compensacao{
+    color:#000;
+}
+
+/***** CORES DOS LABELS **********/
+#ficha_compensacao label, #recibo label{
+    color:rgb(0,94,151);
+}
+
+/***** CORES DOS TEXTOS DO CABEÇALHO**********/
+.cabecalho{
+    color:rgb(0,94,151);
+}

@@ -6,7 +6,7 @@
     $ob = new OB();
     
     $ob->Vendedor
-            ->setBanco('104')
+            ->setBanco('001')
             ->setAgencia('214')
             ->setConta('10571')
             ->setNome('Jose Claudio Medeiros de Lima')
