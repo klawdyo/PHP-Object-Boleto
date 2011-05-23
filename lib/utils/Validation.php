@@ -1,5 +1,5 @@
 <?php
-
+//package Spaghetti.core
 class Validation {
     public static function alphanumeric($value) {
         return (bool) preg_match('/^[\p{Ll}\p{Lm}\p{Lo}\p{Lt}\p{Lu}\p{Nd}]+$/mu', $value);
