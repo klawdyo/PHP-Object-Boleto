@@ -1,11 +1,12 @@
 <?php
 #Adicionando um style para ser carregado
 $OB->Template->addStyle('default');
-#Esse template usará os seguintes blocks: ficha_compensacao.htm.php, recibo.htm.php
-$OB->Template->addBlock('ficha_compensacao');
-$OB->Template->addBlock('recibo');
-//pr($OB->Template,'html5');
+
+#Carregando o estilo referente ao banco, caso ele tenha
+if(!empty($OB->Layout->css))
+    $OB->Template->addStyle('bb.css');
 ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
         <title><?php echo $OB->Template->Title;?></title>
@@ -23,20 +24,12 @@ $OB->Template->addBlock('recibo');
             
             <!--DIV RECIBO DO SACADO-->
             <?php
-                if($OB->Template->blockLoaded('recibo')):
-                    echo $OB->Template->getBlock('recibo');
-                else:
-                    echo 'recibo nao foi carregada';
-                endif;
+                echo $OB->Template->getBlock('recibo');
             ?>
             
             <!--DIV FICHA DE COMPENSACAO-->
             <?php
-                if($OB->Template->blockLoaded('ficha_compensacao')):
-                    echo $OB->Template->getBlock('ficha_compensacao');
-                else:
-                    echo 'ficha de compensacao nao foi carregada';
-                endif;
+                echo $OB->Template->getBlock('ficha_compensacao');
             ?>
         </div>
     </body>

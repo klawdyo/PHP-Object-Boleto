@@ -21,21 +21,9 @@ class Template{
     
     /*
        @var array $Styles
-       Sequência de templates adicionados à página
+       Sequência de estilos adicionados à página
     */
-    private $Styles = array(
-        //'blueprint/screen.css' => 'screen',
-        //'blueprint/print.css' => 'print',
-        //'blueprint/ie.css' => 'screen',
-        //'default.css' => 'screen',
-        //'print.css' => 'print',
-    );
-    
-    /*
-       @var array $Styles
-       Armazena o html dos blocks
-    */
-    public $Blocks = array();
+    private $Styles = array();
     
     /**
       *
@@ -83,40 +71,6 @@ class Template{
         return $html;
     }
     
-    
-    /**
-      * Envia para o template um bloco de código para um lugar previamente
-      * definido.
-      * Ao construir um template, é possível determinar locais que receberão
-      * esses blocos. Ex.:
-      * Em um determinado local do template default.htm.php, eu criei um
-      * bloco chamado 'personalizado'. Nesse bloco, eu posso carregar o
-      * html do template 'demonstrativo.htm.php'. Nesse caso, eu chamaria
-      * o método Template::addBlock('personalizado', 'demonstrativo', $data);
-      * Onde $data seria um array de dados que seriam usados dentro do
-      * template 'demonstrativo.htm.php'
-      * 
-      * @version 0.1 18/05/2011 Initial
-      *
-      */
-    public function addBlock($blockName, $data = array()){
-        $data = array_merge($data, array('OB' => (object) $this->parent));
-        $this->Blocks[$blockName] = $this->render('blocks/' . $blockName, $data);
-        
-        return $this;
-    }
-    
-    /**
-      * O bloco existe?
-      * 
-      * @version 0.1 18/05/2011 Initial
-      *              20/05/2011 Renomeado para blockLoaded()
-      *
-      */
-    public function blockLoaded($blockName){
-        return array_key_exists($blockName, $this->Blocks);
-    }
-    
     /**
       * Pega o html do bloco pré-carregado
       * 
@@ -124,8 +78,27 @@ class Template{
       *
       */
     public function getBlock($blockName, $data = array()){
-        if($this->blockLoaded($blockName)){
-            return $this->Blocks[$blockName];
+        $data = array_merge($data, array('OB' => (object) $this->parent));
+        
+        return $this->render('/blocks/'.$blockName, $data);
+    }
+    
+    /**
+      * Renderiza templates
+      * 
+      * @version 0.1 18/05/2011 Initial
+      *          1.0 22/05/2011 Consertado o bug dos Output bufferin
+      *
+      */
+    public function render($template, $data){
+        $template = OB_DIR . '/templates/' . $template . '.htm.php';
+        if(file_exists($template)){
+            extract($data);
+            ob_start();
+            require $template;
+        }
+        else{
+            throw new Exception('Template "' . $template . '" não existe.');
         }
     }
     
@@ -137,26 +110,6 @@ class Template{
     public function set($var, $value){
         $this->$var = $value;
         return $this;
-    }
-    
-    /**
-      * Renderiza templates
-      * 
-      * @version 0.1 18/05/2011 Initial
-      *
-      */
-    public function render($template, $data){
-        $template = OB_DIR . '/templates/' . $template . '.htm.php';
-        if(file_exists($template)){
-            extract($data);
-            ob_start();
-            require $template;
-            ob_get_flush();
-            return ob_get_clean();
-        }
-        else{
-            throw new Exception('Template "' . $template . '" não existe.');
-        }
     }
     
     

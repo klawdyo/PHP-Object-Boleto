@@ -12,11 +12,20 @@ class Layout{
         Armazena a relação entre os mais diversos bancos e os nomes dos
         seus arquivos. Os nomes devem estar iguais, inclusive em relação
         ao caso.
+        Fonte: http://www.febraban.org.br/Bancos.asp
      */
     public $relacoes = array(
         '001' => 'BB',
+        '003' => 'BancoAmazônia',
         '104' => 'Caixa',
         '237' => 'Bradesco',
+        '623' => 'Panamericano',
+        '356' => 'Real',
+        '033' => 'Santander',
+        '070' => 'BRB', //Banco de Brasília
+        '341' => 'Itau',
+        '409' => 'Unibanco',
+        '318' => 'Bmg',
     );
     
     

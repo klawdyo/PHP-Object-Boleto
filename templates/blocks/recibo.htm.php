@@ -1,8 +1,3 @@
-            <?php
-                #Carregando o estilo referente ao banco, caso ele tenha
-                if(!empty($OB->Layout->css))
-                    $OB->Template->addStyle($OB->Layout->css);
-            ?>
 <div id="recibo">
     <!--  cabecalho  -->
     <div class="cabecalho">

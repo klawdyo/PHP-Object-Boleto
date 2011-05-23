@@ -63,12 +63,13 @@ class OB{
             return $this->Layout;
         }
         
-        //Instância do Layouts pai
+        #Instância do Layouts pai
         $layout = new Layout;
-        //Todos os layouts dos bancos extendem o layout pai. Carrego o layout
-        //específico para o banco em questão
+        
+        #Todos os layouts dos bancos extendem o layout pai. Carrego o layout
+        #específico para o banco em questão
         $this->Layout = $layout->Banco($this->Vendedor->Banco);
-        //
+        
         return $this->Layout;
     }
     
@@ -94,7 +95,7 @@ class OB{
       *
       */
     public function geraCodigo(){
-        //Se nenhum código foi gerado.
+        #Se nenhum código foi gerado.
         if(empty($this->Boleto->CodigoBarras)){
             #Carrega o banco usado
             $this->loadBanco();
@@ -161,9 +162,9 @@ class OB{
     }
     
     /**
-      *
+      * Gera a linha digitável já formatada
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function linhaDigitavel(){
         $codigo = $this->geraCodigo();
@@ -201,7 +202,7 @@ class OB{
         return $linhaDigitavel;
     }
     /**
-      *
+      * Renderiza o template
       * @version 0.1 18/05/2011 Initial
       *          0.2 20/05/2011 Retirado o echo
       *          1.0 20/05/2011 Movido da classe Boleto para a classe OB
@@ -218,8 +219,9 @@ class OB{
                 'Boleto' => $this->Boleto,
                 'Configuracao' => $this->Configuracao,
         ));
-
+        
         $this->Template->render($this->Template->Template, $data);
+        flush();
     }
     
     

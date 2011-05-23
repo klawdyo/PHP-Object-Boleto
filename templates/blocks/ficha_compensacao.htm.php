@@ -1,13 +1,13 @@
             <?php
                 #Carregando o estilo referente ao banco, caso ele tenha
-                if(!empty($OB->Layout->css))
-                    $OB->Template->addStyle($OB->Layout->css);
+                //if(!empty($OB->Layout->css))
+                    //$OB->Template->addStyle($OB->Layout->css);
             ?>
 
             <div id="ficha_compensacao">
                 <!--  cabecalho  -->
                 <div class="cabecalho">
-                    <div class="banco_logo "></div>
+                    <div class="banco_logo "><span class="banco_nome"><?php echo $OB->Vendedor->Banco;?></span></div>
                     <div class="banco_codigo "><?php echo $OB->Vendedor->Banco . '-' . Math::Mod11($OB->Vendedor->Banco)?></div>
                     <div class="linha_digitavel  last"><?php echo $OB->linhaDigitavel();?></div>
                 </div>
