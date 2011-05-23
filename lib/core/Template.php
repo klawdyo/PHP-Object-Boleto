@@ -26,9 +26,9 @@ class Template{
     private $Styles = array();
     
     /**
-      *
+      * Construtor da classe
+      * 
       * @version 0.1 19/05/2011 Initial
-      *
       */
     public function __construct(&$obj){
         $this->parent = $obj;
@@ -42,13 +42,23 @@ class Template{
       *                         - Styles podem ser adicionados a partir dos
       *                         templates, blocks e serão enviados diretamente
       *                         para o template padrão
-      *
+      *          0.3 22/05/2011 - $filename pode receber um array de estilos
+      *                         - Não é mais possível o envio de variáveis dos
+      *                         blocks para o template.
       */
     public function addStyle($filename, $media = 'all' ){
+        #$filename pode receber um array de arquivos
+        if(is_array($filename)){
+            foreach($filename as $file){
+                $this->addStyle($file);
+            }
+            return $this;
+        }
+        #Tornando opcional informar a extensão do CSS
         if(!preg_match('/(.css)$/', $filename)){
             $filename .= '.css';
         }
-        
+        #Guardando o estilo
         $this->Styles[$filename] = $media;
         
         return $this;
@@ -57,7 +67,6 @@ class Template{
       * Retorna os styles css formatados como html
       * 
       * @version 0.1 19/05/2011 Initial
-      *
       */
     public function getStyles(){
         if(!empty($this->Styles)){
@@ -75,7 +84,6 @@ class Template{
       * Pega o html do bloco pré-carregado
       * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function getBlock($blockName, $data = array()){
         $data = array_merge($data, array('OB' => (object) $this->parent));
@@ -88,7 +96,6 @@ class Template{
       * 
       * @version 0.1 18/05/2011 Initial
       *          1.0 22/05/2011 Consertado o bug dos Output bufferin
-      *
       */
     public function render($template, $data){
         $template = OB_DIR . '/templates/' . $template . '.htm.php';
@@ -124,7 +131,6 @@ class Template{
       * Configura o título da página do template
       * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function setTitle($title){
         $this->Title = $title;
@@ -135,7 +141,6 @@ class Template{
       * Define qual o template que será usado
       * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function setTemplate($template){
         $this->Template = $template;
