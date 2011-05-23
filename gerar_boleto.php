@@ -6,7 +6,7 @@
     $ob = new OB();
     
     $ob->Vendedor
-            ->setBanco('001')
+            ->setBanco('104')
             ->setAgencia('214')
             ->setConta('10571')
             ->setNome('Jose Claudio Medeiros de Lima')
@@ -20,9 +20,8 @@
         ;
         
     $ob->Template
-            ->setTitle('ObjBoleto')
+            ->setTitle('PHP->OB ObjectBoleto')
             ->setTemplate('html5')
-            ->set('variavel', 'valor')
         ;
         
     $ob->Cliente
@@ -38,13 +37,12 @@
         
             
     $ob->Boleto
-            ->setValor(129.45)
+            ->setValor(1329.45)
             ->setDiasVencimento(5)
             ->setNossoNumero('123456')
             ->setNumDocumento('873245')
-            ->setQuantidade(2)
+            ->setQuantidade(1)
         ;
             
     $ob->render();
-    
     

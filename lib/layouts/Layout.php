@@ -1,11 +1,23 @@
 <?php
 //18/05/11
 class Layout{
+    /*
+        @var array $nomeBanco
+        Armazena o nome do banco
+    */
     public $nomeBanco;
-    public $logoBanco;
     
-    public $css = 'default';//css utilizado no boleto desse banco
-    public $template = 'default';
+    /*
+        @var array $image
+        Armazena o nome da imagem da logomarca do banco
+    */
+    public $image;
+    
+    /*
+        @var array $css
+        Armazena o arquivo CSS utilizado por esse banco
+    */
+    public $css;
     
     /*
         @var array $relacoes
@@ -16,7 +28,7 @@ class Layout{
      */
     public $relacoes = array(
         '001' => 'BB',
-        '003' => 'BancoAmazônia',
+        '003' => 'BancoAmazonia',
         '104' => 'Caixa',
         '237' => 'Bradesco',
         '623' => 'Panamericano',

@@ -5,7 +5,7 @@
             <div id="ficha_compensacao">
                 <!--  cabecalho  -->
                 <div class="cabecalho">
-                    <div class="banco_logo "><span class="banco_nome"><?php echo $OB->Vendedor->Banco;?></span></div>
+                    <div class="banco_logo "><img src="<?php echo OB::url('/public/images/' . $OB->Layout->image);?>" /></div>
                     <div class="banco_codigo "><?php echo $OB->Vendedor->Banco . '-' . Math::Mod11($OB->Vendedor->Banco)?></div>
                     <div class="linha_digitavel  last"><?php echo $OB->linhaDigitavel();?></div>
                 </div>

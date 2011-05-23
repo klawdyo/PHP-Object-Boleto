@@ -6,11 +6,6 @@
     border-left-color:#FF0;
 }
 
-/******   LOGOMARCA DO BANCO   ******/
-.cabecalho .banco_logo{
-    background:url(../images/bb.png) no-repeat left bottom;
-}
-
 /******   LINHAS NO CABEÇALHO   ******/
 .cabecalho, .cabecalho .banco_codigo{
     border-color:#009;
