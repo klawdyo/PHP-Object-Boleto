@@ -29,7 +29,7 @@ if(!empty($OB->Layout->css))
             
             <!--DIV FICHA DE COMPENSACAO-->
             <?php
-                echo $OB->Template->getBlock('ficha_compensacao');
+                echo $OB->Template->getBlock('ficha_compensacao', array('viaparam'=>'viaparam'));
             ?>
         </div>
     </body>

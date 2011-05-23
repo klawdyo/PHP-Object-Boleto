@@ -32,12 +32,9 @@ class OB{
         foreach($classes as $class){
             $this->$class = new $class($this);
         }
-        //Carrego 
+        #Carrego o layout
         require OB_DIR . '/lib/layouts/Layout.php';
-        //$this->Layout = new Layout($this);
     }
-    
-    //public function __get()
     
     /**
       *
@@ -104,7 +101,7 @@ class OB{
             $this->normalizeData();
             
             #Insere os valores de $this->data no layout do codigo de barras
-            $cod = String::insert($this->Layout->layoutCodigoBarras, $this->data);
+            $cod = String::insert($this->Layout->layoutCodigoBarras, $this->Data);
 
             #Cálculo do dígito verificador geral do código de barras
             $dv = Math::Mod11($cod, 1, 1);
@@ -127,7 +124,7 @@ class OB{
       * @todo Esse método é responsabilidade do layout
       */
     public function normalizeData(){
-        if(empty($this->data)){
+        if(empty($this->Data)){
             $data = array(
                 'Banco'=> $this->Vendedor->Banco,
                 'Moeda' => $this->Vendedor->Moeda,
@@ -140,15 +137,15 @@ class OB{
                );
 
             foreach($data as $var => $value){
-                $this->data[$var] = self::zeros($value, $this->Layout->posicoes[$var][1]);
+                $this->Data[$var] = self::zeros($value, $this->Layout->posicoes[$var][1]);
             }
             
-            $this->data['Vencimento'] = $this->Boleto->Vencimento;
+            $this->Data['Vencimento'] = $this->Boleto->Vencimento;
 
-            return $this->data;
+            return $this->Data;
         }
         else{
-            return $this->data;
+            return $this->Data;
         }
     }
     
@@ -210,30 +207,21 @@ class OB{
       */
     public function render(){
         $this->loadBanco();
-        //$data2 = array('OB', $this->parent);
-        $data = array(
+
+        /*$data = array(
             'OB' => (object) array(
                 'Template' => $this->Template,
                 'Vendedor' => $this->Vendedor,
                 'Cliente' => $this->Cliente,
                 'Boleto' => $this->Boleto,
                 'Configuracao' => $this->Configuracao,
-        ));
+        ));/**/
         
-        $this->Template->render($this->Template->Template, $data);
+        //$this->Template->render($this->Template->Template, $data);
+        $this->Template->render($this->Template->Template);
         flush();
     }
     
-    
-    /**
-      * Pega uma url relativa
-      * 
-      * @version 0.1 19/05/2011 Initial
-      *
-      */
-    public static function url($url = null){
-        return dirname($_SERVER['REQUEST_URI']) . $url;
-    }
     
     # # # # # # # # # # # # # # # # # # # # # #
     # # 
@@ -254,6 +242,15 @@ class OB{
     # # # # # # # # # # # # # # # # # # # # # #
 
     
+    /**
+      * Pega uma url relativa
+      * 
+      * @version 0.1 19/05/2011 Initial
+      *
+      */
+    public static function url($url = null){
+        return dirname($_SERVER['REQUEST_URI']) . $url;
+    }
     
     /**
       * Completa com zeros adicionais à esquerda até o valor informado

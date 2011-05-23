@@ -25,6 +25,12 @@ class Template{
     */
     private $Styles = array();
     
+    /*
+       @var array $Data
+       Guarda o objeto pai enviado
+    */
+    protected $Data = array();
+    
     /**
       * Construtor da classe
       * 
@@ -86,7 +92,7 @@ class Template{
       * @version 0.1 18/05/2011 Initial
       */
     public function getBlock($blockName, $data = array()){
-        $data = array_merge($data, array('OB' => (object) $this->parent));
+        //$data = array_merge($data, array('OB' => (object)$this->Data));
         
         return $this->render('/blocks/'.$blockName, $data);
     }
@@ -97,8 +103,10 @@ class Template{
       * @version 0.1 18/05/2011 Initial
       *          1.0 22/05/2011 Consertado o bug dos Output bufferin
       */
-    public function render($template, $data){
+    public function render($template, $data = array()){
+        $data = array_merge($data, array('OB' => $this->parent));
         $template = OB_DIR . '/templates/' . $template . '.htm.php';
+        
         if(file_exists($template)){
             extract($data);
             ob_start();
