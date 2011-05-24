@@ -78,6 +78,8 @@ class Math{
       *     em seu lugar? Existem exemplos de bancos que adicionam
       *     "0", outros "1", outros "X", outros "P", etc
       * @param $ifZero Se o resultado for zero, substituir por algum outro valor?
+      * @param $returnFull Deve retornar o valor completo, incluindo o dígito, ou somente o cálculo da divisão?
+      * @param $separator Separador para o dígito calculado
       * @return mixed
       */
     public static function Mod11($number, $ifTen = '0', $ifZero = '0', $returnFull = false, $separator = '-'){
