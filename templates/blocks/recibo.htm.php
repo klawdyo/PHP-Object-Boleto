@@ -53,7 +53,7 @@
     <div class="linha">
         <!-- Descontos/Abatimentos -->
         <div class="descontos item">
-            <label>(-) Descontos/ Abatimentos</label>
+            <label>(-) Desconto/Abatimento</label>
         </div>
         <!-- Outras Deduções -->
         <div class="outras_deducoes item">

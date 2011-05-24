@@ -1,7 +1,7 @@
 <?php
 
 class Caixa extends Banco{
-    public $nomeBanco = 'Caixa';
+    public $nome = 'Caixa';
     public $css = 'caixa.css';
     public $image = 'caixa.png';
 }

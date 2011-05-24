@@ -2,10 +2,10 @@
 //18/05/11
 class Banco{
     /*
-        @var array $nomeBanco
+        @var array $nome
         Armazena o nome do banco
     */
-    public $nomeBanco;
+    public $nome;
     
     /*
         @var array $image

@@ -80,14 +80,14 @@ class Math{
       * @param $ifZero Se o resultado for zero, substituir por algum outro valor?
       * @return mixed
       */
-    public static function Mod11($number, $ifTen = '0', $ifZero = '0'){
+    public static function Mod11($number, $ifTen = '0', $ifZero = '0', $returnFull = false, $separator = '-'){
         $numLen = strlen($number) - 1;
         $sum = 0;
         $factor = 2;
         
         for($i = $numLen; $i >= 0; $i --){
             $sum += substr($number, $i, 1) * $factor;
-            //pr($factor);
+            
             $factor = $factor >= 9 ? 2 : $factor + 1;
         }
         //Resto da divisão
@@ -103,14 +103,23 @@ class Math{
             default: $rest;   break;
         }
         
-        return $rest;
+        if($returnFull === false){
+            return $rest;
+        }
+        else{
+            return $number . $separator . $rest;
+        }
     }
     
     
     /**
       * Method Mod10()
       * Calcula o módulo 10 de um número, conforme o esquema a seguir
+      *
+      * @version 0.1 Initial
+      *          0.2 24/05/2011 Adicionados os parâmetros $returnFullNumber e $separator
       * 
+      * @tutorial
         +---+---+---+---+---+---+   +---+
         | 2 | 6 | 1 | 5 | 3 | 3 | - | 4 |
         +---+---+---+---+---+---+   +---+
@@ -125,7 +134,7 @@ class Math{
       * @param $number Número a ser calculado o módulo 10
       * @return integer
       */
-    public static function Mod10($number){
+    public static function Mod10($number, $returnFullNumber = false, $separator = '-'){
         $numLen = strlen($number) - 1;
         $sum = 0;
         $factor = 2;
@@ -143,7 +152,14 @@ class Math{
         //Resto da divisão
         $rest = $sum % 10;
         
-        return $rest <> 0 ? 10 - $rest : $rest;
+        $rest = $rest <> 0 ? 10 - $rest : $rest;
+        
+        if($returnFullNumber === false){
+            return $rest;
+        }
+        else{
+            return $number . $separator . $rest;
+        }
     }
     
     /**
