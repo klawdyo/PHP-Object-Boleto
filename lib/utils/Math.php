@@ -25,8 +25,13 @@
     17/05/2011
     [+] Mod11() calcula o módulo 11 do número informado
     [+] Mod10() calcula o módulo 10 do número informado
-    [+] financi() calcula a prestacao de um financiamento considerando
+    [+] financing() calcula a prestacao de um financiamento considerando
         periodo, valor inicial e juros
+    22/05/2011
+    [m] Correção de bug em Mod11()
+    24/05/2011
+    [m] Mod10() e Mod11() agora podem retornar o valor original formatado
+        juntamente com o dígito calculado pelo algoritmo
     
     -----------------------------------------------
         TO DO
@@ -72,6 +77,8 @@ class Math{
               +---+---+---+---+---+-> = (128 x 10) / 11 = 116, resto 4 => Dígito = 4
       
       * @version 0.1 17/05/2011 Initial
+      *          0.2 22/05/2011 Bug corrigido
+      *          0.3 24/05/2011 Adicionados os parâmetros $returnFull e $separator
       *
       * @param $number O número informado
       * @param $ifTen Caso o resto da divisão seja 10, o que colocar
@@ -105,12 +112,10 @@ class Math{
             default: $rest;   break;
         }
         
-        if($returnFull === false){
+        if($returnFull == false)
             return $rest;
-        }
-        else{
+        else
             return $number . $separator . $rest;
-        }
     }
     
     
@@ -118,7 +123,7 @@ class Math{
       * Method Mod10()
       * Calcula o módulo 10 de um número, conforme o esquema a seguir
       *
-      * @version 0.1 Initial
+      * @version 0.1 17/05/2011 Initial
       *          0.2 24/05/2011 Adicionados os parâmetros $returnFullNumber e $separator
       * 
       * @tutorial
