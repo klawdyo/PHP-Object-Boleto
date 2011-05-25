@@ -19,7 +19,7 @@ class OB{
     
     
     //
-    public $data = array();
+    public $Data = array();
     
     
     /**
@@ -109,7 +109,6 @@ class OB{
             #Inserindo o dígito verificador exatamente na posição 4, iniciando em 0.
             $this->Boleto->CodigoBarras = String::putAt($cod, $dv, 4);
         }
-
         return $this->Boleto->CodigoBarras;
     }
     
@@ -125,7 +124,7 @@ class OB{
       */
     public function normalizeData(){
         if(empty($this->Data)){
-            $data = array(
+            $this->Data = array(
                 'Banco'=> $this->Vendedor->Banco,
                 'Moeda' => $this->Vendedor->Moeda,
                 'Valor' => $this->Boleto->Valor,
@@ -136,12 +135,14 @@ class OB{
                 'FatorVencimento' => $this->Boleto->FatorVencimento,
                );
 
-            foreach($data as $var => $value){
-                $this->Data[$var] = self::zeros($value, $this->Banco->posicoes[$var][1]);
+            foreach($this->Data as $var => $value){
+                $this->Data[$var] = self::normalize($this->Data[$var], $this->Banco->posicoes[$var][1]);
             }
             
             $this->Data['Vencimento'] = $this->Boleto->Vencimento;
-
+            $this->Data['DVConta'] = Math::Mod11($this->Data['Conta']);
+            $this->Data['DVNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
+            
             return $this->Data;
         }
         else{
@@ -257,7 +258,10 @@ class OB{
       * 
       * @version 0.1 18/05/2011 Initial
       */
-   public static function zeros($text, $length){
+   public static function zeros($text, $length, $cut = false){
         return str_pad($text, $length, '0', STR_PAD_LEFT);
+    }
+    public static function normalize(&$var, $length){
+        return String::left(self::zeros($var, $length), $length);
     }
 }

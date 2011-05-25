@@ -29,15 +29,16 @@ class Banco{
     public $relacoes = array(
         '001' => 'BB',
         '003' => 'BancoAmazonia',
-        '104' => 'Caixa',
-        '237' => 'Bradesco',
-        '623' => 'Panamericano',
-        '356' => 'Real',
+        '004' => 'BNB',
         '033' => 'Santander',
         '070' => 'BRB', //Banco de Brasília
-        '341' => 'Itau',
-        '409' => 'Unibanco',
+        '104' => 'Caixa',
+        '237' => 'Bradesco',
         '318' => 'Bmg',
+        '341' => 'Itau',
+        '356' => 'Real',
+        '409' => 'Unibanco',
+        '623' => 'Panamericano',
     );
     
     
@@ -51,11 +52,15 @@ class Banco{
     */
     public $posicoes = array(
                      //(Inicio, Tamanho). Inicia em 0
+                     
+        #Campos comuns a todos os bancos
         'Banco'         => array(0,3),   //identificação do banco
         'Moeda'         => array(3,1),   //Código da moeda: real=9
         'DV'            => array(4,1),   //Dígito verificador geral da linha digitável
         'FatorVencimento'=>array(5,4),   //Fator de vencimento (Dias passados desde 7/out/1997)
         'Valor'         => array(9,10),  //Valor nominal do título
+        
+        #Campos variáveis de banco para banco
         'Agencia'       => array(19,4),  //Código da agencia, sem dígito
         'Carteira'      => array(23,2),  //Código da Carteira
         'NossoNumero'   => array(25,12), //Nosso número

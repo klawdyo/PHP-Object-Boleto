@@ -5,9 +5,9 @@
     $ob = new OB();
     
     $ob->Vendedor
-            ->setBanco('104')
-            ->setAgencia('9999')
-            ->setConta('99999')
+            ->setBanco('004')
+            ->setAgencia('2222')
+            ->setConta('3333')
             ->setCarteira('18')
             ->setNome('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-90')
@@ -37,7 +37,7 @@
     $ob->Boleto
             ->setValor(2950)
             ->setDiasVencimento(5)
-            ->setNossoNumero('77777770000087654')
+            ->setNossoNumero('55555555')
             ->setNumDocumento('27.030195.10')
             ->setQuantidade(1)
         ;
