@@ -8,7 +8,7 @@ class BB extends Banco{
     //00193498200002952950000007777777000008765418
     
     /*
-        @var array $required
+        @var array $obrigatorios
         Armazena os campos obrigatórios para a geração do código de
         barras e a linha digitável neste banco, assim como a emissão
         do boleto bancário

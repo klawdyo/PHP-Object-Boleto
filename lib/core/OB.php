@@ -99,7 +99,7 @@ class OB{
             
             #Padroniza os dados necessários de acordo com Layout do banco
             $this->normalizeData();
-            
+
             #Insere os valores de $this->data no layout do codigo de barras
             $cod = String::insert($this->Banco->layoutCodigoBarras, $this->Data);
 
@@ -140,8 +140,8 @@ class OB{
             }
             
             $this->Data['Vencimento'] = $this->Boleto->Vencimento;
-            $this->Data['DVConta'] = Math::Mod11($this->Data['Conta']);
-            $this->Data['DVNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
+            $this->Data['DigitoConta'] = Math::Mod11($this->Data['Conta']);
+            $this->Data['DigitoNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
             
             return $this->Data;
         }

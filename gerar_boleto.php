@@ -6,9 +6,9 @@
     
     $ob->Vendedor
             ->setBanco('004')
-            ->setAgencia('2222')
-            ->setConta('3333')
-            ->setCarteira('18')
+            ->setAgencia('0016')
+            ->setConta('1193')
+            ->setCarteira('55')
             ->setNome('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-90')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
@@ -35,15 +35,17 @@
         ;
     
     $ob->Boleto
-            ->setValor(2950)
-            ->setDiasVencimento(5)
-            ->setNossoNumero('55555555')
+            ->setValor(1000)
+            //->setDiasVencimento(5)
+            ->setVencimento(10,9,2000)
+            ->setNossoNumero('1')
             ->setNumDocumento('27.030195.10')
             ->setQuantidade(1)
         ;
-            
+    
     $ob->render();
-    
-    
-    //00199.99903 07777.777009 00008.765402 2 49810000295295
-    //00190.00009 07777.777009 00087.654182 8 49810000295295
+
+    /*for($i = 1;$i<=10;$i++){
+        $ob->Boleto->setNossoNumero($i);
+        $ob->render();
+    }/**/
