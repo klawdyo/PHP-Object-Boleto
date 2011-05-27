@@ -2,30 +2,47 @@
 
 class OB{
     
-    //Dados do cedente (banco ou quem vai receber)
+    /*
+        @var object $Vendedor
+        Dados do cedente (banco ou quem vai receber)
+     */
     public $Vendedor;    
     
-    //Dados do Sacado (cliente. quem pagará a conta)
+    /*
+        @var object $Cliente
+        Dados do Sacado (cliente. quem pagará a conta)
+     */
     public $Cliente;
     
-    //Dados de configurações do banco, layout, etc.
+    /*
+        @var object $Boleto
+        Dados de configurações do banco, layout, etc.
+     */
     public $Boleto;
     
-    //Dados de configurações dos templates
+    /*
+        @var object $Template
+        Dados de configurações dos templates
+     */
     public $Template;
     
-    //Dados de configuração do Layout para o banco escolhido
+    /*
+        @var object $Banco
+        Dados de configuração do Layout para o banco escolhido
+     */
     public $Banco;
     
-    
-    //
+    /*
+        @var array $Data
+        Dados utilizados na geração do código de barras e da linha digitável
+     */
     public $Data = array();
     
     
     /**
-      *
+      * Construtor
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function __construct(){
         $classes = array('Vendedor', 'Cliente', 'Boleto', 'Configuracao', 'Template');
@@ -37,9 +54,9 @@ class OB{
     }
     
     /**
-      *
+      * Carrega o plugin informado
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function plugin($pluginName){
         if(!class_exists('Plugin')){
@@ -170,7 +187,7 @@ class OB{
         #Inicio $data vazia
         $data = array();
         
-        #A partir das posições indicadaas pelo layout, separo os dados dentro
+        #A partir das posições indicadas pelo layout, separo os dados dentro
         #do código em variáveis normais
         foreach($this->Banco->posicoes as $var => $substr){
             $data[$var] = substr($codigo, $substr[0], $substr[1]);
@@ -201,41 +218,17 @@ class OB{
     }
     /**
       * Renderiza o template
+      * 
       * @version 0.1 18/05/2011 Initial
       *          0.2 20/05/2011 Retirado o echo
       *          1.0 20/05/2011 Movido da classe Boleto para a classe OB
-      * @todo Trabalho pra OB
       */
     public function render(){
         $this->loadBanco();
-
-        /*$data = array(
-            'OB' => (object) array(
-                'Template' => $this->Template,
-                'Vendedor' => $this->Vendedor,
-                'Cliente' => $this->Cliente,
-                'Boleto' => $this->Boleto,
-                'Configuracao' => $this->Configuracao,
-        ));/**/
-        
-        //$this->Template->render($this->Template->Template, $data);
         $this->Template->render($this->Template->Template);
         flush();
     }
     
-    
-    # # # # # # # # # # # # # # # # # # # # # #
-    # # 
-    # #     SETTERS E TRATAMENTO DOS VALORES DE ENTRADA
-    # #
-    # # # # # # # # # # # # # # # # # # # # # #
-
-
-
-
-
-
-
     # # # # # # # # # # # # # # # # # # # # # #
     # # 
     # #     FUNÇÕES AUXILIARES
@@ -247,7 +240,6 @@ class OB{
       * Pega uma url relativa
       * 
       * @version 0.1 19/05/2011 Initial
-      *
       */
     public static function url($url = null){
         return dirname($_SERVER['REQUEST_URI']) . $url;
@@ -261,6 +253,14 @@ class OB{
    public static function zeros($text, $length, $cut = false){
         return str_pad($text, $length, '0', STR_PAD_LEFT);
     }
+    
+    /**
+      * Completa com zeros adicionais à esquerda até o valor informado,
+      * alterando a variável original, e cortando caso o valor tenha
+      * mais caracteres que o permitido
+      * 
+      * @version 0.1 18/05/2011 Initial
+      */
     public static function normalize(&$var, $length){
         return String::left(self::zeros($var, $length), $length);
     }
