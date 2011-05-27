@@ -7,6 +7,7 @@ class Validar extends Validation{
      *	verificador é válido, e, opcionalmente, se pertence a um estado determinado
      *	
      *	@version:	0.2 - 13/05/2009
+     *	                0.3 - 27/05/2011 Transformado em static
      *	@param	string	sigla_uf	Estado da federação. Se não pertencer a esse
      *	estado, ou se o estado não existir, retorna erro.
      *	@param 	$msg Mensagem personalizada para esse campo. Caso seja null, error()
@@ -38,7 +39,7 @@ class Validar extends Validation{
      *	@param $msg Mensagem personalizada para esse campo. Caso  seja  null,  error()
      *				roteará a mensagem para o padrão da função de validação
      */
-    public function titulo($sigla_uf = null, $msg = null){
+    public static function titulo($sigla_uf = null, $msg = null){
             //Só permite números
             if(eregi("([^0-9]+)", $this->nowdata())){
                     $this->error($msg, 'titulo', null, 'Só números são permitidos'); 
@@ -185,17 +186,18 @@ class Validar extends Validation{
      *	cnpj() não considera pontos, traços e barras.
      *	
      *	@version:	0.2 18/05/2009 
-     *	                0.3 23/05/2011  - Agora retorna True se for um cnpj válido
-     *                                  - Importado do ValidationComponent.
-     *	                                - Método transformado em  static
+     *	                0.3 23/05/2011 - Agora retorna True se for um cnpj válido
+     *                                 - Importado do ValidationComponent.
+     *	                0.4 27/05/2011 Método transformado em  static
+     *	                0.5 27/05/2011 Mudança do algoritmo
      *
      *	@param $cnpj CNPJ a ser verificado
      *	@return	boolean
      */
-    public function cnpj($cnpj = null){
-        //elimina tudo que não for números e acrescenta zeros à esquerda
-        $cnpj = str_pad(eregi_replace("([^0-9])", "", $cnpj), 14, "0", STR_PAD_LEFT);
-        $dv = substr($cnpj, -2, 2);
+    public static function cnpj($cnpj = null){
+        /*elimina tudo que não for números e acrescenta zeros à esquerda
+        $cnpj = String::left(preg_replace("([^0-9])", "", $cnpj), 14);
+        $dv   = String::right($cnpj, 2);
         $seqcalc1 =  "543298765432";
         $seqcalc2 = "6543298765432";
         
@@ -211,7 +213,30 @@ class Validar extends Validation{
         $soma2 += $dv1 * 2;
         $dv2 = (($soma2 % 11) < 2) ? 0 : (11 - ($soma2 % 11));
 
-        return $dv1 . $dv2 != $dv;
+        return $dv1 . $dv2 != $dv;/**/
+        // Canonicalize input
+        $cnpj = sprintf('%014s', preg_replace('{\D}', '', $cnpj));
+
+        // Validate length and CNPJ order
+        if ((strlen($cnpj) != 14)
+                || (intval(substr($cnpj, -4)) == 0)) {
+            return false;
+        }
+
+        // Validate check digits using a modulus 11 algorithm
+        for ($t = 11; $t < 13;) {
+            for ($d = 0, $p = 2, $c = $t; $c >= 0; $c--, ($p < 9) ? $p++
+                                                                  : $p = 2) {
+                $d += $cnpj[$c] * $p;
+            }
+
+            if ($cnpj[++$t] != ($d = ((10 * $d) % 11) % 10)) {
+                return false;
+            }
+        }
+
+        return true;
+        
     }		
     
     
