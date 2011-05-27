@@ -10,22 +10,27 @@
         <!-- Cedente -->
         <div class="cedente item">
             <label>Cedente</label>
+            <?php echo $OB->Vendedor->Nome; ?>
         </div>
         <!-- Agência/Código do Cedente -->
         <div class="agencia item">
             <label>Ag./Código do Cedente</label>
+            <?php echo Math::Mod11($OB->Vendedor->Agencia, 0,0,true) . ' / ' . Math::Mod11($OB->Vendedor->Conta,0,0,true);?>
         </div>
         <!-- Espécie Moeda -->
         <div class="moeda item">
             <label>Moeda</label>
+            R$
         </div>
         <!-- Quantidade -->
         <div class="qtd item">
             <label>Qtd.</label>
+            <?php echo $OB->Boleto->Quantidade;?>
         </div>
         <!-- Nosso Número -->
         <div class="nosso_numero item">
             <label>Nosso Número</label>
+            <?php echo Math::Mod11($OB->Boleto->NossoNumero,0,0, true);?>
         </div>
     </div>
     
@@ -34,18 +39,22 @@
         <!-- Número do Documento -->
         <div class="num_doc item">
             <label>Número do Documento</label>
+            <?php echo $OB->Boleto->NumDocumento;?>
         </div>
         <!-- CPF/CNPJ -->
         <div class="cpf_cnpj item">
             <label>CPF/CNPJ</label>
+            <?php echo $OB->Vendedor->Cpf;?>
         </div>
         <!-- Vencimento -->
         <div class="vencimento item">
             <label>Vencimento</label>
+            <?php echo $OB->Boleto->Vencimento;?>
         </div>
         <!-- Valor do Documento -->
         <div class="valor item">
             <label>Valor do Documento</label>
+            <?php echo number_format($OB->Boleto->Valor/100, 2, ',', '.');?>
         </div>
     </div>
     
@@ -78,6 +87,7 @@
         <!-- Sacado -->
         <div class="sacado item">
             <label>Sacado</label>
+            <?php echo $OB->Cliente->Nome;?>
         </div>
     </div>
     

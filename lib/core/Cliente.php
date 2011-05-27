@@ -59,9 +59,15 @@ class Cliente{
       * Configura o cpf do cliente
       *
       * @version 0.1 20/05/2011 Initial
+      *          0.2 27/05/2011 Adicionada Validação do cpf
       */
     public function setCpf($value){
-        $this->Cpf = $value;
+        if(Validar::cpf($value)){
+            $this->Cpf = $value;
+        }
+        else{
+            throw new Exception('CPF "' . $value . '" inválido');
+        }
         return $this;
     }
     

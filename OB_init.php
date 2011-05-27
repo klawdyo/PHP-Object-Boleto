@@ -22,3 +22,4 @@
     require OB_DIR . '/lib/utils/String.php';
     require OB_DIR . '/lib/utils/Barcode.php';
     require OB_DIR . '/lib/utils/Math.php';
+    require OB_DIR . '/lib/utils/Validar.php';

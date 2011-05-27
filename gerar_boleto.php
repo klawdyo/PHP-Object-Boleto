@@ -26,7 +26,7 @@
         
     $ob->Cliente
             ->setNome('Maria Joelma Bezerra de Medeiros')
-            ->setCpf('111.999.888-77')
+            ->setCpf('111.999.888-39')
             ->setEmail('mariajoelma85@hotmail.com')
             ->setEndereco('')
             ->setCidade('')
@@ -38,14 +38,9 @@
             ->setValor(1000)
             //->setDiasVencimento(5)
             ->setVencimento(10,9,2000)
-            ->setNossoNumero('1')
+            ->setNossoNumero('1234567')
             ->setNumDocumento('27.030195.10')
             ->setQuantidade(1)
         ;
     
     $ob->render();
-
-    /*for($i = 1;$i<=10;$i++){
-        $ob->Boleto->setNossoNumero($i);
-        $ob->render();
-    }/**/
