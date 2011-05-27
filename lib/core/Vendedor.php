@@ -11,7 +11,7 @@ class Vendedor{
     public $Moeda = 9;
     
     //Identificação
-    public $Nome;
+    public $RazaoSocial;
     public $Cnpj;
     public $Endereco;
     public $Email;
@@ -49,16 +49,6 @@ class Vendedor{
             }
         }
     }
-    /**
-      *
-      * @version 0.1 18/05/2011 Initial
-      *
-      */
-    public function setBanco($codigo){
-        $this->Banco = OB::zeros($codigo, 3);
-        
-        return $this;
-    }
     
     /**
       * Configura os dados do vendedor a partir de um array
@@ -72,5 +62,111 @@ class Vendedor{
         }
         return $this;
     }
-    
+
+    /**
+      * Configura o banco
+      * 
+      * @version 0.1 18/05/2011 Initial
+      */
+    public function setBanco($codigo){
+        $this->Banco = OB::zeros($codigo, 3);
+        
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setRazaoSocial($codigo){
+        $this->Banco = OB::zeros($codigo, 3);
+        
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setAgencia($codigo){
+        $this->Agencia = OB::zeros($codigo, 4);
+        
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setConta($value){
+        $this->Conta = $value
+        
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setNumContrato($value){
+        $this->Conta = $value
+        
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setCarteira($value){
+        $this->Carteira = $value
+        
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setCnpj($value){
+        if(Validar::cnpj($value)){
+            $this->Cnpj = $value;
+        }
+        else{
+            throw new Exception('CNPJ "' . $value . '" inválido');
+        }
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setEndereco($value){
+        $this->Endereco = $value
+        
+        return $this;
+    }
+
+    /**
+      * Configura 
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setEmail($value){
+        if(Validar::email($value)){
+            $this->Email = $value;
+        }
+        else{
+            throw new Exception('E-mail "' . $value . '" inválido');
+        }
+        return $this;
+    }
 }

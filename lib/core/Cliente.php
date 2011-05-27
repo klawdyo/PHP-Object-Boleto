@@ -75,9 +75,15 @@ class Cliente{
       * Configura o cnpj do cliente
       *
       * @version 0.1 20/05/2011 Initial
+      *          0.2 27/05/2011 Adicionada Validação do cnpj
       */
     public function setCnpj($value){
-        $this->Cnpj = $value;
+        if(Validar::cnpj($value)){
+            $this->Cnpj = $value;
+        }
+        else{
+            throw new Exception('CNPJ "' . $value . '" inválido');
+        }
         return $this;
     }
     
