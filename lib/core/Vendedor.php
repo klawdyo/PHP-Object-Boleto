@@ -7,6 +7,7 @@ class Vendedor{
     public $Banco;
     public $Agencia;
     public $Conta;
+    public $NumContrato;
     public $Carteira;
     public $Moeda = 9;
     
@@ -20,18 +21,18 @@ class Vendedor{
     public $parent;
     
     /**
-      *
+      * Construtor
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function __construct(&$obj){
         $this->parent = $obj;
     }
     
     /**
-      *
+      * Chama os métodos inexistentes
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function __call($name, $arg = null){
         //pr();
@@ -75,18 +76,19 @@ class Vendedor{
     }
 
     /**
-      * Configura 
+      * Configura a Razão Social
       * 
       * @version 0.1 27/05/2011 Initial
+      *          0.2 27/05/2011 Renomeado de setNome() para setRazaoSocial()
       */
-    public function setRazaoSocial($codigo){
-        $this->Banco = OB::zeros($codigo, 3);
+    public function setRazaoSocial($value){
+        $this->Banco = OB::zeros($value, 3);
         
         return $this;
     }
 
     /**
-      * Configura 
+      * Configura a agência
       * 
       * @version 0.1 27/05/2011 Initial
       */
@@ -97,7 +99,11 @@ class Vendedor{
     }
 
     /**
-      * Configura 
+      * Configura o número da conta do cliente.
+      * Em alguns bancos, esse campo é desnecessário, sendo substituído pelo
+      * número do contrato. Os código de barras serão gerados corretamente de
+      * acordo com o padrão de cada banco, e os templates exibirão corre-
+      * tamente cada dado em seu lugar.
       * 
       * @version 0.1 27/05/2011 Initial
       */
@@ -108,18 +114,22 @@ class Vendedor{
     }
 
     /**
-      * Configura 
+      * Configura o número do contrato do Vendedor com o banco
+      * Em alguns bancos, esse campo é desnecessário, sendo substituído pelo
+      * número do contrato. Os código de barras serão gerados corretamente de
+      * acordo com o padrão de cada banco, e os templates exibirão corre-
+      * tamente cada dado em seu lugar.
       * 
       * @version 0.1 27/05/2011 Initial
       */
     public function setNumContrato($value){
-        $this->Conta = $value
+        $this->NumContrato = $value
         
         return $this;
     }
 
     /**
-      * Configura 
+      * Configura a carteira 
       * 
       * @version 0.1 27/05/2011 Initial
       */
@@ -130,9 +140,10 @@ class Vendedor{
     }
 
     /**
-      * Configura 
+      * Configura o cnpj do vendedor
       * 
       * @version 0.1 27/05/2011 Initial
+      *          0.2 27/05/2011 Adicionada validação do CNPJ informado
       */
     public function setCnpj($value){
         if(Validar::cnpj($value)){
@@ -145,7 +156,7 @@ class Vendedor{
     }
 
     /**
-      * Configura 
+      * Configura o endereço do vendedor
       * 
       * @version 0.1 27/05/2011 Initial
       */
@@ -156,9 +167,10 @@ class Vendedor{
     }
 
     /**
-      * Configura 
+      * Configura o e-mail do vendedor
       * 
       * @version 0.1 27/05/2011 Initial
+      *          0.2 27/05/2011 Adicionada validação do e-mail
       */
     public function setEmail($value){
         if(Validar::email($value)){
