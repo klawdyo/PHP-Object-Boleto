@@ -10,7 +10,7 @@
             ->setConta('1193')
             ->setCarteira('55')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
-            ->setCpf('012.345.678-90')
+            ->setCpf('012.345.678-39')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
             ->setEmail('joseclaudiomedeirosdelima@uol.com.br')
         ;

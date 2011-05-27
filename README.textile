@@ -47,8 +47,8 @@ pre. //Incluindo o arquivo padrão de inicialização do ObjectBoleto
             ->setBanco('001')
             ->setAgencia('2345')
             ->setConta('67890')
-            ->setNome('Jose Claudio Medeiros de Lima')
-            ->setCpf('012.345.678-90')
+            ->setRazaoSocial('Jose Claudio Medeiros de Lima')
+            ->setCnpj('12.345.678/0001-90')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
             ->setEmail('joseclaudiomedeirosdelima@uol.com.br')
         ;
@@ -56,7 +56,7 @@ pre. //Incluindo o arquivo padrão de inicialização do ObjectBoleto
     $ob->Configuracao
             ->setLocalPagamento('Pagável em qualquer banco até o vencimento')
         ;
-    //Definindo configurações do template
+    //Definindo configurações do template. Variáveis enviadas para a configuração do template
     $ob->Template
             ->setTitle('ObjBoleto')
             ->setTemplate('html5')
@@ -65,7 +65,7 @@ pre. //Incluindo o arquivo padrão de inicialização do ObjectBoleto
     //Identificando o cliente
     $ob->Cliente
             ->setNome('Maria Joelma Bezerra de Medeiros')
-            ->setCpf('111.999.888-77')
+            ->setCpf('111.999.888-39')
             ->setEmail('mariajoelma85@hotmail.com')
         ;
     //Passando dados pro boleto   
@@ -74,7 +74,6 @@ pre. //Incluindo o arquivo padrão de inicialização do ObjectBoleto
             ->setDiasVencimento(5)
             ->setNossoNumero('123456')
             ->setNumDocumento('873245')
-            ->setQuantidade(2)
         ;
     //Renderizando o boleto       
     $ob->render();
