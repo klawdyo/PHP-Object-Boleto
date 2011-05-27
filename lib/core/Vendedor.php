@@ -108,7 +108,7 @@ class Vendedor{
       * @version 0.1 27/05/2011 Initial
       */
     public function setConta($value){
-        $this->Conta = $value
+        $this->Conta = $value;
         
         return $this;
     }
@@ -123,7 +123,7 @@ class Vendedor{
       * @version 0.1 27/05/2011 Initial
       */
     public function setNumContrato($value){
-        $this->NumContrato = $value
+        $this->NumContrato = $value;
         
         return $this;
     }
@@ -134,7 +134,7 @@ class Vendedor{
       * @version 0.1 27/05/2011 Initial
       */
     public function setCarteira($value){
-        $this->Carteira = $value
+        $this->Carteira = $value;
         
         return $this;
     }
@@ -161,7 +161,7 @@ class Vendedor{
       * @version 0.1 27/05/2011 Initial
       */
     public function setEndereco($value){
-        $this->Endereco = $value
+        $this->Endereco = $value;
         
         return $this;
     }
