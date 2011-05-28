@@ -7,7 +7,7 @@ class Debug {
         }
 
         set_error_handler($handler, -1);
-        ini_set('error_log', OB . '/log/error.log');
+        ini_set('error_log', OB_DIR . '/log/error.log');
     }
 
     public static function handleError($code, $message, $file, $line) {

@@ -148,6 +148,14 @@ class Banco{
     }
     
     
+    /**
+      * particularidade() Faz em tempo de execução mudanças que sejam imprescindíveis
+      * para a geração correta do código de barras
+      * Esse método será estendido por todas as classes filhas, portanto só é
+      * necessário declará-la caso haja algo para mudar
+      *
+      * @version 0.1 28/05/2011 Initial
+      */
     public function particularidade(&$data){}
     
 }

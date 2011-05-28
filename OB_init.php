@@ -1,11 +1,8 @@
 <?php
     define('OB_DIR', dirname(__FILE__));
    
-    /*
-        TESTE
-     */
-    require OB_DIR . '../../../Spaghetti/Spa03.1-dev/lib/core/debug/Debug.php';
-    
+    require OB_DIR . '/lib/utils/Debug.php';
+
     /*
         CORE
      */
