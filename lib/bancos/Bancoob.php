@@ -51,7 +51,8 @@ class Bancoob extends Banco{
         'Agencia'           => 4,  //Código do cedente
         //'ModalidadeCobranca'=> 2,  //Nosso número
         'CodigoCedente'     => 7,  //Nosso número
-        'NossoNumero'       => 8,  //Nosso número
+        'AnoEmissao'        => 2,  //Nosso número //São 8 números, mas os 2 primeiros são sempre referente ao ano de emissão do boleto. Exemplo: 2011, todos os nossos números devem iniciar com 11
+        'NossoNumero'       => 6,  //Nosso número //São 8 números, mas os 2 primeiros são sempre referente ao ano de emissão do boleto. Exemplo: 2011, todos os nossos números devem iniciar com 11
         'NumParcela'        => 3,  //Nosso número
     );
 
@@ -61,7 +62,7 @@ class Bancoob extends Banco{
         Cada variável é precedida por dois-pontos (:), que serão substituídas
         pelos seus respectivos valores
      */
-    public $layoutCodigoBarras = ':Banco:Moeda:FatorVencimento:Valor:Carteira:Agencia01:CodigoCedente:NossoNumero:NumParcela';
+    public $layoutCodigoBarras = ':Banco:Moeda:FatorVencimento:Valor:Carteira:Agencia01:CodigoCedente:AnoEmissao:NossoNumero:NumParcela';
     
     /**
       * particularidade() Faz em tempo de execução mudanças que sejam imprescindíveis
@@ -74,5 +75,6 @@ class Bancoob extends Banco{
       */
     public function particularidade(&$object){
         $object->Data['NumParcela'] = OB::zeros($object->Boleto->NumParcela, 3);
+        $object->Data['AnoEmissao'] = date('y');
     }
 }
