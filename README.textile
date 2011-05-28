@@ -40,11 +40,10 @@ h2. Exemplo de uso
 
 pre. //Incluindo o arquivo padrão de inicialização do ObjectBoleto
     include 'OB_init.php';    
-    //Instanciando a class
-    $ob = new OB();
+    //Instanciando a class e informando o código do banco a ser utilizado
+    $ob = new OB('001');
     //Definindo os dados do vendedor
     $ob->Vendedor
-            ->setBanco('001')
             ->setAgencia('2345')
             ->setConta('67890')
             ->setRazaoSocial('Jose Claudio Medeiros de Lima')

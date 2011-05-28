@@ -91,7 +91,8 @@ class OB{
     }
     
     /**
-      * Calcula o fator de vencimento
+      * Calcula o fator de vencimento, que é a quantidade de dias desde
+      * a data-base 07/10/1997
       * 
       * @version 0.1 18/05/2011 Initial
       */
@@ -142,8 +143,6 @@ class OB{
       *          0.4 27/05/2011 normalize() verifica se a chave existe no
       *                 array antes de tentar normalizar seu valor.
       *          0.5 27/05/2011 Acrescentado DigitoAgencia
-      *
-      * @todo Esse método é responsabilidade do layout
       */
     public function normalizeData(){
         if(empty($this->Data)){

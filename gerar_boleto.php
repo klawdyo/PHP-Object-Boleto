@@ -2,9 +2,9 @@
     header('Content-type: text/html; charset=utf-8');
     include 'OB_init.php';    
 
-    $ob = new OB('104');
+    $ob = new OB('004');
     
-    /*
+    //*
     $ob->Vendedor
             
             ->setAgencia('0016')
@@ -45,7 +45,7 @@
         ;
     
     $ob->render(); /**/
-
+/*
     $ob->Vendedor
             ->setAgencia('1565')
             ->setConta('87000000414')
@@ -85,4 +85,4 @@
             ->setQuantidade(1)
         ;
     
-    $ob->render();
+    $ob->render();/**/
