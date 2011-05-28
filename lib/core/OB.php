@@ -117,7 +117,10 @@ class OB{
         if(empty($this->Boleto->CodigoBarras)){
             #Padroniza os dados necessários de acordo com Layout do banco
             $this->normalizeData();
-
+            
+            #Verifica alguma particularidade do banco na geração do código
+            $this->Banco->particularidade($this->Data);
+            
             #Insere os valores de $this->data no layout do codigo de barras
             $cod = String::insert($this->Banco->layoutCodigoBarras, $this->Data);
 
@@ -286,7 +289,7 @@ class OB{
       * @version 0.1 19/05/2011 Initial
       */
     public static function url($url = null){
-        return dirname($_SERVER['REQUEST_URI']) . $url;
+        return preg_replace('([\\\/]+)','/',dirname(dirname(dirname(substr(__FILE__, strlen($_SERVER['DOCUMENT_ROOT']))))) . '//' . $url);
     }
     
     /**

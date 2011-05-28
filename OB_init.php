@@ -4,7 +4,7 @@
     /*
         TESTE
      */
-    require '../../Spaghetti/Spa03.1-dev/lib/core/debug/Debug.php';
+    require OB_DIR . '../../../Spaghetti/Spa03.1-dev/lib/core/debug/Debug.php';
     
     /*
         CORE

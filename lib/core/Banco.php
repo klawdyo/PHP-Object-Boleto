@@ -39,6 +39,7 @@ class Banco{
         '003' => 'BancoAmazonia',
         '004' => 'BNB',
         '033' => 'Santander',
+        '041' => 'Banrisul',
         '070' => 'BRB', //Banco de Brasília
         '104' => 'Caixa',
         '237' => 'Bradesco',
@@ -145,6 +146,8 @@ class Banco{
             throw new Exception(" A chave \"{$variavel}\" não existe no layout");
         }
     }
-
+    
+    
+    public function particularidade(&$data){}
     
 }
