@@ -121,9 +121,11 @@ class Vendedor{
       * tamente cada dado em seu lugar.
       * 
       * @version 0.1 27/05/2011 Initial
+      *          0.2 27/05/2011 Renomeado de setNumCodigoCedente() para
+      *             setCodigoCedente()
       */
-    public function setNumCodigoCedente($value){
-        $this->NumCodigoCedente = $value;
+    public function setCodigoCedente($value){
+        $this->CodigoCedente = $value;
         
         return $this;
     }
