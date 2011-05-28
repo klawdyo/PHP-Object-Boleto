@@ -79,9 +79,11 @@ class Vendedor{
       * Configura a agência
       * 
       * @version 0.1 27/05/2011 Initial
+      *          0.2 28/05/2011 Removido bug que forçava 4 caracteres
+      *             no campo Agencia, sendo que alguns bancos usam 3
       */
     public function setAgencia($codigo){
-        $this->Agencia = OB::zeros($codigo, 4);
+        $this->Agencia = $codigo;
         
         return $this;
     }
