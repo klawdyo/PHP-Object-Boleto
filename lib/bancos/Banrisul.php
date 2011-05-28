@@ -1,5 +1,25 @@
 <?php
+/**
+-----------------------
+    COPYRIGHT
+-----------------------
+    Licensed under The MIT License.
+    Redistributions of files must retain the above copyright notice.
 
+    @author  Cláudio Medeiros <ob@claudiomedeiros.net>
+    @package ObjectBoleto http://github.com/klawdyo/PHP-Object-Boleto
+    @subpackage ObjectBoleto.Lib.Bancos
+    @license http://www.opensource.org/licenses/mit-license.php The MIT License
+    
+-----------------------
+    CHANGELOG
+-----------------------
+    28/05/2011
+    [+] Inicial
+    
+    
+    
+  */
 class Banrisul extends Banco{
     public $Codigo = '041';
     public $Nome = 'Banrisul';
@@ -30,7 +50,7 @@ class Banrisul extends Banco{
         'FatorVencimento'   => 4,  //Fator de vencimento (Dias passados desde 7/out/1997)
         'Valor'             => 10, //Valor nominal do título
         #Campos variávies
-        'Agencia'           => 3,  //Código do cedente
+        'Agencia'           => 3,  //Código da agência
         'CodigoCedente'     => 7,  //Código do cedente
         'NossoNumero'       => 8,  //Nosso número
     );

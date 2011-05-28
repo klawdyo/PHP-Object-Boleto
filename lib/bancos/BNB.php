@@ -1,5 +1,25 @@
 <?php
+/**
+-----------------------
+    COPYRIGHT
+-----------------------
+    Licensed under The MIT License.
+    Redistributions of files must retain the above copyright notice.
 
+    @author  Cláudio Medeiros <ob@claudiomedeiros.net>
+    @package ObjectBoleto http://github.com/klawdyo/PHP-Object-Boleto
+    @subpackage ObjectBoleto.Lib.Bancos
+    @license http://www.opensource.org/licenses/mit-license.php The MIT License
+    
+-----------------------
+    CHANGELOG
+-----------------------
+    25/05/2011
+    [+] Inicial
+    
+    
+    
+  */
 class BNB extends Banco{
     public $Codigo = '004';
     public $Nome = 'Banco do Nordeste';
