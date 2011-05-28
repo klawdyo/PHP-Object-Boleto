@@ -46,6 +46,7 @@ class Banco{
         '318' => 'Bmg',
         '341' => 'Itau',
         '356' => 'Real',
+        '399' => 'Hsbc',
         '409' => 'Unibanco',
         '623' => 'Panamericano',
         '756' => 'Bancoob',
