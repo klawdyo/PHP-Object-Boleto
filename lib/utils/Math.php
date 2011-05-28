@@ -89,23 +89,23 @@ class Math{
       * @param $separator Separador para o dígito calculado
       * @return mixed
       */
-    public static function Mod11($number, $ifTen = '0', $ifZero = '0', $returnFull = false, $separator = '-'){
+    public static function Mod11($number, $ifTen = '0', $ifZero = '0',
+                                 $returnFull = false, $maxFactor = 9, $separator = '-'){
         $numLen = strlen($number) - 1;
         $sum = 0;
         $factor = 2;
         
         for($i = $numLen; $i >= 0; $i --){
             $sum += substr($number, $i, 1) * $factor;
-            
-            $factor = $factor >= 9 ? 2 : $factor + 1;
+            $factor = $factor >= $maxFactor ? 2 : $factor + 1;
         }
-        //Resto da divisão
+        #Resto da divisão
         $rest = ($sum * 10) % 11;
-        //ifTen
+        #ifTen
         $rest = $rest == 10 ? $ifTen : $rest;
-        //ifZero
+        #ifZero
         $rest = $rest === 0 ? $ifZero : $rest;
-        
+        #Verificando se é 0, 10
         switch($rest){
             case 10: $ifTen;  break;
             case 0:  $ifZero; break;
@@ -168,6 +168,22 @@ class Math{
             return $number . $separator . $rest;
         }
     }
+    
+    public static function GenericMod11($NumDado, $NumDig, $LimMult){
+    
+      $Dado = $NumDado;
+      for($n=1; $n<=$NumDig; $n++){
+        $Soma = 0;
+        $Mult = 2;
+        for($i=strlen($Dado) - 1; $i>=0; $i--){
+          $Soma += $Mult * intval(substr($Dado,$i,1));
+          if(++$Mult > $LimMult) $Mult = 2;
+        }
+        $Dado .= strval(fmod(fmod(($Soma * 10), 11), 10));
+      }
+      return substr($Dado, strlen($Dado)-$NumDig);
+    }
+        
     
     /**
       * http://pt.wikipedia.org/wiki/Tabela_price#C.C3.A1lculo

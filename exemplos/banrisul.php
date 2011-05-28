@@ -40,9 +40,7 @@
             ->setValor(550)
             //->setDiasVencimento(5)
             ->setVencimento(4,7,2000)
-            ->setNossoNumero('1234567')
-            ->setNumDocumento('27.030195.10')
-            ->setQuantidade(1)
+            ->setNossoNumero('22832563')
         ;
     
     $ob->render(); /**/

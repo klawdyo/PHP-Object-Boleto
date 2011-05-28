@@ -41,6 +41,15 @@ class Banrisul extends Banco{
         Posição 32 a 39	Nosso Número sem Número de Controle.
         Posição 40 a 42	Constante "041".
         Posição 43 a 44	Duplo Dígito referente às posições 20 a 42 (módulos 10 e 11).
+        
+        
+          1   5   10   15   20   25   30   35   40  44
+          |   |    |    |    |    |    |    |    |   |
+          0419 100100000550002110000000012283256304168    //manual
+          04191100100000550002110000000012283256304168    //gerado 
+              |                |                    \/
+              dv                                   dig.duplo
+        
     */
     public $tamanhos = array(
         #Campos comuns a todos os bancos
@@ -74,6 +83,73 @@ class Banrisul extends Banco{
       */
     public function particularidade(&$data){
         $codigo = String::insert('21:Agencia:CodigoCedente:NossoNumero041', $data);
-        return $data['DuploDigito'] = Math::Mod10($codigo) . Math::Mod11($codigo);
+        $dv1 = Math::Mod10($codigo);
+        $dv2 = Math::Mod11($codigo . $dv1);
+        //pr($dv1.$dv2);
+        //return $data['DuploDigito'] = $dv1.$dv2;
+        return $data['DuploDigito'] = self::DuploDigito($codigo);
     }
+    
+    /*
+    
+3.4.1.1 PRIMEIRO DÍGITO – MÓDULO 10
+P1 – Multiplicar Os Dígitos Do Argumento Pelos Pesos 2,1,2,....Da Direita Para Esquerda;
+P2 – Subtrair 9 Do Valor Obtido Em Cada Multiplicação Do P1 Se Superior A 9;
+P3 – Efetuar Somatório Dos Resultados Das Multiplicações P1 Após P2;
+P4 – Obter O Resto Da Divisão Inteira Do Somatório De P3 Por 10;
+P5 – O Primeiro Dígito Será 10 Menos O Resto Da Divisão Inteira De P4;
+P6 – Se O Resto Da Divisão Inteira De P4 For Zero, Então O Primeiro Dígito Será Zero.
+
+3.4.1.2 SEGUNDO DÍGITO – MÓDULO 11
+P7 – Multiplicar Os Dígitos Do Novo Argumento (Original Acrescido Do Primeiro Dígito) Pelos Pesos 2 A 7 Da Direita Para Esquerda;
+P8 – Efetuar Somatório Dos Resultados Das Multiplicações De P7;
+P9 – Obter O Resto Da Divisão Inteira Do Somatório De P8 Por 11;
+P10 – O Segundo Dígito Será 11 Menos O Resto Da Divisão Inteira De P9;
+P11 – Se O Resto Da Divisão Inteira De P9 For Zero, Então O Segundo Dígito Será Zero;
+P12 – Se O Resto Da Divisão Inteira De P9 For 1 (Um), Então Somar 1 (Um)
+    Ao Primeiro Dígito Calculado (Módulo 10) E Reiniciar A Partir De P7;
+P13 – Se A Soma De 1 (Um) Ao Primeiro Dígito, Descrito No P12, For Maior Que 9, Então O Primeiro Dígito (Módulo 10) Será Zero;
+P14 – Nos Casos De P12 E P13 O Primeiro Conserva Seu Valor Para O Seu Duplo-Dígito Final.
+
+EXEMPLO DE CÁLCULO DO DUPLO-DÍGITO (NC):
+Toma-se o argumento 00009194:
+P1 - 9x1, 1x2, 9x1, 4x2
+P2 - = 9, =2, =9, =8
+P3 - 9 + 2 + 9 + 8 = 28
+P4 - 28/10 resto 8
+P5 - 10 - 8 = 2 (Primeiro Dígito)
+P6 - (Não Se Aplica Neste Caso)
+P7 - 9x6, 1x5, 9x4, 4x3, 2x2
+P8 - 54 + 5 + 36 + 12 + 4 = 111
+P9 - 111/11 resto 1
+P10 – 11 – 1 = 10 (Inválido)
+P11 - (Não Se Aplica Neste Caso)
+P12 – 91943 (Novo Argumento)
+P13 – (Não Se Aplica Neste Caso)
+P14 – Primeiro Dígito Passa A Ser 3
+P7 - 9x6, 1x5, 9x4, 4x3, 3x2
+P8 - 54 + 5 + 36 + 12 + 6 = 113
+P9 - 113/11 resto 3
+P10 – 11 – 3 = 8 (Segundo Dígito)
+P11 – (Não Se Aplica Neste Caso)
+P12 – (Não Se Aplica Neste Caso)
+P13 – (Não Se Aplica Neste Caso)
+P14 – Primeiro Dígito Permanece Com 3 Resultado:
+Argumento 00009194 Duplo Dígito = 38
+Nota: Mesmo Não Constando No Exemplo, O Número Do Título Para O Banco Sempre Deve Ser Composto Por 8 (Oito) Dígitos, Neste Caso Deve Ser Completado Com Zeros A Esquerda.
+    */
+    public static function DuploDigito($num){
+        $dv1 = Math::Mod10($num);
+        $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7, '-');
+
+        if($dv2 == 10){
+            $dv1++;
+            $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7, '-');
+        }
+
+        return $dv1 . $dv2;
+    }
+    
+    
+    
 }

@@ -120,7 +120,7 @@ class OB{
             
             #Verifica alguma particularidade do banco na geração do código
             $this->Banco->particularidade($this->Data);
-            
+
             #Insere os valores de $this->data no layout do codigo de barras
             $cod = String::insert($this->Banco->layoutCodigoBarras, $this->Data);
 
