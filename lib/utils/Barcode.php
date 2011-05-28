@@ -91,7 +91,7 @@ class Barcode{
       * @version 0.1 17/05/2011 Initial
       */
     public static function getHtml($code){
-        return '<img src="lib/utils/Barcode.php?n=' . $code . '" />';
+        return '<img src="' . OB::url('lib/utils/Barcode.php') . '?n=' . $code . '" />';
     }
     
     /**
