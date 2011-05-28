@@ -104,13 +104,18 @@ class OB{
     }
     
     /**
-      *
+      * Gera o código numérico que será a base para o código de barras
+      * 
       * @version 0.1 18/05/2011 Initial
-      *              20/05/2011 Modificações gerais, uso das variáveis de layout
-      *                 externas, separação dos tratamentos de dados em outro
-      *                 método, verificação se a propriedade já existe para
-      *                 evitar mais processamento, e criação da propriedade
-      *
+      *          0.2 20/05/2011 - Modificações gerais;
+      *                         - Uso das variáveis de layout externas;
+      *                         - Separação dos tratamentos de dados em outro
+      *                         método;
+      *                         - Criação da propriedade Boleto->CodigoBarras
+      *                         - Verificação se a propriedade já existe
+      *                         para evitar mais processamento
+      *          0.3 28/05/2011 - Chama Banco::particularidade() para
+      *                         os bancos que as tiverem
       */
     public function geraCodigo(){
         #Se nenhum código foi gerado.
@@ -119,7 +124,10 @@ class OB{
             $this->normalizeData();
             
             #Verifica alguma particularidade do banco na geração do código
-            $this->Banco->particularidade($this->Data);
+            $this->Banco->particularidade($this);
+            
+            #Verifica os campos obrigatórios
+            $this->Banco->verificaObrigatorios($this->Data);
 
             #Insere os valores de $this->data no layout do codigo de barras
             $cod = String::insert($this->Banco->layoutCodigoBarras, $this->Data);

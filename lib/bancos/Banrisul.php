@@ -6,7 +6,7 @@
     Licensed under The MIT License.
     Redistributions of files must retain the above copyright notice.
 
-    @author  Cláudio Medeiros <ob@claudiomedeiros.net>
+    @author  Cláudio Medeiros <contato@claudiomedeiros.net>
     @package ObjectBoleto http://github.com/klawdyo/PHP-Object-Boleto
     @subpackage ObjectBoleto.Lib.Bancos
     @license http://www.opensource.org/licenses/mit-license.php The MIT License
@@ -81,13 +81,12 @@ class Banrisul extends Banco{
       *
       * @version 0.1 28/05/2011 Initial
       */
-    public function particularidade(&$data){
-        $codigo = String::insert('21:Agencia:CodigoCedente:NossoNumero041', $data);
+    public function particularidade(&$object){
+        $codigo = String::insert('21:Agencia:CodigoCedente:NossoNumero041', $object->Data);
         $dv1 = Math::Mod10($codigo);
         $dv2 = Math::Mod11($codigo . $dv1);
-        //pr($dv1.$dv2);
-        //return $data['DuploDigito'] = $dv1.$dv2;
-        return $data['DuploDigito'] = self::DuploDigito($codigo);
+
+        return $object->Data['DuploDigito'] = self::DuploDigito($codigo);
     }
     
     /*
@@ -108,7 +107,8 @@ P10 – O Segundo Dígito Será 11 Menos O Resto Da Divisão Inteira De P9;
 P11 – Se O Resto Da Divisão Inteira De P9 For Zero, Então O Segundo Dígito Será Zero;
 P12 – Se O Resto Da Divisão Inteira De P9 For 1 (Um), Então Somar 1 (Um)
     Ao Primeiro Dígito Calculado (Módulo 10) E Reiniciar A Partir De P7;
-P13 – Se A Soma De 1 (Um) Ao Primeiro Dígito, Descrito No P12, For Maior Que 9, Então O Primeiro Dígito (Módulo 10) Será Zero;
+P13 – Se A Soma De 1 (Um) Ao Primeiro Dígito, Descrito No P12, For Maior Que 9, Então
+    O Primeiro Dígito (Módulo 10) Será Zero;
 P14 – Nos Casos De P12 E P13 O Primeiro Conserva Seu Valor Para O Seu Duplo-Dígito Final.
 
 EXEMPLO DE CÁLCULO DO DUPLO-DÍGITO (NC):
@@ -139,17 +139,26 @@ Argumento 00009194 Duplo Dígito = 38
 Nota: Mesmo Não Constando No Exemplo, O Número Do Título Para O Banco Sempre Deve Ser Composto Por 8 (Oito) Dígitos, Neste Caso Deve Ser Completado Com Zeros A Esquerda.
     */
     public static function DuploDigito($num){
+        #DV1 
         $dv1 = Math::Mod10($num);
-        $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7, '-');
-
+        
+        #DV2 - $num concatenado com $dv1, calculado com Mod11 com
+        #multiplicador máximo 7
+        $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7);
+        
+        #Se $dv2 = 10, adiciona 1 a $dv1 e recalcula $dv2
+        #concatenando agora o novo $dv1
         if($dv2 == 10){
             $dv1++;
-            $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7, '-');
+            $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7);
+            
+            #Se o novo valor de $dv1 for maior que 9, então
+            #$dv1 passará a ser 0
+            if($dv1 > 9){
+                $dv1 = 0;
+            }
         }
-
+        
         return $dv1 . $dv2;
     }
-    
-    
-    
 }
