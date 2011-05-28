@@ -31,6 +31,7 @@ class Boleto{
     public $NossoNumero;
     public $NumDocumento;
     public $DataEmissao;
+    public $NumParcela;
     //Opcionais
     public $Quantidade;
     public $Desconto;
@@ -219,5 +220,15 @@ class Boleto{
         return $this;
     }
     
-    
+     /**
+      * Define o número da parcela
+      * 
+      * @version 0.1 28/05/2011 Initial
+      */
+    public function setNumParcela($num){
+        $this->NumParcela = $num;
+        
+        return $this;
+    }
+   
 }
