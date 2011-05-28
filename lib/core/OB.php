@@ -136,6 +136,8 @@ class OB{
       *              20/05/2011 Agora verifica se a propriedade já está
       *                 preenchida, salva os dados em uma propriedade de
       *                 classe
+      *              27/05/2011 normalize() verifica se a chave existe no
+      *                 array antes de tentar normalizar seu valor. 
       *
       * @todo Esse método é responsabilidade do layout
       */
@@ -154,16 +156,13 @@ class OB{
                );
 
             foreach($this->Data as $var => $value){
-                //if(array_key_exists($var, $this->Banco->posicoes)){
-                    //$this->Data[$var] = self::normalize($this->Data[$var], $this->Banco->posicoes[$var][1]);
-                //}
                 if(array_key_exists($var, $this->Banco->tamanhos)){
                     $this->Data[$var] = self::normalize($this->Data[$var], $this->Banco->tamanhos[$var]);
                 }
-                
             }
             
             $this->Data['Vencimento'] = $this->Boleto->Vencimento;
+            $this->Data['DigitoAgencia'] = Math::Mod11($this->Data['Agencia']);
             $this->Data['DigitoConta'] = Math::Mod11($this->Data['Conta']);
             $this->Data['DigitoNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
             //pr($this->Data);
