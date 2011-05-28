@@ -48,46 +48,23 @@ class Banco{
         '356' => 'Real',
         '409' => 'Unibanco',
         '623' => 'Panamericano',
+        '756' => 'Bancoob',
     );
     
     
     /*
-        @var array $posicoes
+        @var array $tamanhos
         Armazena os dados de posições dos valores dentro do código de barras.
         
-        @example
-        O Fator de Vencimento (FatorVencimento) inicia na posição
-        "5" (contando a partir do zero), e tem 4 caracteres: (5,4)
     */
-    public $posicoes = array(
-                     //(Inicio, Tamanho). Inicia em 0
-                     
-        #Campos comuns a todos os bancos
-        'Banco'         => array(0,3),   //identificação do banco
-        'Moeda'         => array(3,1),   //Código da moeda: real=9
-        'DV'            => array(4,1),   //Dígito verificador geral da linha digitável
-        'FatorVencimento'=>array(5,4),   //Fator de vencimento (Dias passados desde 7/out/1997)
-        'Valor'         => array(9,10),  //Valor nominal do título
-        
-        #Campos variáveis de banco para banco
-        'Agencia'       => array(19,4),  //Código da agencia, sem dígito
-        'Carteira'      => array(23,2),  //Código da Carteira
-        'NossoNumero'   => array(25,12), //Nosso número
-        'Conta'         => array(36,7),  //Conta corrente do cedente, sem o dígito
-    );
+    public $tamanhos = array();
     
     /*
         @var $layoutCodigoBarras
         armazena o layout que será usado para gerar o código de barras desse banco
      */
-    public $layoutCodigoBarras = ':Banco:Moeda:FatorVencimento:Valor:Agencia:Carteira:NossoNumero:Conta0';
+    public $layoutCodigoBarras;
     
-    /*
-        @var $layoutCodigoBarras
-        Armazena o layout que será usado para gerar a linha digitável nesse banco
-     */
-    public $layoutLinhaDigitavel = ':Banco:Moeda:Agencia:Carteira:NossoNumero:Conta:FatorVencimento:Valor';
-
     /*
         @var $formataLinhaDigitavel
         Máscara para a linha digitável
@@ -157,5 +134,24 @@ class Banco{
       * @version 0.1 28/05/2011 Initial
       */
     public function particularidade(&$data){}
+    
+    
+    
+    /**
+      * Avalia se todos os campos necessários para a geração do código de barras
+      * estão preenchidos
+      *
+      * @version 0.1 28/05/2011
+      */
+    public function verificaObrigatorios($data){
+        $obrigatorios = array_keys($this->tamanhos);
+        //pr($data);
+        foreach($data as $chave => $valor){
+            if(!array_key_exists($chave, $data) || is_null($data[$chave])){
+                throw new Exception('O campo "' . $chave . '" é obrigatório para
+                    a geração do código de barras do banco "' . $this->Nome . '"');
+            }
+        }
+    }
     
 }
