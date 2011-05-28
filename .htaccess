@@ -1,0 +1,8 @@
+Options +FollowSymlinks
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    #Reescreve as chamadas a barcode/23836473254735243524753274527354732
+    #para lib/utils/Barcode.php?n=23836473254735243524753274527354732
+    RewriteRule ^barcode/([\d]{44})$ lib/utils/Barcode.php?n=$1 [L]
+</IfModule>
