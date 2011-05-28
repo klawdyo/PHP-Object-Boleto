@@ -13,14 +13,14 @@
 
     @author  Cláudio Medeiros <contato@claudiomedeiros.net>
     @package ObjectBoleto http://github.com/klawdyo/PHP-Object-Boleto
-    @subpackage ObjectBoleto.Lib.Bancos
+    @subpackage ObjectBoleto.Lib.Utils
     @license http://www.opensource.org/licenses/mit-license.php The MIT License
     
     -----------------------------------------------
         HOW TO USE
     -----------------------------------------------
         //Inclua a class no arquivo
-        require 'lib/Math.php';
+        require 'lib/utils/Math.php';
         
         //Chame as funções normalmente
         echo Math::Mod11('261533'); //Retorna 9

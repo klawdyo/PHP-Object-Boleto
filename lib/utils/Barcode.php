@@ -1,5 +1,50 @@
 <?php
-//17/05/2011
+/*
+    Class Barcode
+    Essa classe tem o objetivo de fazer a geração de códigos de barra
+    em imagem única
+    
+    -----------------------------------------------
+        COPYRIGHT
+    -----------------------------------------------
+
+    Licensed under The MIT License.
+    Redistributions of files must retain the above copyright notice.
+
+    @author  Cláudio Medeiros <contato@claudiomedeiros.net>
+    @package ObjectBoleto http://github.com/klawdyo/PHP-Object-Boleto
+    @subpackage ObjectBoleto.Lib.Utils
+    @license http://www.opensource.org/licenses/mit-license.php The MIT License
+    
+    -----------------------------------------------
+        HOW TO USE
+    -----------------------------------------------
+        //Inclua a class no arquivo
+        require 'lib/utils/Barcode.php';
+        
+        //Chame as funções normalmente
+        Barcode::getImage('123455689') pega o resource da imagem gerada
+        echo Barcode::getHtml('123455689') retorna o html para gerar a imagem
+        
+    -----------------------------------------------
+        CHANGELOG
+    -----------------------------------------------
+    
+    17/05/2011
+    [+] Initial 
+    
+    -----------------------------------------------
+        TO DO
+    -----------------------------------------------
+    
+
+    
+    -----------------------------------------------
+        KNOWN BUGS
+    -----------------------------------------------
+
+    
+ */
 class Barcode{
     //Imagem
     public $image;
