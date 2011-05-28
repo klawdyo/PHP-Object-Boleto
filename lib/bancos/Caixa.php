@@ -1,9 +1,10 @@
 <?php
 
 class Caixa extends Banco{
-    public $nome = 'Caixa';
-    public $css = 'caixa.css';
-    public $image = 'caixa.png';
+    public $Codigo = '104';
+    public $Nome = 'Caixa';
+    public $Css = 'caixa.css';
+    public $Image = 'caixa.png';
     
     /*
         @var array $posicoes

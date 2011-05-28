@@ -44,13 +44,13 @@ class OB{
       * 
       * @version 0.1 18/05/2011 Initial
       */
-    public function __construct(){
+    public function __construct($codigoBanco){
+        $this->loadBanco($codigoBanco);
+        
         $classes = array('Vendedor', 'Cliente', 'Boleto', 'Configuracao', 'Template');
         foreach($classes as $class){
             $this->$class = new $class($this);
         }
-        #Carrego o layout
-        require OB_DIR . '/lib/core/Banco.php';
     }
     
     /**
@@ -71,8 +71,11 @@ class OB{
       * 
       * @version 0.1 20/05/2011 Initial
       *          0.2 20/05/2011 Verificando se algo já foi carregado
+      *          0.3 27/05/2011 Parâmetro $codigoBanco adicionado.
+      *             loadBanco() agora é chamado no construtor da
+      *             classe.
       */
-    public function loadBanco(){
+    public function loadBanco($codigoBanco){
         if(!empty($this->Banco)){
             return $this->Banco;
         }
@@ -82,7 +85,7 @@ class OB{
         
         #Todos os layouts dos bancos estendem o layout pai. Carrego o layout
         #específico para o banco em questão
-        $this->Banco = $banco->load($this->Vendedor->Banco);
+        $this->Banco = $banco->load($codigoBanco);
         
         return $this->Banco;
     }
@@ -93,8 +96,8 @@ class OB{
       * @version 0.1 18/05/2011 Initial
       */
     public static function fatorVencimento($dia, $mes, $ano){
-        $timestampVencimento = (int) (mktime(0,0,0,$mes, $dia, $ano) / (24*60*60));
-        $timestampDatabase = (int) (mktime(0,0,0,10, 7, 1997) / (24*60*60));
+        $timestampVencimento = (int) (mktime(0, 0, 0, $mes, $dia, $ano) / (24 * 60 * 60));
+        $timestampDatabase = (int) (mktime(0, 0, 0 , 10, 7, 1997) / (24 * 60 * 60));
         
         return abs($timestampVencimento - $timestampDatabase);
     }
@@ -111,9 +114,6 @@ class OB{
     public function geraCodigo(){
         #Se nenhum código foi gerado.
         if(empty($this->Boleto->CodigoBarras)){
-            #Carrega o banco usado
-            $this->loadBanco();
-            
             #Padroniza os dados necessários de acordo com Layout do banco
             $this->normalizeData();
 
@@ -126,6 +126,7 @@ class OB{
             #Inserindo o dígito verificador exatamente na posição 4, iniciando em 0.
             $this->Boleto->CodigoBarras = String::putAt($cod, $dv, 4);
         }
+        
         return $this->Boleto->CodigoBarras;
     }
     
@@ -133,18 +134,21 @@ class OB{
       * Normaliza os dados da propriedade, unificando a esse trabalho
       * 
       * @version 0.1 18/05/2011 Initial
-      *              20/05/2011 Agora verifica se a propriedade já está
+      *          0.2 20/05/2011 Agora verifica se a propriedade já está
       *                 preenchida, salva os dados em uma propriedade de
       *                 classe
-      *              27/05/2011 normalize() verifica se a chave existe no
-      *                 array antes de tentar normalizar seu valor. 
+      *          0.3 25/05/2011 Acrescentados DigitoNossoNumero e DigitoConta
+      *             para atender a necessidade de alguns bancos
+      *          0.4 27/05/2011 normalize() verifica se a chave existe no
+      *                 array antes de tentar normalizar seu valor.
+      *          0.5 27/05/2011 Acrescentado DigitoAgencia
       *
       * @todo Esse método é responsabilidade do layout
       */
     public function normalizeData(){
         if(empty($this->Data)){
             $this->Data = array(
-                'Banco'=> $this->Vendedor->Banco,
+                'Banco'=> $this->Banco->Codigo,
                 'Moeda' => $this->Vendedor->Moeda,
                 'Valor' => $this->Boleto->Valor,
                 'Agencia' => $this->Vendedor->Agencia,
@@ -165,7 +169,7 @@ class OB{
             $this->Data['DigitoAgencia'] = Math::Mod11($this->Data['Agencia']);
             $this->Data['DigitoConta'] = Math::Mod11($this->Data['Conta']);
             $this->Data['DigitoNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
-            //pr($this->Data);
+
             return $this->Data;
         }
         else{
@@ -266,7 +270,6 @@ class OB{
       *          1.0 20/05/2011 Movido da classe Boleto para a classe OB
       */
     public function render(){
-        $this->loadBanco();
         $this->Template->render($this->Template->Template);
         flush();
     }

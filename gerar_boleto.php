@@ -2,11 +2,11 @@
     header('Content-type: text/html; charset=utf-8');
     include 'OB_init.php';    
 
-    $ob = new OB();
+    $ob = new OB('104');
     
     /*
     $ob->Vendedor
-            ->setBanco('004')
+            
             ->setAgencia('0016')
             ->setConta('1193')
             ->setCarteira('55')
@@ -47,7 +47,6 @@
     $ob->render(); /**/
 
     $ob->Vendedor
-            ->setBanco('104')
             ->setAgencia('1565')
             ->setConta('87000000414')
             ->setCodigoCedente('87000000414')

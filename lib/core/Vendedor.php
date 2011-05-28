@@ -4,7 +4,6 @@
 */
 class Vendedor{
     //Dados bancários
-    public $Banco;
     public $Agencia;
     public $Conta;
     public $CodigoCedente;
@@ -61,17 +60,6 @@ class Vendedor{
             $method = 'set' . $var;
             $this->$method($value);
         }
-        return $this;
-    }
-
-    /**
-      * Configura o banco
-      * 
-      * @version 0.1 18/05/2011 Initial
-      */
-    public function setBanco($codigo){
-        $this->Banco = OB::zeros($codigo, 3);
-        
         return $this;
     }
 

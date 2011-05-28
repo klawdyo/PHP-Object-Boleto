@@ -1,8 +1,9 @@
 <?php
 class BB extends Banco{
-    public $nome = 'Banco do Brasil';
-    public $css = 'bb.css';
-    public $image = 'bb.png';
+    public $Codigo = '001';
+    public $Nome = 'Banco do Brasil';
+    public $Css = 'bb.css';
+    public $Image = 'bb.png';
     
     /*
         @var array $obrigatorios

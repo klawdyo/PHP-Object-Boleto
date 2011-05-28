@@ -10,6 +10,7 @@
         CORE
      */
     require OB_DIR . '/lib/core/OB.php';
+    require OB_DIR . '/lib/core/Banco.php';
     require OB_DIR . '/lib/core/Vendedor.php';
     require OB_DIR . '/lib/core/Cliente.php';
     require OB_DIR . '/lib/core/Boleto.php';

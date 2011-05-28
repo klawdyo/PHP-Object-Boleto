@@ -2,22 +2,30 @@
 //18/05/11
 class Banco{
     /*
+        @var array $Codigo
+        Armazena o código do banco
+    */
+    public $Codigo;
+
+    /*
         @var array $nome
         Armazena o nome do banco
     */
-    public $nome;
+    public $Nome;
     
     /*
         @var array $image
         Armazena o nome da imagem da logomarca do banco
     */
-    public $image;
+    public $Image;
     
     /*
         @var array $css
         Armazena o arquivo CSS utilizado por esse banco
     */
-    public $css;
+    public $Css;
+    
+    
     
     /*
         @var array $relacoes
@@ -124,8 +132,8 @@ class Banco{
       * @version 0.1 18/05/2011 Initial
       */
     public function normalize($valor, $variavel){
-        if(array_key_exists($variavel, $this->posicoes)){
-            $length = $this->posicoes[$variavel][1];
+        if(array_key_exists($variavel, $this->tamanhos)){
+            $length = $this->tamanhos[$variavel];
             if(strlen($valor) < $length){
                 return OB::zeros($valor, $length);
             }

@@ -1,9 +1,10 @@
 <?php
 
 class BNB extends Banco{
-    public $nome = 'Banco do Nordeste';
-    //public $css = 'bnb.css';
-    public $image = 'bnb.png';
+    public $Codigo = '004';
+    public $Nome = 'Banco do Nordeste';
+    //public $Css = 'bnb.css';
+    public $Image = 'bnb.png';
     
     /*
         @var array $posicoes
