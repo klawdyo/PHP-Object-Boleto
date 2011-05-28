@@ -13,7 +13,7 @@ class BNB extends Banco{
         O Fator de Vencimento (FatorVencimento) inicia na posição
         "5" (contando a partir do zero), e tem 4 caracteres: (5,4)
     */
-    public $posicoes = array(
+    /*public $posicoes = array(
         #Campos comuns a todos os bancos
         'Banco'             => array(0,3),   //identificação do banco
         'Moeda'             => array(3,1),   //Código da moeda: real=9
@@ -27,6 +27,21 @@ class BNB extends Banco{
         'NossoNumero'       => array(31,7),  //Nosso número
         'DigitoNossoNumero' => array(38, 1),
         'Carteira'          => array(39, 2),
+    );/**/
+    public $tamanhos = array(
+        #Campos comuns a todos os bancos
+        'Banco'             => 3,   //identificação do banco
+        'Moeda'             => 1,   //Código da moeda: real=9
+        'DV'                => 1,   //Dígito verificador geral da linha digitável
+        'FatorVencimento'   => 4,   //Fator de vencimento (Dias passados desde 7/out/1997)
+        'Valor'             => 10,  //Valor nominal do título
+        #Campos variávies
+        'Agencia'           => 4,   //Código da agencia, sem dígito
+        'Conta'             => 7,   //Número da conta
+        'DigitoConta'       => 1,   //Dígito da conta do Cedente
+        'NossoNumero'       => 7,   //Nosso número
+        'DigitoNossoNumero' => 1,   //Dígito do nosso número
+        'Carteira'          => 2,   //Código da carteira
     );
 
     /*
@@ -44,7 +59,7 @@ class BNB extends Banco{
                                 ban,moe,dv,venc,vr,ag,  conta, dvc,nosnum,dvn,cart,000
                                 00490.01605 00119.320000 00531.550006 4 10690000100000
      */
-    public $layoutLinhaDigitavel = ':Banco:Moeda:Agencia:Conta:DigitoConta:NossoNumero:DigitoNossoNumero:Carteira000:FatorVencimento:Valor';
+    //public $layoutLinhaDigitavel = ':Banco:Moeda:Agencia:Conta:DigitoConta:NossoNumero:DigitoNossoNumero:Carteira000:FatorVencimento:Valor';
 
     
     //public $obrigatorios = array();

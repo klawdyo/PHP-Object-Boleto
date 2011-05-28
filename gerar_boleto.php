@@ -50,6 +50,7 @@
             ->setBanco('104')
             ->setAgencia('1565')
             ->setConta('87000000414')
+            ->setCodigoCedente('87000000414')
             ->setCarteira('55')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-39')

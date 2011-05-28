@@ -150,16 +150,23 @@ class OB{
                 'Conta' => $this->Vendedor->Conta,
                 'NossoNumero' => $this->Boleto->NossoNumero,
                 'FatorVencimento' => $this->Boleto->FatorVencimento,
+                'CodigoCedente' => $this->Vendedor->CodigoCedente,
                );
 
             foreach($this->Data as $var => $value){
-                $this->Data[$var] = self::normalize($this->Data[$var], $this->Banco->posicoes[$var][1]);
+                //if(array_key_exists($var, $this->Banco->posicoes)){
+                    //$this->Data[$var] = self::normalize($this->Data[$var], $this->Banco->posicoes[$var][1]);
+                //}
+                if(array_key_exists($var, $this->Banco->tamanhos)){
+                    $this->Data[$var] = self::normalize($this->Data[$var], $this->Banco->tamanhos[$var]);
+                }
+                
             }
             
             $this->Data['Vencimento'] = $this->Boleto->Vencimento;
             $this->Data['DigitoConta'] = Math::Mod11($this->Data['Conta']);
             $this->Data['DigitoNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
-            
+            //pr($this->Data);
             return $this->Data;
         }
         else{
@@ -168,20 +175,55 @@ class OB{
     }
     
     /**
-      *
-      * @version 0.1 18/05/2011 Initial
-      *
-      */
-    public function extractData(){
-        $this->Banco->posicoes;
-    }
-    
-    /**
-      * Gera a linha digitável já formatada
+      * Gera a linha digitável já formatada. O layout só é necessário
+      * para gerar o código de barras. Para gerar a linha digitável,
+      * todos os bancos usam os mesmos posicionamentos em relação ao
+      * código previamente gerado:
+      * Campo1 - Posições de 1-4 e 20-24, Campo2 - Posições 25-34,
+      * Campo3 - Posições 35-44, Campo4 - Posição 5 e
+      * Campo5 - Posições 6-19.
       * 
       * @version 0.1 18/05/2011 Initial
+      *          1.0 27/05/2011 Mudança total em linha digitavel.
       */
     public function linhaDigitavel(){
+        $codigo = $this->geraCodigo();
+        //  1       10        20        30        40  44
+        //  |        |         |         |         |   |
+        //  10497498600001000001870000900000000001234567 //cod-bar
+        //  10491870000900000000001234567749860000100000 //lin-digi virgem
+        //  10491.8700X 00900.00000X 00012.34567X 7 49860000100000 //lin-digi formatada
+        //  10491.87006 00900.000001 00012.345674 7 49860000100000
+        //  10491.87006 00900.000001 00012.345674 7 49860000100000
+        // 104918700    0090000000   00012345677
+        
+        //Campo1 - Posições de 1-4 e 20-24
+        $linhaDigitavel = substr($codigo, 0, 4) . substr($codigo, 19, 5)
+        //Campo2 - Posições 25-34
+                         .substr($codigo, 24, 10)
+        //Campo3 - Posições 35-44
+                         .substr($codigo, 34, 10)
+        //Campo4 - Posição 5
+                         .substr($codigo, 4, 1)
+        //Campo5 - Posições 6-19
+                         .substr($codigo, 5, 14);
+        
+        $dv1 = Math::Mod10(substr($linhaDigitavel, 0, 9));
+        $dv2 = Math::Mod10(substr($linhaDigitavel, 9, 10));
+        $dv3 = Math::Mod10(substr($linhaDigitavel, 19, 10));
+
+        #Inserindo os DVs em seus lugares
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv3, 29);
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv2, 19);
+        $linhaDigitavel = String::putAt($linhaDigitavel, $dv1, 9);
+       
+        #Aplicando A linha digitável gerada à sua máscara
+        $linhaDigitavel = String::applyMask($linhaDigitavel, $this->Banco->mascaraLinhaDigitavel);
+
+        return $linhaDigitavel;
+    }
+    
+    /*public function linhaDigitave(){
         $codigo = $this->geraCodigo();
         
         #Inicio $data vazia
@@ -215,7 +257,8 @@ class OB{
         $linhaDigitavel = String::applyMask($linhaDigitavel, $this->Banco->mascaraLinhaDigitavel);
         
         return $linhaDigitavel;
-    }
+    }/**/
+    
     /**
       * Renderiza o template
       * 
