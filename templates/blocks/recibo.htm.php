@@ -10,7 +10,7 @@
         <!-- Cedente -->
         <div class="cedente item">
             <label>Cedente</label>
-            <?php echo $OB->Vendedor->Nome; ?>
+            <?php echo $OB->Vendedor->RazaoSocial; ?>
         </div>
         <!-- Agência/Código do Cedente -->
         <div class="agencia item">
@@ -49,7 +49,14 @@
         <!-- Vencimento -->
         <div class="vencimento item">
             <label>Vencimento</label>
-            <?php echo $OB->Boleto->Vencimento;?>
+            <?php
+               if($OB->Boleto->VencimentoContraApresentacao == false){
+                  echo $OB->Boleto->Vencimento;
+               }
+               else{
+                   echo 'Contra-Apresentacao';
+               }
+            ?>
         </div>
         <!-- Valor do Documento -->
         <div class="valor item">

@@ -114,7 +114,7 @@ class Banco{
             }
         }
         else{
-            throw new Exception('O banco ' . $banco. ' não existe em Banco::$relacoes');
+            throw new Exception('O banco ' . $codigo. ' não existe em Banco::$relacoes');
         }
     }
     

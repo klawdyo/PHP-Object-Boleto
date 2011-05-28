@@ -7,7 +7,7 @@ class Vendedor{
     public $Banco;
     public $Agencia;
     public $Conta;
-    public $NumContrato;
+    public $CodigoCedente;
     public $Carteira;
     public $Moeda = 9;
     
@@ -82,7 +82,7 @@ class Vendedor{
       *          0.2 27/05/2011 Renomeado de setNome() para setRazaoSocial()
       */
     public function setRazaoSocial($value){
-        $this->Banco = OB::zeros($value, 3);
+        $this->RazaoSocial = OB::zeros($value, 3);
         
         return $this;
     }
@@ -122,8 +122,8 @@ class Vendedor{
       * 
       * @version 0.1 27/05/2011 Initial
       */
-    public function setNumContrato($value){
-        $this->NumContrato = $value;
+    public function setNumCodigoCedente($value){
+        $this->NumCodigoCedente = $value;
         
         return $this;
     }

@@ -70,7 +70,7 @@ class OB{
       * Carrego os dados do banco desejado
       * 
       * @version 0.1 20/05/2011 Initial
-      *          0.2 20/05/2011 Verifico se algo já foi carregado
+      *          0.2 20/05/2011 Verificando se algo já foi carregado
       */
     public function loadBanco(){
         if(!empty($this->Banco)){
@@ -80,7 +80,7 @@ class OB{
         #Instância do Layouts pai
         $banco = new Banco;
         
-        #Todos os layouts dos bancos extendem o layout pai. Carrego o layout
+        #Todos os layouts dos bancos estendem o layout pai. Carrego o layout
         #específico para o banco em questão
         $this->Banco = $banco->load($this->Vendedor->Banco);
         

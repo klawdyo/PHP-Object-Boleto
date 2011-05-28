@@ -2,7 +2,7 @@
 
 class BNB extends Banco{
     public $nome = 'Banco do Nordeste';
-    //public $css = 'caixa.css';
+    //public $css = 'bnb.css';
     public $image = 'bnb.png';
     
     /*

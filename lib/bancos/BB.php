@@ -4,9 +4,6 @@ class BB extends Banco{
     public $css = 'bb.css';
     public $image = 'bb.png';
     
-    
-    //00193498200002952950000007777777000008765418
-    
     /*
         @var array $obrigatorios
         Armazena os campos obrigatórios para a geração do código de
@@ -14,9 +11,13 @@ class BB extends Banco{
         do boleto bancário
      */
     public $obrigatorios = array(
-        'Agencia', 'CodigoCedente'
-        'Nome', 'Valor', 'Vencimento',
+        'Agencia', 'CodigoCedente',
+        'Nome', 'Valor', 'Vencimento', 
         'Banco', 'Moeda', 'NossoNumero', 'Carteira'
     );
+    
+    
+    
+    
     
 }

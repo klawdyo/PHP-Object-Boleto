@@ -2,9 +2,9 @@
 //18/05/11
 class Boleto{
     /**
-      *
+      * Construtor
+      * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function __construct(&$obj){
         $this->parent = $obj;
@@ -27,6 +27,7 @@ class Boleto{
     public $ValorUnitario;
     public $FatorVencimento;
     public $Vencimento;
+    public $VencimentoContraApresentacao = false;
     public $NossoNumero;
     public $NumDocumento;
     public $DataEmissao;
@@ -59,7 +60,6 @@ class Boleto{
       * atual
       * 
       * @version 0.1 19/05/2011 Initial
-      *
       */
     public function setDataEmissao($dia = null, $mes = null, $ano = null){
         $dia = empty($dia) ? date('d') : $dia;
@@ -71,9 +71,9 @@ class Boleto{
     }
     
     /**
-      *
+      * Define o número do documento
+      * 
       * @version 0.1 19/05/2011 Initial
-      *
       */
     public function setNumDocumento($numero){
         $this->NumDocumento = $numero;
@@ -86,7 +86,6 @@ class Boleto{
       * o valor da propriedade Valor
       * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function setValor($valor){
         $this->ValorUnitario = (int) ($valor * 100);
@@ -102,7 +101,6 @@ class Boleto{
       * Define o nosso número do boleto
       * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function setNossoNumero($valor){
         if(!preg_match('/[^0-9]/', $valor)){
@@ -119,11 +117,24 @@ class Boleto{
       * Define uma data específica de vencimento
       * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function setVencimento($dia, $mes, $ano){
         $this->FatorVencimento = OB::fatorVencimento($dia, $mes, $ano);
         $this->Vencimento = $dia . '/' . $mes . '/' . $ano;
+        
+        return $this;
+    }
+    
+    /**
+      * Define o vencimento como contra-apresentação
+      * 
+      * @version 0.1 27/05/2011 Initial
+      */
+    public function setVencimentoContraApresentacao(){
+        $time = strtotime('+15 days');
+        $this->VencimentoContraApresentacao = true;
+        $this->FatorVencimento = OB::fatorVencimento(date('d', $time), date('m', $time), date('Y', $time));
+        
         return $this;
     }
     
@@ -131,56 +142,63 @@ class Boleto{
       * Adiciona dias à data de hoje para definir o vencimento
       * 
       * @version 0.1 18/05/2011 Initial
-      *
       */
     public function setDiasVencimento($num){
         $time = strtotime('+' . $num . ' days');
         $this->setVencimento(date('d', $time), date('m', $time), date('Y', $time));
+        
         return $this;
     }
     
     /**
-      * 
+      * Define a multa a ser impressa no boleto
       * 
       * @version 0.1 20/05/2011 Initial
       */
     public function setMulta($valor){
         $this->Multa = $valor;
+        
         return $this;
     }
     
     /**
-      * 
+      * Define o desconto
       * 
       * @version 0.1 20/05/2011 Initial
       */
     public function setDesconto($valor){
         $this->Desconto = $valor;
+        
         return $this;
     }
     
     /**
-      * 
+      * Define outros acréscimos
       * 
       * @version 0.1 20/05/2011 Initial
       */
     public function setOutrosAcrescimos($valor){
         $this->OutrosAcrescimos = $valor;
+        
         return $this;
     }
     
     /**
-      * 
+      * Define outros abatimentos
       * 
       * @version 0.1 20/05/2011 Initial
       */
     public function setOutrosAbatimentos($valor){
         $this->OutrosAbatimentos = $valor;
+        
         return $this;
     }
     
     /**
-      * Define o índice quantidade desse boleto
+      * Define o índice quantidade desse boleto.
+      * Se $this->ValorUnitario não estiver vazio, setQuantidade() irá
+      * preencher $this->Valor com o produto da multiplicação entre
+      * $this->ValorUnitario e $this->Quantidade.
       * 
       * @version 0.1 20/05/2011 Initial
       *          0.2 21/05/2011 Ajusta o valor nominal do boleto de acordo

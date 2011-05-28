@@ -22,7 +22,7 @@
                         <!--Cedente-->
                         <div class="cedente item">
                              <label>Cedente </label>
-                             <?php echo $OB->Vendedor->Nome; ?>
+                             <?php echo $OB->Vendedor->RazaoSocial; ?>
                         </div>
                     
                     <!--  linha3  -->
@@ -96,7 +96,14 @@
                 <div id="colunadireita" class="">
                     <div class="">
                          <label>Vencimento</label>
-                         <?php echo $OB->Boleto->Vencimento; ?>
+                         <?php
+                            if($OB->Boleto->VencimentoContraApresentacao == false){
+                               echo $OB->Boleto->Vencimento;
+                            }
+                            else{
+                                echo 'Contra-Apresentacao';
+                            }
+                         ?>
                     </div>
                     <div class="">
                          <label>Agência / Código cedente </label>
