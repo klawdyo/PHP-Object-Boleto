@@ -40,7 +40,7 @@
             ->setValor(550)
             ->setNumParcela(1)
             ->setVencimento(4,7,2000)
-            ->setNossoNumero('22832563')
+            ->setNossoNumero('228563')
         ;
     
     $ob->render(); /**/
