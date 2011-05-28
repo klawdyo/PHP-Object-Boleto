@@ -7,6 +7,14 @@
     -----------------------------------------------
         COPYRIGHT
     -----------------------------------------------
+
+    Licensed under The MIT License.
+    Redistributions of files must retain the above copyright notice.
+
+    @author  Cláudio Medeiros <contato@claudiomedeiros.net>
+    @package ObjectBoleto http://github.com/klawdyo/PHP-Object-Boleto
+    @subpackage ObjectBoleto.Lib.Bancos
+    @license http://www.opensource.org/licenses/mit-license.php The MIT License
     
     -----------------------------------------------
         HOW TO USE
@@ -27,11 +35,17 @@
     [+] Mod10() calcula o módulo 10 do número informado
     [+] financing() calcula a prestacao de um financiamento considerando
         periodo, valor inicial e juros
+    
     22/05/2011
     [m] Correção de bug em Mod11()
+    
     24/05/2011
     [m] Mod10() e Mod11() agora podem retornar o valor original formatado
         juntamente com o dígito calculado pelo algoritmo
+    
+    28/05/2011
+    [m] Adicionado $maxFactor em Mod11() como quinto parâmetro
+    [m] $separator foi movido para o sexto parâmetro
     
     -----------------------------------------------
         TO DO
@@ -79,13 +93,17 @@ class Math{
       * @version 0.1 17/05/2011 Initial
       *          0.2 22/05/2011 Bug corrigido
       *          0.3 24/05/2011 Adicionados os parâmetros $returnFull e $separator
+      *          0.4 28/05/2011 Adicionado o parâmetro $maxFactor
       *
       * @param $number O número informado
       * @param $ifTen Caso o resto da divisão seja 10, o que colocar
       *     em seu lugar? Existem exemplos de bancos que adicionam
       *     "0", outros "1", outros "X", outros "P", etc
       * @param $ifZero Se o resultado for zero, substituir por algum outro valor?
-      * @param $returnFull Deve retornar o valor completo, incluindo o dígito, ou somente o cálculo da divisão?
+      * @param $returnFull Deve retornar o valor completo, incluindo o dígito,
+      *     ou somente o cálculo da divisão?
+      * @param $maxFactor Estipula o fator máximo de múltiplicação a ser aplicado
+      *     nos algarismos do número informado
       * @param $separator Separador para o dígito calculado
       * @return mixed
       */
@@ -136,10 +154,13 @@ class Math{
          =2 =12  =1 =10  =3  =6
          +2 +1+2 +1 +1+0 +3  +6 = 16
         +---+---+---+---+---+-> = (16 / 10) = 1, resto 6 => DV = (10 - 6) = 4
-        *Se o resto for diferente de 0, o resultado será 10 menos esse número
+      * Se o resto for diferente de 0, o resultado será 10 menos esse número
       *
       * @param $number Número a ser calculado o módulo 10
-      * @return integer
+      * @param $returnFull Deve retornar o valor completo, incluindo o dígito,
+      *    ou somente o cálculo da divisão?
+      * @param $separator Separador para o dígito calculado
+      * @return integer 
       */
     public static function Mod10($number, $returnFullNumber = false, $separator = '-'){
         $numLen = strlen($number) - 1;
@@ -168,22 +189,6 @@ class Math{
             return $number . $separator . $rest;
         }
     }
-    
-    public static function GenericMod11($NumDado, $NumDig, $LimMult){
-    
-      $Dado = $NumDado;
-      for($n=1; $n<=$NumDig; $n++){
-        $Soma = 0;
-        $Mult = 2;
-        for($i=strlen($Dado) - 1; $i>=0; $i--){
-          $Soma += $Mult * intval(substr($Dado,$i,1));
-          if(++$Mult > $LimMult) $Mult = 2;
-        }
-        $Dado .= strval(fmod(fmod(($Soma * 10), 11), 10));
-      }
-      return substr($Dado, strlen($Dado)-$NumDig);
-    }
-        
     
     /**
       * http://pt.wikipedia.org/wiki/Tabela_price#C.C3.A1lculo
