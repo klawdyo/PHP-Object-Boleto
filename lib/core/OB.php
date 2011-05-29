@@ -104,6 +104,15 @@ class OB{
     }
     
     /**
+      * Transforma um fator de vencimento em uma data
+      *
+      * @version 0.1 28/05/2011 Initial
+      */
+    public static function fatorVencimentoParaData($fator, $formato = 'd/m/Y'){
+        return date($formato, ((strtotime('1997-10-7 00:00:00')/86400) + $fator) * 86400);
+    }
+    
+    /**
       * Gera o código numérico que será a base para o código de barras
       * 
       * @version 0.1 18/05/2011 Initial
