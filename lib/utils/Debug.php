@@ -20,7 +20,7 @@ class Debug {
 
     public static function pr($data, $legend=null) {
         if(is_null($legend)):
-            echo '<pre>' . print_r($data, true) . '</pre>';
+            echo PHP_EOL . '<pre>' .PHP_EOL . print_r($data, true) . PHP_EOL . '</pre>' . PHP_EOL;
         else:
             echo '<fieldset><legend>'   . $legend
                                         . '</legend><pre>'
