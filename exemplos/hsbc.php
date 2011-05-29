@@ -9,8 +9,8 @@
             
             ->setAgencia('100')
             ->setConta('1193')
-            ->setCodigoCedente('1')
-            ->setCarteira('2')
+            ->setCodigoCedente('351202')
+            ->setCarteira('4')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-39')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
@@ -40,7 +40,7 @@
             ->setValor(550)
             ->setNumParcela(1)
             ->setVencimento(4,7,2000)
-            ->setNossoNumero('228563')
+            ->setNossoNumero('39104766')
         ;
     
     $ob->render(); /**/

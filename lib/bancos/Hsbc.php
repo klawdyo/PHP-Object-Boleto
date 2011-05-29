@@ -33,10 +33,22 @@ class Hsbc extends Banco{
         
           1   5   10   15   20   25   30   35   40  44
           |   |    |    |    |    |    |    |    |   |
-          0419 100100000550002110000000012283256304168    //manual
-          04191100100000550002110000000012283256304168    //gerado 
-              |                |                    \/
-              dv                                   dig.duplo
+          39991100100000550002110000000012283256304168
+          \./||\../\......../\...../\.........../\../|  
+           . ..  .      .       .         .        . ... Código do aplicativo (2 fixo)
+           . ..  .      .       .         .        ..... Data no formato juliano
+           . ..  .      .       .         .............. Nosso número
+           . ..  .      .       ........................ Código do cedente
+           . ..  .      ................................ Valor
+           . ..  ....................................... Fator de vencimento
+           . ........................................... Dígito verificador do código
+           . ........................................... Código da Moeda
+           ............................................. Código do banco
+                                                        
+                                                        
+                                                        
+                                                        
+
         
     */
     public $tamanhos = array(
@@ -47,34 +59,44 @@ class Hsbc extends Banco{
         'FatorVencimento'   => 4,  //Fator de vencimento (Dias passados desde 7/out/1997)
         'Valor'             => 10, //Valor nominal do título
         #Campos variávies
-        'Carteira'          => 1,  //Código da agência
-        'Agencia'           => 4,  //Código do cedente
-        //'ModalidadeCobranca'=> 2,  //Nosso número
-        'CodigoCedente'     => 7,  //Nosso número
-        'AnoEmissao'        => 2,  //Nosso número //São 8 números, mas os 2 primeiros são sempre referente ao ano de emissão do boleto. Exemplo: 2011, todos os nossos números devem iniciar com 11
-        'NossoNumero'       => 6,  //Nosso número //São 8 números, mas os 2 primeiros são sempre referente ao ano de emissão do boleto. Exemplo: 2011, todos os nossos números devem iniciar com 11
-        'NumParcela'        => 3,  //Nosso número
+        'CodigoCedente'     => 7,
+        'NossoNumero'       => 13,
+        'DataVencimentoCalendarioJuliano' => 4,
+        //'CodigoAplicativo'  => 1,
     );
-
+    
+    public $carteiras = array(4, 5);
+    
     /*
         @var string $layoutCodigoBarras
         Armazena o layout que será usado para gerar o código de barras desse banco.
         Cada variável é precedida por dois-pontos (:), que serão substituídas
         pelos seus respectivos valores
      */
-    public $layoutCodigoBarras = ':Banco:Moeda:FatorVencimento:Valor:Carteira:Agencia01:CodigoCedente:AnoEmissao:NossoNumero:NumParcela';
+    public $layoutCodigoBarras = ':Banco:Moeda:FatorVencimento:Valor:CodigoCedente:NossoNumero:DataVencimentoCalendarioJuliano2';
     
     /**
       * particularidade() Faz em tempo de execução mudanças que sejam imprescindíveis
       * para a geração correta do código de barras
-      * Particularmente para o Banrisul, ele acrescenta ao array OB::$Data, que
-      * guarda as variáveis que geram o código de barras, uma nova variável
-      * $DuploDigito, específica desse banco
+      * Especificamente para o Hsbc, temos duas particularidas: Data no formato juliano, e
+      * um dígito verificador triplo para o nosso número.
       *
       * @version 0.1 28/05/2011 Initial
       */
-    public function particularidade(&$object){
-        $object->Data['NumParcela'] = OB::zeros($object->Boleto->NumParcela, 3);
-        $object->Data['AnoEmissao'] = date('y');
+    public function particularidade($object){
+        $object->Data['DataVencimentoCalendarioJuliano'] = '0000';
+        $object->Data['NossoNumero'] = $this->geraCodigoDocumento($object->Data);
+    }
+    
+    public function geraCodigoDocumento($dados){
+        $dv1 = Math::Mod11($dados['NossoNumero']);
+        $dv2 = $dados['Carteira'];
+        $codigo = $dados['NossoNumero'] . $dv1 . $dv2;
+        
+        $data = OB::fatorVencimentoParaData($dados['FatorVencimento'], 'dmy');
+
+        $dv3 = Math::Mod11($codigo + $data + $dados['CodigoCedente']);
+        
+        return OB::zeros($codigo . $dv3, $this->tamanhos['NossoNumero']);
     }
 }
