@@ -134,7 +134,7 @@ class Banco{
       *
       * @version 0.1 28/05/2011 Initial
       */
-    public function particularidade(&$data){}
+    public function particularidade($data){}
     
     
     

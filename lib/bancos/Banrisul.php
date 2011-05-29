@@ -81,7 +81,7 @@ class Banrisul extends Banco{
       *
       * @version 0.1 28/05/2011 Initial
       */
-    public function particularidade(&$object){
+    public function particularidade($object){
         $codigo = String::insert('21:Agencia:CodigoCedente:NossoNumero041', $object->Data);
         $dv1 = Math::Mod10($codigo);
         $dv2 = Math::Mod11($codigo . $dv1);

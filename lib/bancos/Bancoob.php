@@ -84,7 +84,7 @@ class Bancoob extends Banco{
       *
       * @version 0.1 28/05/2011 Initial
       */
-    public function particularidade(&$object){
+    public function particularidade($object){
         $object->Data['NumParcela'] = OB::zeros($object->Boleto->NumParcela, 3);
         $object->Data['AnoEmissao'] = date('y');
     }
