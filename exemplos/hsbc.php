@@ -38,9 +38,8 @@
     
     $ob->Boleto
             ->setValor(550)
-            ->setNumParcela(1)
             ->setVencimento(4,7,2000)
             ->setNossoNumero('39104766')
         ;
     
-    $ob->render(); /**/
+    $ob->render();

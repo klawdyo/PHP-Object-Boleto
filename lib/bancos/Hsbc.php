@@ -33,20 +33,29 @@ class Hsbc extends Banco{
         
           1   5   10   15   20   25   30   35   40  44
           |   |    |    |    |    |    |    |    |   |
-          39991100100000550002110000000012283256304168
-          \./||\../\......../\...../\.........../\../|  
-           . ..  .      .       .         .        . ... Código do aplicativo (2 fixo)
-           . ..  .      .       .         .        ..... Data no formato juliano
-           . ..  .      .       .         .............. Nosso número
-           . ..  .      .       ........................ Código do cedente
-           . ..  .      ................................ Valor
-           . ..  ....................................... Fator de vencimento
-           . ........................................... Dígito verificador do código
-           . ........................................... Código da Moeda
-           ............................................. Código do banco
+          39994100100000550000351202003910476634000002
+          └-┘↓↓└--┘└--------┘└-----┘└-----------┘└--┘↓  
+           | ||  |      |       |         |        | └-- Código do aplicativo (2 fixo)
+           | ||  |      |       |         |        └---- Data no formato juliano
+           | ||  |      |       |         └------------- Nosso número
+           | ||  |      |       └----------------------- Código do cedente
+           | ||  |      └------------------------------- Valor
+           | ||  └-------------------------------------- Fator de vencimento
+           | |└----------------------------------------- Dígito verificador do código
+           | └------------------------------------------ Código da Moeda
+           └-------------------------------------------- Código do banco
                                                         
                                                         
-                                                        
+            Array
+            (
+                [Banco] => 399
+                [Moeda] => 9
+                [Valor] => 0000055000
+                [NossoNumero] => 0039104766340
+                [FatorVencimento] => 1001
+                [CodigoCedente] => 0351202
+                [DataVencimentoCalendarioJuliano] => 0000
+            )                                                        
                                                         
 
         
@@ -80,6 +89,7 @@ class Hsbc extends Banco{
       * para a geração correta do código de barras
       * Especificamente para o Hsbc, temos duas particularidas: Data no formato juliano, e
       * um dígito verificador triplo para o nosso número.
+      * 
       *
       * @version 0.1 28/05/2011 Initial
       */
@@ -91,12 +101,9 @@ class Hsbc extends Banco{
     public function geraCodigoDocumento($dados){
         $dv1 = Math::Mod11($dados['NossoNumero']);
         $dv2 = $dados['Carteira'];
-        $codigo = $dados['NossoNumero'] . $dv1 . $dv2;
-        
+        $codigo = (int) $dados['NossoNumero'] . $dv1 . $dv2;
         $data = OB::fatorVencimentoParaData($dados['FatorVencimento'], 'dmy');
-
         $dv3 = Math::Mod11($codigo + $data + $dados['CodigoCedente']);
-        
         return OB::zeros($codigo . $dv3, $this->tamanhos['NossoNumero']);
     }
 }
