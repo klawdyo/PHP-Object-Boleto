@@ -145,14 +145,14 @@ class Banco{
       * @version 0.1 28/05/2011
       */
     public function verificaObrigatorios($data){
-        $obrigatorios = array_keys($this->tamanhos);
-        //pr($data);
-        foreach($data as $chave => $valor){
+        /*$obrigatorios = array_keys($this->tamanhos);
+
+        foreach($this->tamanhos as $chave => $valor){
             if(!array_key_exists($chave, $data) || is_null($data[$chave])){
                 throw new Exception('O campo "' . $chave . '" é obrigatório para
                     a geração do código de barras do banco "' . $this->Nome . '"');
             }
-        }
+        }/**/
     }
     
 }
