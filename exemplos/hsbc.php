@@ -8,9 +8,9 @@
     $ob->Vendedor
             
             ->setAgencia('100')
-            ->setConta('1193')
-            ->setCodigoCedente('351202')
-            ->setCarteira('4')
+            ->setConta('1122334')
+            ->setCodigoCedente('1122334')
+            ->setCarteira('CNR Fácil')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-39')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
@@ -37,9 +37,9 @@
         ;
     
     $ob->Boleto
-            ->setValor(550)
-            ->setVencimento(4,7,2000)
-            ->setNossoNumero('39104766')
+            ->setValor(2952.95)
+            ->setVencimento(5,6,2011)
+            ->setNossoNumero('0000012345678943')
         ;
     
     $ob->render();
