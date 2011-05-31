@@ -72,8 +72,8 @@ div#container{
     
                 /*  Linha 4   */
                 #ficha_compensacao #colunaprincipal .uso_banco{width:100px;}
-                #ficha_compensacao #colunaprincipal .carteira{width:50px;}
-                #ficha_compensacao #colunaprincipal .moeda{width:80px;}
+                #ficha_compensacao #colunaprincipal .carteira{width:90px;}
+                #ficha_compensacao #colunaprincipal .moeda{width:40px;}
                 #ficha_compensacao #colunaprincipal .qtd{width:55px;}
                 #ficha_compensacao #colunaprincipal .valor{width:130px;}
                 
