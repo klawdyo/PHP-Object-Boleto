@@ -59,11 +59,10 @@ class Itau extends Banco{
         'FatorVencimento'   => 4,   //Fator de vencimento (Dias passados desde 7/out/1997)
         'Valor'             => 10,  //Valor nominal do título
         #Campos variávies
-        'Carteira' => 3,
-        //'CodigoCedente'     => 0,  //Código do cedente
+        'Carteira'          => 3,
         'NossoNumero'       => 8,  //Nosso número
-        'Agencia' => 4,
-        'Conta' => 5
+        'Agencia'           => 4,
+        'Conta'             => 5
     );
 
     /*

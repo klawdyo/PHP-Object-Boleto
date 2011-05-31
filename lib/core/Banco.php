@@ -25,7 +25,11 @@ class Banco{
     */
     public $Css;
     
-    
+    /*
+        @var array $object
+        Armazena o objeto OB
+    */
+    public $parent;
     
     /*
         @var array $relacoes
@@ -59,6 +63,13 @@ class Banco{
         
     */
     public $tamanhos = array();
+
+    /*
+        @var array $carteiras
+        Armazena todas as carteiras disponíveis e as diferenças de tamanhos
+        dos campos entre elas.
+    */
+    public $carteiras = array();
     
     /*
         @var $layoutCodigoBarras
@@ -78,8 +89,10 @@ class Banco{
       * 
       * @version 0.1 18/05/2011 Initial
       */
-    public function __construct(){
-
+    public function __construct($object = null){
+        if(!empty($object)){
+            $this->parent = $object;
+        }
     }
     
     /**
@@ -87,14 +100,16 @@ class Banco{
       * 
       * @version 0.1 20/05/2011 Initial
       */
-    public function load($codigo){
+    public function load($codigo, $object){
+        
+
         if(array_key_exists($codigo, $this->relacoes)){
             $banco = $this->relacoes[$codigo];
             $filename = OB_DIR . '/lib/bancos/' . $banco . '.php';
 
             if(file_exists($filename)){
                 require $filename;
-                return new $banco;
+                return new $banco($object);
             }
             else{
                 throw new Exception('O arquivo /lib/bancos/' . $banco. '.php não existe.');
@@ -153,6 +168,51 @@ class Banco{
                     a geração do código de barras do banco "' . $this->Nome . '"');
             }
         }/**/
+    }
+    
+    /**
+      * Retorna as carteiras aceitas por esse boleto
+      *
+      * @version 0.1 31/05/2011
+      */
+    public function getCarteiras(){
+        $buff = array();
+        
+        foreach($this->carteiras as $key => $carteira){
+            if(is_array($carteira)){
+                $buff[] = $key;
+            }
+            else{
+                $buff[] = $carteira;
+            }
+        }
+        return $buff;
+    }
+
+    /**
+      * Retorna as posições desse banco, para essa carteira,
+      * já considerando as diferenças
+      *
+      * @version 0.1 31/05/2011
+      *          0.2 31/05/2011 Se passar um nome de campo, ele retorna só aquele campo específico
+      */
+    public function getTamanhos($campo = null){
+        if(is_null($campo)){
+            $carteira = $this->parent->Vendedor->Carteira;
+            if(array_key_exists($carteira, $this->carteiras)){
+                return array_merge($this->tamanhos,
+                                   $this->carteiras[$carteira]);
+            }
+            else{
+                return $this->tamanhos;
+            }
+        }
+        else{
+            $tamanhos = $this->getTamanhos();
+            if(array_key_exists($campo, $tamanhos)){
+                return $tamanhos[$campo];
+            }
+        }
     }
     
 }
