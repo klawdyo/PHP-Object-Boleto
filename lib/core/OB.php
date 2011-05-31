@@ -85,7 +85,7 @@ class OB{
         
         #Todos os layouts dos bancos estendem o layout pai. Carrego o layout
         #específico para o banco em questão
-        $this->Banco = $banco->load($codigoBanco);
+        $this->Banco = $banco->load($codigoBanco, $this);
         
         return $this->Banco;
     }
