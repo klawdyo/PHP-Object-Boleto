@@ -191,7 +191,8 @@ class Banco{
 
     /**
       * Retorna as posições desse banco, para essa carteira,
-      * já considerando as diferenças
+      * já considerando as diferenças. Se informar o parâmetro
+      * $campo, retorna o tamanho específico desse campo
       *
       * @version 0.1 31/05/2011
       *          0.2 31/05/2011 Se passar um nome de campo, ele retorna só aquele campo específico
@@ -200,8 +201,7 @@ class Banco{
         if(is_null($campo)){
             $carteira = $this->parent->Vendedor->Carteira;
             if(array_key_exists($carteira, $this->carteiras)){
-                return array_merge($this->tamanhos,
-                                   $this->carteiras[$carteira]);
+                return array_merge($this->tamanhos, $this->carteiras[$carteira]);
             }
             else{
                 return $this->tamanhos;

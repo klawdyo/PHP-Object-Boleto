@@ -23,6 +23,7 @@
     $ob->Template
             ->setTitle('PHP->OB ObjectBoleto')
             ->setTemplate('html5')
+            ->set('instrucao', array('linha1', 'linha2', 'linha3'))
         ;
         
     $ob->Cliente

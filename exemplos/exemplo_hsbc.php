@@ -10,7 +10,7 @@
             ->setAgencia('100')
             ->setConta('1122334')
             ->setCodigoCedente('1122334')
-            ->setCarteira('CNR Fácil')
+            ->setCarteira('CNR')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-39')
             ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
