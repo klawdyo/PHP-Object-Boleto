@@ -31,7 +31,7 @@ class String{
     }
     
     /**
-      * Corta um texto, exibindo somente os $num caracteres ao final
+      * Corta um texto, exibindo somente os $num caracteres do início
       * 
       * @version
       *     0.1 18/05/2011 Initial
@@ -75,7 +75,7 @@ class String{
       *     tamanho máximo seja atingido no meio de uma delas.
       *     
       */
-    public function slice($text, $length, $complement = '...', $cut = false){
+    public function slice($text, $length, $complement = '&hellip;', $cut = false){
         $newText = mb_substr($text, 0, $length);
         
         //Se na string original, o tamanho definido já representar um espaço,
