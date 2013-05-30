@@ -2,17 +2,18 @@
     header('Content-type: text/html; charset=utf-8');
     include '../OB_init.php';    
 
-    $ob = new OB('004');
+    $ob = new OB('001');
     
     //*
     $ob->Vendedor
             
-            ->setAgencia('0016')
+            ->setAgencia('100')
             ->setConta('1193')
-            ->setCarteira('50') //Cobrança Simples - fichamento emitido pelo cliente
+            ->setCodigoCedente('1')
+            ->setCarteira('2')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-39')
-            ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 12345-678')
+            ->setEndereco('Rua dos Mororós 111 Centro, São Paulo/SP CEP 01234-567')
             ->setEmail('joseclaudiomedeirosdelima@uol.com.br')
         ;
             
@@ -36,12 +37,10 @@
         ;
     
     $ob->Boleto
-            ->setValor(1)
-            //->setDiasVencimento(5)
-            ->setVencimento(18,2,2013)
-            ->setNossoNumero(1)
-            ->setNumDocumento('27.030195.10')
-            ->setQuantidade(1)
+            ->setValor(550)
+            ->setNumParcela(1)
+            ->setVencimento(4,7,2000)
+            ->setNossoNumero('228563')
         ;
     
     $ob->render(); /**/

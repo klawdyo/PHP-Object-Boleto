@@ -139,7 +139,15 @@ class Banco{
             throw new Exception(" A chave \"{$variavel}\" não existe no layout");
         }
     }
-    
+        
+    /**
+      * engenhariaReversa() pega um número de código de barras e o transforma em um array
+      * com os valores, baseando os detalhes de cada banco.
+      */
+    public function engenhariaReversa($banco, $codigoBarras){
+        
+    }
+
     
     /**
       * particularidade() Faz em tempo de execução mudanças que sejam imprescindíveis
@@ -167,7 +175,7 @@ class Banco{
                 throw new Exception('O campo "' . $chave . '" é obrigatório para
                     a geração do código de barras do banco "' . $this->Nome . '"');
             }
-        }/**/
+        }*/
     }
     
     /**

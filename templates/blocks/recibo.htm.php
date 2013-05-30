@@ -30,7 +30,7 @@
         <!-- Nosso Número -->
         <div class="nosso_numero item">
             <label>Nosso Número</label>
-            <?php echo Math::Mod11($OB->Boleto->NossoNumero,0,0, true);?>
+            <?php echo Math::Mod11($OB->Boleto->NossoNumero, 0, 0, true);?>
         </div>
     </div>
     
@@ -44,7 +44,15 @@
         <!-- CPF/CNPJ -->
         <div class="cpf_cnpj item">
             <label>CPF/CNPJ</label>
-            <?php echo $OB->Vendedor->Cpf;?>
+            <?php
+                if(isset($OB->Vendedor->Cpf)){
+                   echo $OB->Vendedor->Cpf; 
+                }
+                elseif(isset($OB->Vendedor->Cnpj)){
+                    echo $OB->Vendedor->Cnpj;
+                }
+                
+            ?>
         </div>
         <!-- Vencimento -->
         <div class="vencimento item">

@@ -50,4 +50,11 @@ class Caixa extends Banco{
         pelos seus respectivos valores
      */
     public $layoutCodigoBarras = ':Banco:Moeda:FatorVencimento:Valor1:CodigoCedente9:NossoNumero';
+    
+    
+    //public function particularidade($object){
+        //pr($object->Data);
+        //$object->Data['DV'] = 0;
+    //}
+    
 }

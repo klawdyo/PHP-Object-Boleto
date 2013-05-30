@@ -70,7 +70,7 @@ class Vendedor{
       *          0.2 27/05/2011 Renomeado de setNome() para setRazaoSocial()
       */
     public function setRazaoSocial($value){
-        $this->RazaoSocial = OB::zeros($value, 3);
+        $this->RazaoSocial = $value;
         
         return $this;
     }
@@ -92,8 +92,8 @@ class Vendedor{
       * Configura o número da conta do cliente.
       * Em alguns bancos, esse campo é desnecessário, sendo substituído pelo
       * número do contrato. Os código de barras serão gerados corretamente de
-      * acordo com o padrão de cada banco, e os templates exibirão corre-
-      * tamente cada dado em seu lugar.
+      * acordo com o padrão de cada banco, e os templates exibirão correta-
+      * mente cada dado em seu lugar.
       * 
       * @version 0.1 27/05/2011 Initial
       */
