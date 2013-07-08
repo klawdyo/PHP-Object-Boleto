@@ -87,5 +87,6 @@ class Bancoob extends Banco{
     public function particularidade($object){
         $object->Data['NumParcela'] = OB::zeros($object->Boleto->NumParcela, 3);
         $object->Data['AnoEmissao'] = date('y');
+        $object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);
     }
 }

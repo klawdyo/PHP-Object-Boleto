@@ -82,6 +82,7 @@ class Itau extends Banco{
         
         $object->Data['DigitoAgContaCarteiraNNum'] = Math::Mod10($digAgContaCartNNum);
         $object->Data['DigitoAgConta'] = Math::Mod10($digAgConta);
+        $object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);
     }
     
 }

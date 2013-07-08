@@ -30,7 +30,7 @@
         <!-- Nosso Número -->
         <div class="nosso_numero item">
             <label>Nosso Número</label>
-            <?php echo Math::Mod11($OB->Boleto->NossoNumero, 0, 0, true);?>
+            <?php echo $OB->Boleto->NossoNumero; ?>
         </div>
     </div>
     

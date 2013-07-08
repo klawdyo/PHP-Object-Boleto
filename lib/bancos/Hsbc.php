@@ -118,6 +118,7 @@ class Hsbc extends Banco{
             $object->Data['DataVencimentoCalendarioJuliano'] = $this->julianDays($object->Boleto->Vencimento);
         }
         $object->Data['NossoNumero'] = $this->geraCodigoDocumento($object->Data);
+        $object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);        
     }
     
     /**

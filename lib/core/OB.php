@@ -177,7 +177,10 @@ class OB{
                 'FatorVencimento' => $this->Boleto->FatorVencimento,
                 'CodigoCedente' => $this->Vendedor->CodigoCedente,
                );
-
+            
+            //Solução proposta por github.om/riotera. Não testada. 
+            //$this->Banco->getTamanhos(); 
+            
             foreach($this->Data as $var => $value){
                 if(array_key_exists($var, $this->Banco->tamanhos)){
                     $this->Data[$var] = self::normalize($this->Data[$var], $this->Banco->tamanhos[$var]);

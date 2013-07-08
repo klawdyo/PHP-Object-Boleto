@@ -52,9 +52,17 @@ class Caixa extends Banco{
     public $layoutCodigoBarras = ':Banco:Moeda:FatorVencimento:Valor1:CodigoCedente9:NossoNumero';
     
     
-    //public function particularidade($object){
-        //pr($object->Data);
-        //$object->Data['DV'] = 0;
-    //}
+	/**
+      * particularidade() Faz em tempo de execução mudanças que sejam imprescindíveis
+      * para a geração correta do código de barras
+      * Especificamente para o Hsbc, temos duas particularidas: Data no formato juliano, e
+      * um dígito verificador triplo para o nosso número.
+      *
+      *
+      * @version 0.1 28/05/2011 Initial
+      */
+    public function particularidade($object){
+		$object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);
+    }
     
 }

@@ -116,10 +116,7 @@
                     </div>
                     <div class="">
                          <label>Nosso número</label>
-                         <?php
-                            echo $OB->Boleto->NossoNumero . '-' . Math::Mod11($OB->Boleto->NossoNumero)
-                            ;
-                            ?>
+                         <?php echo $OB->Boleto->NossoNumero; ?>
                     </div>
                     <div class="">
                          <label>(=) Valor do documento</label>

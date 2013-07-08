@@ -121,7 +121,8 @@ class Boleto{
       */
     public function setVencimento($dia, $mes, $ano){
         $this->FatorVencimento = OB::fatorVencimento($dia, $mes, $ano);
-        $this->Vencimento = $dia . '/' . $mes . '/' . $ano;
+        //$this->Vencimento = $dia . '/' . $mes . '/' . $ano;
+        $this->Vencimento = sprintf("%02d", $dia) . '/' . sprintf("%02d", $mes) . '/' . $ano;
         
         return $this;
     }

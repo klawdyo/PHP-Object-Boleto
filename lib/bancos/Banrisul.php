@@ -85,7 +85,8 @@ class Banrisul extends Banco{
         $codigo = String::insert('21:Agencia:CodigoCedente:NossoNumero041', $object->Data);
         $dv1 = Math::Mod10($codigo);
         $dv2 = Math::Mod11($codigo . $dv1);
-
+        $object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);
+        
         return $object->Data['DuploDigito'] = self::DuploDigito($codigo);
     }
     
