@@ -45,6 +45,7 @@ class BNB extends Banco{
         'NossoNumero'       => 7,   //Nosso número
         'DigitoNossoNumero' => 1,   //Dígito do nosso número
         'Carteira'          => 2,   //Código da carteira
+     // 'Zeros'             => 3,   //Zeros
     );
 
     /*
