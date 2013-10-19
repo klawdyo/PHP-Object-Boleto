@@ -15,7 +15,7 @@
         <!-- Agência/Código do Cedente -->
         <div class="agencia item">
             <label>Ag./Código do Cedente</label>
-            <?php echo Math::Mod11($OB->Vendedor->Agencia, 0,0,true) . ' / ' . Math::Mod11($OB->Vendedor->Conta,0,0,true);?>
+            <?php echo $OB->Banco->agenciaCodigoCedente(); ?>
         </div>
         <!-- Espécie Moeda -->
         <div class="moeda item">

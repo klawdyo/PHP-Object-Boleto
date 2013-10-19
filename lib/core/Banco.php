@@ -159,6 +159,14 @@ class Banco{
       */
     public function particularidade($data){}
     
+    /**
+      * agenciaCondigoCedente()
+      * 
+      */
+    public function agenciaCodigoCedente(){
+        $object = $this->parent;
+        return Math::Mod10($object->Vendedor->Agencia, true) . '/ ' . Math::Mod10($object->Vendedor->Conta, true);
+    }
     
     
     /**
@@ -166,16 +174,22 @@ class Banco{
       * estão preenchidos
       *
       * @version 0.1 28/05/2011
+      *          0.2 18/10/2013 Reabilitado. Agora não verifica a o DV, pois este é calculado
+      *             só ao final da geração do código de barras
       */
     public function verificaObrigatorios($data){
-        /*$obrigatorios = array_keys($this->tamanhos);
-
+        //*
+        $obrigatorios = array_keys($this->tamanhos);
+        
+        //pr($obrigatorios);
+        //*
         foreach($this->tamanhos as $chave => $valor){
-            if(!array_key_exists($chave, $data) || is_null($data[$chave])){
+            //Se a chave for diferente de 'DV' e 
+            if($chave != 'DV' && (!array_key_exists($chave, $data) || is_null($data[$chave]))){
                 throw new Exception('O campo "' . $chave . '" é obrigatório para
                     a geração do código de barras do banco "' . $this->Nome . '"');
             }
-        }*/
+        }//*/
     }
     
     /**

@@ -107,12 +107,7 @@
                     </div>
                     <div class="">
                          <label>Agência / Código cedente </label>
-                         <?php
-                            echo $OB->Vendedor->Agencia . '-' . Math::Mod11($OB->Vendedor->Agencia)
-                                 . ' / ' .
-                                 $OB->Vendedor->Conta . '-' . Math::Mod11($OB->Vendedor->Conta)
-                            ;
-                            ?>
+                         <?php echo $OB->Banco->agenciaCodigoCedente(); ?>
                     </div>
                     <div class="">
                          <label>Nosso número</label>
