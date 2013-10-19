@@ -14,7 +14,7 @@
 -----------------------
     CHANGELOG
 -----------------------
-    18/10/2013
+    19/10/2013
     [+] Inicial
     
     
@@ -32,41 +32,10 @@ class BancoAmazonia extends Banco{
         e da linha digitável
         
         ----
-        Formatação no bloqueto
-        ----
-        Os 3 primeiros campos da chave ASBACE (zeros, agencia e conta), devem ser separados
-        por um traço ou espaço e impressos no quadrilátero "Agência/Código Cedente" no bloqueto
-        de cobrança
-        Ex.:
-        Agência/ Código do Cedente
-		000–058-6002006
-		
-		Os demais campos são juntos e impressos no quadrilátero "Nosso Número"
-		Ex.:
-		Nosso Número
-		100000107045
-        
-        ----
         Descrição dos campos
         ----
-        O campo "Carteira" (ou "categoria") identifica os tipos de cobrança. Que são:
-        Tipo "1" - Cobrança direta sem registro
-		- Bloqueto pré impresso fornecido pelo BRB- Banco de Brasília S.A ao cedente;
-		- Emissão própria do cedente em papel A4;
-		- Impressão local pelo cedente em papel A4 utilizando o módulo de Cobrança Offline)        
-        Tipo "2" - 	Cobrança direta com registro
-        - Bloqueto impresso pelo cliente e entregue diretamente ao Sacado. É necessário a
-        transmissão do arquivo de remessa para o Banco.
-        
-        O campo "sequencial", ou "nosso número", é montado a critério do cedente. Pode
-        ser um número sequencial iniciado em 1, ou um número composto.
-        Ex.: As 2 primeiras posições pode ser o ano, e as outras 4 uma sequência. O mais
-			importante é que esse número não se repita
-			
-		O campo "banco" sempre é 070, que é o código para Banco de Brasília S.A.
-		
-		DV1 e DV2 são calculados a partir das 23 posições anteriores
-        
+        O campo "sequencial", ou "nosso número", é montado a critério do cedente. Precisa
+        ser um número único com no máximo 16 caracteres
     */
     public $tamanhos = array(
         #Campos comuns a todos os bancos
@@ -76,10 +45,10 @@ class BancoAmazonia extends Banco{
         'FatorVencimento'   => 4,   //Fator de vencimento (Dias passados desde 7/out/1997)
         'Valor'             => 10,  //Valor nominal do título
         #Campos variávies.
-        'AgComDigito'       => 4,   //Código da agencia, COM dígito
-        'Convenio'          => 4,   //Número da conta
-        'NossoNumero'       => 16,  //Nosso número, também chamado de sequencial. Tem que ser único
-      //'Identificador'     => 1,   //Identificador no Sistema: 8
+        'AgComDigito'       => 4,   //Agencia, COM dígito calculado pelo Mod11
+        'Convenio'          => 4,   //Número do convênio firmado com o banco
+        'NossoNumero'       => 16,  //Nosso número, também chamado de sequencial.
+      //'Identificador'     => 1,   //Identificador no Sistema: 8. Sempre 8
     );
 
     /*

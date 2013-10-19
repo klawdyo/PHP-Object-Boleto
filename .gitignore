@@ -1,12 +1,10 @@
 logo_empresa.png
 esquema.png
-*.gitignore
-*.git*
+*git*
 *.komodoproject
 TODO.txt
 arquivos/*
 teste.php
-.gitignore
 lib/utils/validation_component.php
 tests/*
 lib/bancos/Santander/
