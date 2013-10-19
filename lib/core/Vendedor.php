@@ -34,8 +34,8 @@ class Vendedor{
       * @version 0.1 18/05/2011 Initial
       */
     public function __call($name, $arg = null){
-        //pr();
         preg_match('/^(set|get)([a-zA-Z]+)$/', $name, $output);
+        
         if($output[1] == 'set'){
             $this->$output[2] = $arg[0];
             return $this;
@@ -60,6 +60,7 @@ class Vendedor{
             $method = 'set' . $var;
             $this->$method($value);
         }
+        
         return $this;
     }
 

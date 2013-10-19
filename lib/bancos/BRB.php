@@ -109,9 +109,9 @@ class BRB extends Banco{
 		//$object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);
 		
 		//Formato os dados
+		$object->Data['Categoria'] = $object->Vendedor->Carteira;
 		$object->Data['DV1'] = $this->dv1($object->Data);
 		$object->Data['DV2'] = $this->dv2($object->Data);
-		$object->Data['Categoria'] = $object->Vendedor->Carteira;
 		
 		//Formato o Nosso Número de acordo com o padrão do banco
 		$object->Boleto->NossoNumero = $this->layoutNossoNumero($object->Data);
@@ -126,7 +126,7 @@ class BRB extends Banco{
 	  * @return string String formatada no padrão do Nosso Número do banco
 	  */
 	public function layoutNossoNumero($data){
-		return String::insert(':NossoNumero:Banco:DV1:DV2', $data);
+		return String::insert(':Categoria:NossoNumero:Banco:DV1:DV2', $data);
 	}
 	
 	/**
@@ -154,7 +154,12 @@ class BRB extends Banco{
 	  * @return int Inteiro contendo o dígito procurado
 	  */
 	public function dv1($data){
-		$string = String::insert('000:Agencia:Conta:Carteira:NossoNumero:Banco', $data);
+		//pr($data);
+		$string = String::insert('000:Agencia:Conta:Categoria:NossoNumero:Banco', $data);
+		//pr('00017201326131758964070');
+		//pr($string);
+		//pr(Math::Mod11($string, 0, 0, false, 7));
+		//pr(Math::Mod10($string));
 		return Math::Mod10($string);
 	}
 
@@ -170,6 +175,7 @@ class BRB extends Banco{
 	  */
 	public function dv2($data){
 		$string = String::insert('000:Agencia:Conta:Carteira:NossoNumero:Banco:DV1', $data);
-		return Math::Mod10($string);
+		//pr($string);
+		return Math::Mod11($string, 0, 0, false, 7);
 	}
 }

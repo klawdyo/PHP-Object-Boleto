@@ -178,18 +178,15 @@ class Banco{
       *             só ao final da geração do código de barras
       */
     public function verificaObrigatorios($data){
-        //*
         $obrigatorios = array_keys($this->tamanhos);
         
-        //pr($obrigatorios);
-        //*
         foreach($this->tamanhos as $chave => $valor){
             //Se a chave for diferente de 'DV' e 
             if($chave != 'DV' && (!array_key_exists($chave, $data) || is_null($data[$chave]))){
                 throw new Exception('O campo "' . $chave . '" é obrigatório para
                     a geração do código de barras do banco "' . $this->Nome . '"');
             }
-        }//*/
+        }
     }
     
     /**
@@ -236,5 +233,4 @@ class Banco{
             }
         }
     }
-    
 }

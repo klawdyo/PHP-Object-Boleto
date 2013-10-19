@@ -2,7 +2,7 @@
 
 class Configuracao{
     private $Instrucoes = array();
-    public $LocalPagamento;
+    public  $LocalPagamento;
     
     /**
       *
@@ -23,6 +23,26 @@ class Configuracao{
             $this->Instrucoes[] = $frase;
         }        
         return $this;
+    }
+    
+    /**
+      * Devolve as instruções 
+      *
+      * @version 0.1 19/10/2013
+      * 
+      */
+    public function getInstrucoes(){
+        return $this->Instrucoes;
+    }
+    
+    /**
+      * Devolve as instruções 
+      *
+      * @version 0.1 19/10/2013
+      * 
+      */
+    public function getLocalPagamento(){
+        return $this->LocalPagamento;
     }
     
     /**

@@ -87,7 +87,8 @@
                     <div class="mensagens ">
                              <label>Instruções (Texto de responsabilidade do cedente)</label>
                              <?php
-                                
+                                $instrucoes = $OB->Configuracao->getInstrucoes();
+                                echo implode('<br />', $instrucoes);
                              ?>
                     </div>
                 
