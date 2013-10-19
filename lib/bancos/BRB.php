@@ -104,10 +104,6 @@ class BRB extends Banco{
       * @version 0.1 18/10/2013 Initial
       */
     public function particularidade($object){
-		//pr(Math::Mod10('00005860020061000001070'));
-		//pr(Math::Mod10('000058600200610000010704'));
-		//$object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);
-		
 		//Formato os dados
 		$object->Data['Categoria'] = $object->Vendedor->Carteira;
 		$object->Data['DV1'] = $this->dv1($object->Data);

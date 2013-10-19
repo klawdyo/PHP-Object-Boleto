@@ -94,6 +94,7 @@ class Math{
       *          0.2 22/05/2011 Bug corrigido
       *          0.3 24/05/2011 Adicionados os parâmetros $returnFull e $separator
       *          0.4 28/05/2011 Adicionado o parâmetro $maxFactor
+      *          0.5 19/10/2013 Corrigido erro no retorno
       *
       * @param $number O número informado
       * @param $ifTen Caso o resto da divisão seja 10, o que colocar
@@ -124,11 +125,9 @@ class Math{
         #Resto da divisão
         $rest = ($sum * 10) % 11;
         
-        #Verificando se o resto da divisão é 0 ou 10
-        switch($rest){
-            case 0:  $ifZero; break;
-            case 10: $ifTen;  break;
-        }
+        #Verificando se o resto é 10 ou zero. //v0.5
+        if($rest === 10){$rest = $ifTen;}
+        elseif($rest === 0){$rest = $ifZero;}
         
         if($returnFull == false)
             return $rest;

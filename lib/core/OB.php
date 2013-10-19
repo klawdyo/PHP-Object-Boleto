@@ -142,8 +142,8 @@ class OB{
             $cod = String::insert($this->Banco->layoutCodigoBarras, $this->Data);
 
             #Cálculo do dígito verificador geral do código de barras
-            $dv = Math::Mod11($cod, 1, 1);
-
+            $dv = Math::Mod11($cod, '1', '1');
+            
             #Inserindo o dígito verificador exatamente na posição 4, iniciando em 0.
             $this->Boleto->CodigoBarras = String::putAt($cod, $dv, 4);
         }

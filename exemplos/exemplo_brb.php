@@ -8,7 +8,7 @@
     $ob->Vendedor
             
             ->setAgencia('172')
-            ->setConta('132613')
+            ->setConta('1000345')
             ->setCarteira('1')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-39')
