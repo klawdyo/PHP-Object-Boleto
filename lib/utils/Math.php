@@ -111,23 +111,23 @@ class Math{
                                  $returnFull = false, $maxFactor = 9, $separator = '-'){
         $numLen = strlen($number) - 1;
         $sum = 0;
-        $factor = 2;
+        $factor = 2; //Inicial
         
+        #Loop pelos algarismos, de trás pra frente. O último número
+        #é multiplicado pelo fator 2, o penúltimo por 3, e assim por diante.
+        #Quando o fator ficar maior que $maxFactor, retorno seu valor para 2
         for($i = $numLen; $i >= 0; $i --){
             $sum += substr($number, $i, 1) * $factor;
             $factor = $factor >= $maxFactor ? 2 : $factor + 1;
         }
+        
         #Resto da divisão
         $rest = ($sum * 10) % 11;
-        #ifTen
-        $rest = $rest == 10 ? $ifTen : $rest;
-        #ifZero
-        $rest = $rest === 0 ? $ifZero : $rest;
-        #Verificando se é 0, 10
+        
+        #Verificando se o resto da divisão é 0 ou 10
         switch($rest){
-            case 10: $ifTen;  break;
             case 0:  $ifZero; break;
-            default: $rest;   break;
+            case 10: $ifTen;  break;
         }
         
         if($returnFull == false)
