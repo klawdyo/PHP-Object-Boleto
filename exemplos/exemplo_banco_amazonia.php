@@ -7,8 +7,8 @@
     //*
     $ob->Vendedor
             
-            ->setAgencia('58')
-            //->setConta('6002006')
+            ->setAgencia('7') //Agência, sem dígito. O dígito será calculado para exibir no boleto
+            ->setConta('1')
             ->setConvenio('386')
             ->setCarteira('CNR')
             ->setRazaoSocial('José Claudio Medeiros de Lima')
@@ -45,10 +45,10 @@
     
     //Define as configurações do boleto
     $ob->Boleto
-            ->setValor(10)
+            ->setValor(15.56)
             ->setNumParcela(1)
-            ->setVencimento(14,3,2011)
-            ->setNossoNumero('1000004')
+            ->setVencimento(27,6,2014)
+            ->setNossoNumero('123')
         ;
     
     //Renderiza o boleto

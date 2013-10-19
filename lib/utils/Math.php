@@ -129,7 +129,8 @@ class Math{
         if($rest === 10){$rest = $ifTen;}
         elseif($rest === 0){$rest = $ifZero;}
         
-        if($returnFull == false)
+        #Se $returnFull===false, retorna só o resto
+        if($returnFull === false)
             return $rest;
         else
             return $number . $separator . $rest;

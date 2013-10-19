@@ -161,11 +161,15 @@ class Banco{
     
     /**
       * agenciaCondigoCedente()
-      * 
+      * Retorna a agência e a conta/código do cedente formatada de acordo
+      * com o padrão visual do banco.
+      * Caso esse método não seja declarado na classe individual dos bancos,
+      * ele irá herdar esta definição
       */
     public function agenciaCodigoCedente(){
         $object = $this->parent;
-        return Math::Mod10($object->Vendedor->Agencia, true) . '/ ' . Math::Mod10($object->Vendedor->Conta, true);
+        
+        return Math::Mod10($object->Data['Agencia'], true) . ' / ' . Math::Mod10($object->Data['Conta'], true);
     }
     
     
