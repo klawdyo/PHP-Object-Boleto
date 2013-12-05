@@ -7,8 +7,8 @@
     //*
     $ob->Vendedor
             
-            ->setAgencia('1565')
-            ->setConta('87000000414')
+            ->setAgencia('0035')
+            ->setConta('0036098')
             ->setCarteira('55') //Cobrança Simples - fichamento emitido pelo cliente
             ->setRazaoSocial('José Claudio Medeiros de Lima')
             ->setCpf('012.345.678-39')
@@ -39,11 +39,11 @@
         ;
     
     $ob->Boleto
-            ->setValor(2952.95)
-            ->setDiasVencimento(5)
+            ->setValor(949.50)
+            ->setDiasVencimento(1)
             //->setVencimento(18,2,2013)
-            ->setNossoNumero('8019525086')
-            ->setNumDocumento('27.030195.10')
+            ->setNossoNumero('0009946')
+            ->setNumDocumento('666688')
             ->setQuantidade(1)
         ;
     

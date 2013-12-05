@@ -78,6 +78,9 @@ class BB extends Banco{
 				break;
 		}
 		$object->Vendedor->Carteira = '18';
+		//Gerando o número do dígito da conta
+		$object->Data['DigitoConta'] = Math::Mod11($object->Cliente->Conta);
+		$object->Data['DigitoNossoNumero'] = Math::Mod11($object->Boleto->NossoNumero);
     }
 
 	/*

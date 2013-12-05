@@ -188,9 +188,10 @@ class OB{
             }
             
             $this->Data['Vencimento'] = $this->Boleto->Vencimento;
-            $this->Data['DigitoAgencia'] = Math::Mod11($this->Data['Agencia']);
-            $this->Data['DigitoConta'] = Math::Mod11($this->Data['Conta']);
-            $this->Data['DigitoNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
+            //Definir estes dados é repsonsabilidade das classes individuais dos bancos
+            //$this->Data['DigitoAgencia'] = Math::Mod11($this->Data['Agencia']);
+            //$this->Data['DigitoConta'] = Math::Mod11($this->Data['Conta']);
+            //$this->Data['DigitoNossoNumero'] = Math::Mod11($this->Data['NossoNumero']);
 
             return $this->Data;
         }

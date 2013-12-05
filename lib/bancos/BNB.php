@@ -66,6 +66,8 @@ class BNB extends Banco{
       */
     public function particularidade($object){
 		$object->Boleto->NossoNumero = Math::Mod11($object->Boleto->NossoNumero, 0, 0, true);
+		$object->Data['DigitoConta'] = Math::Mod10($object->Data['Conta']);
+		$object->Data['DigitoNossoNumero'] = Math::Mod10($object->Data['NossoNumero']);
     }
 
 }
