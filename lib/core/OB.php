@@ -173,7 +173,9 @@ class OB{
                 'Agencia' => $this->Vendedor->Agencia,
                 'Carteira' => $this->Vendedor->Carteira,
                 'Conta' => $this->Vendedor->Conta,
+                'DigitoConta' => $this->Vendedor->DigitoConta,
                 'NossoNumero' => $this->Boleto->NossoNumero,
+                'DigitoNossoNumero' => $this->Boleto->DigitoNossoNumero,
                 'FatorVencimento' => $this->Boleto->FatorVencimento,
                 'CodigoCedente' => $this->Vendedor->CodigoCedente,
                );
