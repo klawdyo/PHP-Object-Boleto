@@ -18,6 +18,9 @@
             
     $ob->Configuracao
             ->setLocalPagamento('Pagável em qualquer banco até o vencimento')
+            ->addDemonstrativo('Demostrativo 1')
+            ->addDemonstrativo('Demostrativo 2')
+            ->addDemonstrativo('Demostrativo 3')
         ;
         
     $ob->Template
