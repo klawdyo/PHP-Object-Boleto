@@ -1,4 +1,11 @@
 
+h1. ATENÇÃO!!
+
+Este projeto está pausado! O código é perfeitamente utilizável, porém como estou em outros projetos, não tenho mais tempo para dar manutenção. Você pode utilizar tranquilamente, desde que tenha tempo e interesse de fuçar o código e fazer as alterações que desejar. Como trata-se de um projeto inovador diante das opções disponíveis, existem dezenas de forks aqui no github. Procure um que esteja ativo e contribua. O código livre é mais bonito quando todo mundo se ajuda. 
+
+Cláudio Medeiros
+
+
 h1. Descrição
 
 
