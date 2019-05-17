@@ -151,13 +151,14 @@ Nota: Mesmo Não Constando No Exemplo, O Número Do Título Para O Banco Sempre 
         #concatenando agora o novo $dv1
         if($dv2 == 10){
             $dv1++;
-            $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7);
             
             #Se o novo valor de $dv1 for maior que 9, então
             #$dv1 passará a ser 0
             if($dv1 > 9){
                 $dv1 = 0;
             }
+            
+            $dv2 = Math::Mod11($num . $dv1, 10, 0, false, 7);
         }
         
         return $dv1 . $dv2;
