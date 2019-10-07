@@ -1,7 +1,8 @@
 <?php //18/05/2010
 
 class Configuracao{
-    private $Instrucoes = array();
+    private $Instrucoes     = array();
+    private $Demonstrativos = array();
     public  $LocalPagamento;
     
     /**
@@ -55,6 +56,28 @@ class Configuracao{
             $this->LocalPagamento = $frase;
         }        
         return $this;
+    }
+
+     /**
+      * Adiciona os demonstrativos
+      * @version 0.1 18/02/2015 Initial
+      *
+      */
+    public function addDemonstrativo($frase){
+        if(!empty($frase)){
+            $this->Demonstrativos[] = $frase;
+        }        
+        return $this;
+    }
+    
+    /**
+      * Devolve os demonstrativos
+      *
+      * @version 0.1 18/02/2015
+      * 
+      */
+    public function getDemonstrativos(){
+        return $this->Demonstrativos;
     }
     
 }
